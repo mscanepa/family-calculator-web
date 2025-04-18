@@ -4,7 +4,7 @@
       <n-layout>
         <n-layout-content>
           <n-space vertical size="large" style="padding: 20px">
-            <SharedCMApp />
+            <SharedCmApp />
           </n-space>
         </n-layout-content>
       </n-layout>
