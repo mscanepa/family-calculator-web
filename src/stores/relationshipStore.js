@@ -2,7 +2,7 @@ import { defineStore } from 'pinia'
 import { ref, computed } from 'vue'
 import { useI18n } from 'vue-i18n'
 
-const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:8001'
+const API_URL = import.meta.env.VITE_API_URL || window.location.origin
 const API_VERSION = import.meta.env.VITE_API_VERSION || 'v1'
 
 export const useRelationshipStore = defineStore('relationship', () => {
