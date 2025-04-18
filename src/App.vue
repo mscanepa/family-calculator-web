@@ -14,7 +14,7 @@
 
 <script setup>
 import { NConfigProvider, NMessageProvider, NLayout, NLayoutHeader, NLayoutContent, NSpace } from 'naive-ui'
-import SharedCMApp from './components/SharedCmApp.vue'
+import SharedCmApp from './components/SharedCmApp.vue'
 </script>
 
 <style>
