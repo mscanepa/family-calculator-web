@@ -1,5 +1,5 @@
 import { createRouter, createWebHistory } from 'vue-router';
-import SharedCmApp from '../src/components/SharedCMApp.vue';
+import SharedCmApp from '../src/components/SharedCmApp.vue';
 
 const routes = [
   {
