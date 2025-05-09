@@ -21,9 +21,10 @@ export default defineConfig({
       }
     },
     hmr: {
-      protocol: 'ws',
-      host: 'localhost',
-      port: 3000
+      protocol: 'wss',
+      host: 'familycalc.app',
+      port: 443,
+      clientPort: 443
     }
   }
 })
