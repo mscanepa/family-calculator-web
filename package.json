@@ -1,5 +1,5 @@
 {
-  "name": "shared-cm-project",
+  "name": "family-calculator-web",
   "version": "1.0.0",
   "scripts": {
     "dev": "vite",
@@ -13,12 +13,15 @@
     "d3": "^7.9.0",
     "naive-ui": "^2.41.0",
     "pinia": "^3.0.2",
+    "react": "^19.1.0",
+    "react-dom": "^19.1.0",
     "vue": "^3.4.0",
     "vue-i18n": "^9.14.4",
     "vue-router": "^4.5.0"
   },
   "devDependencies": {
-    "@vitejs/plugin-vue": "^4.5.0",
+    "@vitejs/plugin-react": "^4.4.1",
+    "@vitejs/plugin-vue": "^4.6.2",
     "vite": "^4.5.0"
   }
 }

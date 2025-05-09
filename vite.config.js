@@ -4,15 +4,19 @@ import vue from '@vitejs/plugin-vue'
 export default defineConfig({
   plugins: [vue()],
   server: {
-    port: 3000
-  },
-  build: {
-    minify: false,  // Desactivar minificación
-    sourcemap: false,  // Desactivar source maps
-    chunkSizeWarningLimit: 1000,
-    rollupOptions: {
-      output: {
-        manualChunks: undefined  // Desactivar chunking
+    host: true,
+    port: 3000,
+    allowedHosts: [
+      'localhost',
+      'familycalc.app',
+      'www.familycalc.app',
+      '18.189.205.126'
+    ],
+    proxy: {
+      '/api': {
+        target: 'http://localhost:8001',
+        changeOrigin: true,
+        secure: false
       }
     }
   }
