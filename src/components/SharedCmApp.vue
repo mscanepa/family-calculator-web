@@ -27,27 +27,27 @@
             </n-text>
           </n-space>
         </div>
-        <h1 class="title">{{ $t('app.title') }}</h1>
-        <p class="subtitle">{{ $t('app.subtitle') }}</p>
+        <div class="title-container">
+          <h1 class="title">{{ $t('app.title') }}</h1>
+          <p class="subtitle">{{ $t('app.subtitle') }}</p>
+        </div>
       </div>
       
+      <div class="main-content">
       <n-grid :cols="24" :x-gap="24" responsive="screen">
         <!-- Left Section: Input Cards -->
         <n-grid-item :span="12" :s-span="24" :m-span="12" :l-span="12">
           <!-- Searcher Row -->
           <n-card :title="$t('app.search.title')" hoverable class="form-section">
-            <n-grid :cols="24" :x-gap="24" responsive="screen">
-              <n-grid-item :span="16" :s-span="16" :m-span="16" :l-span="16">
-                <n-form-item :label="$t('app.search.name')">
+              <div class="form-row">
+                <n-form-item :label="$t('app.search.name')" class="name-field">
                   <n-input v-model:value="store.name1" :placeholder="$t('app.search.example')">
                     <template #prefix>
                       <n-icon><Person /></n-icon>
                     </template>
                   </n-input>
                 </n-form-item>
-              </n-grid-item>
-              <n-grid-item :span="4" :s-span="4" :m-span="4" :l-span="4">
-                <n-form-item :label="$t('app.search.gender')">
+                <n-form-item :label="$t('app.search.gender')" class="gender-field">
                   <n-radio-group v-model:value="store.sex1">
                     <n-radio value="F" class="gender-radio">
                       <n-icon size="20" color="#ff69b4"><Woman /></n-icon>
@@ -57,36 +57,29 @@
                     </n-radio>
                   </n-radio-group>
                 </n-form-item>
-              </n-grid-item>
-              <n-grid-item :span="4" :s-span="4" :m-span="4" :l-span="4">
-                <n-form-item :label="$t('app.search.age')">
+                <n-form-item :label="$t('app.search.age')" class="age-field">
                   <n-input-number 
                     v-model:value="store.age1" 
                     :min="0" 
                     :max="120"
                     :show-button="false"
                     placeholder=""
-                    style="width: 100%"
                   />
                 </n-form-item>
-              </n-grid-item>
-            </n-grid>
+              </div>
           </n-card>
 
           <!-- Match Row -->
           <n-card :title="$t('app.match.title')" hoverable class="form-section">
-            <n-grid :cols="24" :x-gap="24" responsive="screen">
-              <n-grid-item :span="16" :s-span="16" :m-span="16" :l-span="16">
-                <n-form-item :label="$t('app.match.name')">
+              <div class="form-row">
+                <n-form-item :label="$t('app.match.name')" class="name-field">
                   <n-input v-model:value="store.name2" :placeholder="$t('app.match.example')">
                     <template #prefix>
                       <n-icon><Person /></n-icon>
                     </template>
                   </n-input>
                 </n-form-item>
-              </n-grid-item>
-              <n-grid-item :span="4" :s-span="4" :m-span="4" :l-span="4">
-                <n-form-item :label="$t('app.match.gender')">
+                <n-form-item :label="$t('app.match.gender')" class="gender-field">
                   <n-radio-group v-model:value="store.sex2">
                     <n-radio value="F" class="gender-radio">
                       <n-icon size="20" color="#ff69b4"><Woman /></n-icon>
@@ -96,20 +89,16 @@
                     </n-radio>
                   </n-radio-group>
                 </n-form-item>
-              </n-grid-item>
-              <n-grid-item :span="4" :s-span="4" :m-span="4" :l-span="4">
-                <n-form-item :label="$t('app.match.age')">
+                <n-form-item :label="$t('app.match.age')" class="age-field">
                   <n-input-number 
                     v-model:value="store.age2" 
                     :min="0" 
                     :max="120"
                     :show-button="false"
                     placeholder=""
-                    style="width: 100%"
                   />
                 </n-form-item>
-              </n-grid-item>
-            </n-grid>
+              </div>
           </n-card>
 
           <!-- DNA Row -->
@@ -130,9 +119,14 @@
                       <n-icon class="info-icon"><InformationCircle /></n-icon>
                     </template>
                     <div class="tooltip-content">
-                      <h4>Centimorgans (cM)</h4>
-                      <p>Los centimorgans son una medida de la cantidad de ADN compartido entre dos personas. Cuanto mayor sea el número, más cercana será la relación probable.</p>
-                      <p>El sistema utiliza esta medida como base principal para calcular las posibles relaciones familiares.</p>
+                        <div class="tooltip-header">
+                          <n-icon size="18" color="#1e90ff"><Calculator /></n-icon>
+                          <h4>¿Qué son los centimorgans (cM)?</h4>
+                        </div>
+                        <div class="tooltip-body">
+                          <p class="tooltip-intro">Los centimorgans (cM) indican cuánto ADN compartís con otra persona. Cuanto mayor es el número de centimorgans, más cercana suele ser la relación familiar.</p>
+                          <p class="tooltip-note">La aplicación usa este valor (cM) como dato principal para estimar qué parentesco podrían tener dos personas.</p>
+                        </div>
                     </div>
                   </n-tooltip>
                 </n-form-item>
@@ -164,14 +158,20 @@
                         <n-icon class="info-icon"><InformationCircle /></n-icon>
                       </template>
                       <div class="tooltip-content">
+                          <div class="tooltip-header">
+                            <n-icon size="18" color="#1e90ff"><Calculator /></n-icon>
                         <h4>Endogamia</h4>
-                        <p>La endogamia ocurre cuando hay matrimonios entre parientes cercanos en el árbol genealógico.</p>
-                        <p>Cuando se selecciona un nivel de endogamia:</p>
-                        <ul>
+                          </div>
+                          <div class="tooltip-body">
+                            <p class="tooltip-intro">La endogamia ocurre cuando hay matrimonios entre parientes cercanos en el árbol genealógico.</p>
+                            <p class="tooltip-section">Cuando se selecciona un nivel de endogamia:</p>
+                            <ul class="tooltip-list">
                           <li>El sistema ajusta los rangos esperados de cM</li>
                           <li>Considera relaciones más lejanas como posibles</li>
                           <li>Ajusta las probabilidades basándose en patrones de herencia endogámica</li>
                         </ul>
+                            <p class="tooltip-note">El sistema ajusta los rangos esperados de cM y considera relaciones más lejanas como posibles.</p>
+                          </div>
                       </div>
                     </n-tooltip>
                     <n-button
@@ -204,14 +204,19 @@
                         <n-icon class="info-icon"><InformationCircle /></n-icon>
                       </template>
                       <div class="tooltip-content">
+                          <div class="tooltip-header">
+                            <n-icon size="18" color="#1e90ff"><Calculator /></n-icon>
                         <h4>Cromosoma X</h4>
-                        <p>El cromosoma X tiene patrones de herencia específicos que pueden ayudar a determinar la línea ancestral.</p>
-                        <p>Cuando se comparte ADN en el cromosoma X:</p>
-                        <ul>
+                          </div>
+                          <div class="tooltip-body">
+                            <p class="tooltip-intro">El cromosoma X tiene patrones de herencia específicos que pueden ayudar a determinar la línea ancestral.</p>
+                            <p class="tooltip-section">Cuando se comparte ADN en el cromosoma X:</p>
+                            <ul class="tooltip-list">
                           <li>Se puede identificar si la relación es por línea materna o paterna</li>
                           <li>Se ajustan las probabilidades de ciertas relaciones</li>
                           <li>Se puede excluir ciertas líneas ancestrales</li>
                         </ul>
+                          </div>
                       </div>
                     </n-tooltip>
                   </n-form-item>
@@ -261,13 +266,18 @@
                         <n-icon class="info-icon"><InformationCircle /></n-icon>
                       </template>
                       <div class="tooltip-content">
+                          <div class="tooltip-header">
+                            <n-icon size="18" color="#1e90ff"><Calculator /></n-icon>
                         <h4>Número de Segmentos</h4>
-                        <p>El número de segmentos compartidos puede indicar:</p>
-                        <ul>
+                          </div>
+                          <div class="tooltip-body">
+                            <p class="tooltip-intro">El número de segmentos compartidos puede indicar:</p>
+                            <ul class="tooltip-list">
                           <li>La antigüedad de la relación (más segmentos = relación más reciente)</li>
                           <li>La probabilidad de una relación específica</li>
                           <li>Posibles eventos de recombinación en el árbol genealógico</li>
                         </ul>
+                          </div>
                       </div>
                     </n-tooltip>
                   </n-form-item>
@@ -288,13 +298,18 @@
                         <n-icon class="info-icon"><InformationCircle /></n-icon>
                       </template>
                       <div class="tooltip-content">
+                          <div class="tooltip-header">
+                            <n-icon size="18" color="#1e90ff"><Calculator /></n-icon>
                         <h4>Segmento Más Grande</h4>
-                        <p>El tamaño del segmento más grande compartido es importante porque:</p>
-                        <ul>
+                          </div>
+                          <div class="tooltip-body">
+                            <p class="tooltip-intro">El tamaño del segmento más grande compartido es importante porque:</p>
+                            <ul class="tooltip-list">
                           <li>Indica la probabilidad de una relación reciente</li>
                           <li>Ayuda a distinguir entre relaciones cercanas y lejanas</li>
                           <li>Puede sugerir eventos específicos en el árbol genealógico</li>
                         </ul>
+                          </div>
                       </div>
                     </n-tooltip>
                   </n-form-item>
@@ -311,9 +326,10 @@
                 @click="store.calculateResults" 
                 :loading="store.loading"
                 :disabled="!store.cmValue"
+                  class="action-button calculate-button"
               >
                 <template #icon>
-                  <n-icon><Calculator /></n-icon>
+                  <n-icon><Search /></n-icon>
                 </template>
                 {{ $t('app.actions.calculate') }}
               </n-button>
@@ -321,6 +337,7 @@
                 type="error" 
                 @click="store.clearData"
                 :disabled="store.loading"
+                  class="action-button clear-button"
               >
                 <template #icon>
                   <n-icon><Trash /></n-icon>
@@ -333,351 +350,265 @@
 
         <!-- Right Section: Results -->
         <n-grid-item :span="12" :s-span="24" :m-span="12" :l-span="12">
-          <n-card :title="$t('app.results.title')" class="results-section">
-            <template v-if="!store.cmValue">
-              <div class="empty-state">
-                <n-icon size="64" color="#d9d9d9">
-                  <BarChart />
-                </n-icon>
-                <n-text depth="3" class="empty-state-text">
-                  {{ $t('app.results.empty.title') }}
-                </n-text>
-              </div>
-            </template>
-            <template v-else-if="store.loading">
-              <div class="loading-state">
+            <n-card :title="$t('app.results.title')" hoverable class="results-container">
+              <template v-if="store.loading">
                 <n-spin size="large" />
-                <n-text depth="3" class="loading-text">
-                  {{ $t('app.results.loading') }}
-                </n-text>
+              </template>
+              <template v-else-if="store.relationships.length > 0">
+                <!-- Analysis Summary -->
+                <n-card title="Informe de Relación" class="analysis-card">
+                  <template #header-extra>
+                    <n-tooltip trigger="hover" placement="right">
+                      <template #trigger>
+                        <n-icon class="info-icon"><InformationCircle /></n-icon>
+                      </template>
+                      <div class="tooltip-content">
+                        <div class="tooltip-header">
+                          <n-icon size="18" color="#1e90ff"><Calculator /></n-icon>
+                          <h4>Cálculo de Probabilidad</h4>
+                        </div>
+                        <div class="tooltip-body">
+                          <p class="tooltip-intro">El análisis considera los siguientes factores:</p>
+                          <div class="factors-grid">
+                            <div class="factor-item">
+                              <span class="factor-label">Distancia al promedio cM</span>
+                              <span class="factor-value">30%</span>
+                            </div>
+                            <div class="factor-item">
+                              <span class="factor-label">Rango de cM</span>
+                              <span class="factor-value">20%</span>
+                            </div>
+                            <div class="factor-item">
+                              <span class="factor-label">Número de segmentos</span>
+                              <span class="factor-value">20%</span>
+                            </div>
+                            <div class="factor-item">
+                              <span class="factor-label">Tamaño del segmento más grande</span>
+                              <span class="factor-value">15%</span>
+                            </div>
+                            <div class="factor-item">
+                              <span class="factor-label">Coincidencia en cromosoma X</span>
+                              <span class="factor-value">5%</span>
+                            </div>
+                            <div class="factor-item">
+                              <span class="factor-label">Rango de edad esperado</span>
+                              <span class="factor-value">10%</span>
+                            </div>
+                          </div>
+                          <p class="tooltip-note">Nota: El rango de edad ayuda a validar la plausibilidad de la relación. Por ejemplo, un tatarabuelo no suele tener una diferencia de edad menor a 60 años con su descendiente.</p>
+                        </div>
+                      </div>
+                    </n-tooltip>
+                  </template>
+                  <n-space vertical>
+                    <n-text class="analysis-text">
+                      <template v-if="store.name1 && store.name2">
+                        <span class="name">{{ store.name1 }}</span>
+                        <template v-if="store.age1"> ({{ store.age1 }} años)</template>
+                        comparte 
+                        <span class="cm-value">{{ store.cmValue }}cM</span> con 
+                        <span class="name">{{ store.name2 }}</span>
+                        <template v-if="store.age2"> ({{ store.age2 }} años)</template>
+                        <template v-if="store.numSegments">
+                          en <span class="highlight">{{ store.numSegments }}</span> segmentos
+                          <template v-if="store.largestSegment">
+                            (el más grande de <span class="highlight">{{ store.largestSegment }}cM</span>)
+                          </template>
+                        </template>.
+                        <template v-if="store.age1 && store.age2">
+                          <div class="age-difference">
+                            La diferencia de edad es de <span class="highlight">{{ Math.abs(store.age1 - store.age2) }}</span> años.
               </div>
+                        </template>
+                        <template v-if="store.relationships && store.relationships.length > 0">
+                          La relación más probable es 
+                          <span class="relationship-name">{{ store.relationships[0].name }}</span> 
+                          (<span class="probability">{{ (store.relationships[0].probability * 100).toFixed(1) }}%</span> de probabilidad).
+                          <template v-if="store.relationships.length > 1">
+                            También es posible que sean 
+                            <span class="relationship-name">{{ store.relationships[1].name }}</span> 
+                            (<span class="probability">{{ (store.relationships[1].probability * 100).toFixed(1) }}%</span> de probabilidad).
+                          </template>
+                        </template>
+                        <template v-if="store.xMatch === 'yes'">
+                          <div class="x-match-info">
+                            Se comparten <span class="highlight">{{ store.xcmValue }}cM</span> en el cromosoma X.
+                            <template v-if="store.sex2 === 'M'">
+                              Esto indica que la relación probablemente viene por la línea materna del match.
             </template>
             <template v-else>
-              <n-tabs type="line" animated>
-                <n-tab-pane name="relationships" :tab="$t('app.results.empty.list.possible_relationships')">
-                  <n-card v-if="store.relationships.length > 0 && !store.loading" class="ancestor-info" hoverable>
-                    <n-space vertical>
-                      <n-text strong>
-                        {{ $t('app.results.ancestor.title') }}
+                              Esto sugiere que la relación podría venir por líneas femeninas en el árbol.
+                            </template>
+                          </div>
+                        </template>
+                        <template v-else-if="store.xMatch === 'no'">
+                          <div class="x-match-info">
+                            No se comparten segmentos en el cromosoma X.
+                            <template v-if="store.sex2 === 'M'">
+                              Esto descarta la línea materna del match como posible origen de la relación.
+                            </template>
+                          </div>
+                        </template>
+                      </template>
                       </n-text>
-                      <n-text>
-                        Se comparten {{ store.cmValue }} cM{{ store.numSegments ? ` en ${store.numSegments} segmentos` : '' }}.
-                        {{ store.xMatch === 'yes' && store.xcmValue ? ` Se comparten ${store.xcmValue} cM en el cromosoma X.` : '' }}
-                        {{ store.xMatch === 'no' ? ' No se comparten segmentos en el cromosoma X.' : '' }}
-                        {{ store.age1 && store.age2 ? ` Las edades (${store.age1} y ${store.age2}) son ${Math.abs(store.age1 - store.age2) <= 10 ? 'consistentes' : 'diferentes'}.` : '' }}
-                      </n-text>
-                      <n-text>
-                        Por lo tanto, habría que investigar al {{ getAncestorGeneration(sortedRelationships[0]) }} de {{ store.name2 || $t('app.results.match') }} como posible ancestro común.
-                        {{ store.xMatch === 'yes' 
-                          ? store.sex2 === 'M' 
-                            ? ' Dado que se comparten segmentos en el cromosoma X, la línea materna del match es más probable.'
-                            : ' Dado que se comparten segmentos en el cromosoma X, las líneas femeninas son más probables.'
-                          : store.xMatch === 'no'
-                            ? ' Dado que no se comparten segmentos en el cromosoma X, la línea materna del match es menos probable, aunque no se puede descartar completamente.'
-                            : ''
-                        }}
-                      </n-text>
-                      <n-text v-if="store.xMatch === 'unknown'" type="info">
-                        No hay información sobre el cromosoma X, por lo tanto no podemos brindar información sobre las ramas posibles.
-                      </n-text>
-                      
-                      <!-- Sección de Sugerencias -->
-                      <div class="suggestions-section">
-                        <n-text strong class="suggestions-title">🔍 Sugerencias para investigar la relación</n-text>
-                        <n-text class="suggestions-intro">
-                          Dado que {{ store.name2 || $t('app.results.match') }} es posiblemente {{ sortedRelationships[0].name }} de {{ store.name1 || $t('app.results.searcher') }}, se sugiere:
-                        </n-text>
-                        <ul class="suggestions-list">
-                          <li v-for="(sugerencia, index) in getGenerationTargets(sortedRelationships[0])" :key="index" class="suggestion-item">
-                            <n-icon class="suggestion-icon"><ArrowForward /></n-icon>
-                            <n-text>{{ sugerencia }}</n-text>
-                          </li>
-                          <li v-if="store.xMatch !== 'unknown'" class="suggestion-item">
-                            <n-icon class="suggestion-icon"><ArrowForward /></n-icon>
-                            <n-text>{{ getXMatchGuidance(store.xMatch, store.sex2) }}</n-text>
-                          </li>
-                        </ul>
-                      </div>
-                    </n-space>
-                  </n-card>
+                  </n-space>
+                </n-card>
+
+                <!-- Investigation Suggestions -->
+                <n-card title="Sugerencias para Investigar" class="suggestions-card">
+                  <template #header-extra>
+                    <n-button text @click="toggleSuggestions">
+                      <template #icon>
+                        <n-icon><ArrowForward /></n-icon>
+                      </template>
+                      {{ showSuggestions ? 'Ocultar' : 'Mostrar' }}
+                    </n-button>
+                  </template>
+                  <n-collapse-transition :show="showSuggestions">
+                    <div class="suggestions-content">
+                      <ul class="suggestions-list">
+                        <li v-for="(suggestion, index) in store.investigationSuggestions" :key="index">
+                          {{ suggestion }}
+                        </li>
+                      </ul>
+                    </div>
+                  </n-collapse-transition>
+                </n-card>
+
+                <!-- Relationships List -->
+                <n-card title="Lista de Relaciones Posibles" class="relationships-card">
+                  <n-space vertical>
                   <n-list>
-                    <n-list-item v-for="rel in sortedRelationships" :key="rel.code">
-                      <n-card hoverable @click="selectRelationship(rel.code)">
+                      <n-list-item v-for="rel in store.relationships" :key="rel.code">
                         <n-space justify="space-between" align="center">
                           <n-space vertical>
-                            <n-text strong>
-                              {{ $t('app.relationships.' + rel.code + '.narrative') }} ({{ rel.code }})
-                            </n-text>
-                            <n-text depth="3">
-                              {{ $t('app.relationships.' + rel.code + '.description') }}
-                            </n-text>
-                            <n-text depth="3">
-                              {{ $t('app.results.average') }}: {{ rel.average_cm }} cM • 
-                              {{ $t('app.results.typical_range') }}: {{ rel.min_cm }}–{{ rel.max_cm }} cM
-                            </n-text>
-                            <n-text v-if="store.xMatch !== 'unknown'" :type="rel.xPlausible ? 'success' : 'warning'">
-                              {{ store.xMatch === 'yes' ? store.xcmValue : 0 }} cM {{ $t('app.results.in_x') }} — 
-                              {{ rel.xPlausible ? $t('app.results.consistent') : $t('app.results.inconsistent') }}
+                            <n-text strong>{{ rel.name }}</n-text>
+                            <n-text depth="3">{{ rel.description }}</n-text>
+                            <n-text>
+                              Promedio: {{ rel.avg_cm }} cM • Rango típico: {{ rel.min_cm }}–{{ rel.max_cm }} cM
                             </n-text>
                           </n-space>
-                          <n-tag :type="rel.adjustedProb >= 0.5 ? 'success' : rel.adjustedProb >= 0.15 ? 'warning' : 'error'" round>
-                            {{ (rel.adjustedProb * 100).toFixed(1) }}%
-                          </n-tag>
+                          <n-text strong>{{ (rel.probability * 100).toFixed(1) }}%</n-text>
                         </n-space>
-                      </n-card>
                     </n-list-item>
                   </n-list>
-                </n-tab-pane>
-
-                <n-tab-pane name="table" :tab="$t('app.results.empty.list.detailed_table')">
-                  <n-data-table
-                    :columns="columns"
-                    :data="sortedRelationships"
-                    :pagination="false"
-                  />
-                </n-tab-pane>
-
-                <n-tab-pane name="histogram" :tab="$t('app.results.empty.list.statistical_distribution')">
-                  <n-space vertical>
-                    <n-select
-                      v-model:value="selectedRelationshipForAnalysis"
-                      :options="sortedRelationships.map(rel => ({
-                        label: `${$t('app.relationships.' + rel.code + '.narrative')} (${rel.code}) - ${(rel.adjustedProb * 100).toFixed(1)}%`,
-                        value: rel.code,
-                        type: rel.adjustedProb >= 0.5 ? 'success' : rel.adjustedProb >= 0.15 ? 'warning' : 'error'
-                      }))"
-                      :render-label="renderLabel"
-                      placeholder="Selecciona una relación para ver su análisis"
-                      class="mb-4"
-                    />
-                    
-                    <template v-if="selectedRelationshipForAnalysis && store.histogram[selectedRelationshipForAnalysis]">
-                      <n-table>
-                        <thead>
-                          <tr>
-                            <th>{{ $t('app.results.range_cm') }}</th>
-                            <th>{{ $t('app.results.percentage_cases') }}</th>
-                          </tr>
-                        </thead>
-                        <tbody>
-                          <tr v-for="(count, bin) in store.histogram[selectedRelationshipForAnalysis]" :key="bin">
-                            <td>{{ bin }} cM</td>
-                            <td>{{ count }}%</td>
-                          </tr>
-                        </tbody>
-                      </n-table>
-
-                      <n-card class="mt-4">
-                        <n-space vertical>
-                          <n-text strong>¿Qué significa esta tabla?</n-text>
-                          <n-text>
-                            <p>La coincidencia genética entre {{ store.name1 || 'el buscador' }} y {{ store.name2 || 'el match' }} es de {{ store.cmValue }} cM.</p>
-                          </n-text>
-                          <n-text>
-                            <p>Esta tabla muestra cuántas personas con el mismo parentesco confirmado comparten diferentes cantidades de ADN. Por ejemplo:</p>
-                            <ul class="interpretation-list">
-                              <li v-for="(count, bin) in store.histogram[selectedRelationshipForAnalysis]" :key="bin">
-                                {{ count }}% de las personas con este parentesco comparten entre {{ bin }} cM
-                              </li>
-                            </ul>
-                          </n-text>
-                          <n-text>
-                            <p><strong>Conclusión:</strong></p>
-                            <template v-if="getCurrentRangeCount(store.cmValue, store.histogram[selectedRelationshipForAnalysis])">
-                              <p>El valor de {{ store.cmValue }} cM está en un rango que representa el {{ getCurrentRangeCount(store.cmValue, store.histogram[selectedRelationshipForAnalysis]) }}% de los casos para esta relación.</p>
-                              <p v-if="getCurrentRangeCount(store.cmValue, store.histogram[selectedRelationshipForAnalysis]) >= 30">
-                                Por lo tanto, es muy probable que tengas este parentesco. La cantidad de ADN compartido es típica para este tipo de relación y la hipótesis de parentesco es consistente con los datos genéticos.
-                              </p>
-                              <p v-else-if="getCurrentRangeCount(store.cmValue, store.histogram[selectedRelationshipForAnalysis]) >= 20">
-                                Por lo tanto, es probable que tengas este parentesco. La cantidad de ADN compartido es común para este tipo de relación y la hipótesis de parentesco es razonable.
-                              </p>
-                              <p v-else-if="getCurrentRangeCount(store.cmValue, store.histogram[selectedRelationshipForAnalysis]) >= 10">
-                                Por lo tanto, es posible que tengas este parentesco. La cantidad de ADN compartido está dentro de un rango aceptable para este tipo de relación.
-                              </p>
-                              <p v-else>
-                                Por lo tanto, es poco probable que tengas este parentesco. La cantidad de ADN compartido está fuera del rango típico para esta relación.
-                              </p>
-                            </template>
-                          </n-text>
-                          <n-text>
-                            <p><strong>Recomendaciones para el análisis:</strong></p>
-                            <ul class="recommendations-list">
-                              <li>
-                                <strong>Valores en rangos frecuentes (>20%):</strong>
-                                <ul>
-                                  <li>Indican una alta probabilidad de que la relación sea la correcta</li>
-                                  <li>Sugieren un patrón típico de herencia genética</li>
-                                  <li>Apoyan la hipótesis de la relación propuesta</li>
-                                </ul>
-                              </li>
-                              <li>
-                                <strong>Valores en rangos poco frecuentes (<5%):</strong>
-                                <ul>
-                                  <li>Recomiendan considerar otras posibles relaciones</li>
-                                  <li>Sugieren investigar la presencia de endogamia</li>
-                                  <li>Indican la necesidad de buscar evidencia genealógica adicional</li>
-                                </ul>
-                              </li>
-                              <li>
-                                <strong>Consideraciones generales:</strong>
-                                <ul>
-                                  <li>Los valores poco comunes pueden ser correctos, especialmente en casos de endogamia</li>
-                                  <li>La información genética debe complementarse con datos genealógicos</li>
-                                  <li>Los rangos típicos varían según el tipo de relación familiar</li>
-                                </ul>
-                              </li>
-                            </ul>
-                          </n-text>
-                        </n-space>
-                      </n-card>
-                    </template>
-                    <n-empty v-else :description="$t('app.results.empty.histogram')">
-                      <template #icon>
-                        <n-icon><BarChart /></n-icon>
-                      </template>
-                    </n-empty>
                   </n-space>
-                </n-tab-pane>
-              </n-tabs>
-            </template>
+                </n-card>
+              </template>
+              <template v-else>
+                <div class="empty-state">
+                  <n-icon size="48" color="#9CA3AF">
+                    <DocumentText />
+                  </n-icon>
+                  <p>Aquí aparecerán los resultados una vez que completes el formulario con los datos.</p>
+                </div>
+              </template>
           </n-card>
         </n-grid-item>
       </n-grid>
     </div>
-
-    <!-- Endogamy Help Modal -->
-    <n-modal v-model:show="showHelpModal" preset="dialog" :title="$t('app.dna.endogamy.title')">
-      <n-card v-if="endogamyInfo" class="help-modal">
-        <template #header>
-          <h3>{{ endogamyInfo.levels[store.endogamy]?.name }}</h3>
-        </template>
-
-        <n-space vertical>
-          <n-alert type="info" :title="$t('app.dna.endogamy.description')">
-            {{ endogamyInfo.levels[store.endogamy]?.description }}
-          </n-alert>
-
-          <n-alert type="info" :title="$t('app.dna.endogamy.examples')">
-            {{ endogamyInfo.levels[store.endogamy]?.examples }}
-          </n-alert>
-
-          <n-alert type="info" :title="$t('app.dna.endogamy.effect')">
-            {{ endogamyInfo.levels[store.endogamy]?.dna_effect }}
-          </n-alert>
-
-          <n-divider>{{ $t('app.dna.endogamy.references') }}</n-divider>
-          <n-list>
-            <n-list-item v-for="(ref, index) in endogamyInfo.references" :key="index">
-              <n-thing>
-                <template #header>{{ ref.title }}</template>
-                <template #description>{{ ref.author }} - {{ ref.source }}</template>
-                <template #default>{{ ref.description }}</template>
-                <template #footer v-if="ref.url">
-                  <n-button text type="primary" @click="openReference(ref.url)">
-                    <template #icon>
-                      <n-icon><InformationCircle /></n-icon>
-                    </template>
-                    {{ $t('app.dna.endogamy.read_more') }}
-                  </n-button>
-                </template>
-              </n-thing>
-            </n-list-item>
-          </n-list>
-        </n-space>
-      </n-card>
-    </n-modal>
-
-    <!-- Footer -->
-    <footer class="app-footer">
-      <div class="footer-content">
-        <div class="footer-links">
-          <a href="mailto:mscanepa@gmail.com" class="footer-link">
-            <n-icon><Mail /></n-icon>
-            Soporte
-          </a>
-          <a href="#" @click="showSourcesModal = true" class="footer-link">
-            <n-icon><Book /></n-icon>
-            Fuentes
-          </a>
-          <a href="https://github.com/mscanepa/genealogy" target="_blank" class="footer-link">
-            <n-icon><LogoGithub /></n-icon>
-            GitHub
-          </a>
         </div>
-        <div class="footer-license">
-          <p>Licenciado bajo <a href="https://opensource.org/licenses/MIT" target="_blank">MIT License</a></p>
-          <p class="credits">Desarrollado por <a href="mailto:mscanepa@gmail.com">Sole Canepa</a> con asistencia de <a href="https://openai.com" target="_blank">ChatGPT 4</a> y <a href="https://cursor.sh" target="_blank">Cursor</a></p>
-        </div>
-      </div>
-    </footer>
-
-    <!-- Sources Modal -->
-    <n-modal
-      v-model:show="showSourcesModal"
-      preset="dialog"
-      title="Fuentes y Referencias"
-      class="sources-modal"
-    >
-      <n-card>
-        <n-space vertical>
-          <div class="source-group">
-            <h4>Datos Genéticos</h4>
-            <div class="source-item">
-              <h5>Shared cM Project v4</h5>
-              <p class="source-author">Blaine Bettinger</p>
-              <p class="source-description">Proporciona rangos de cM para cada tipo de relación</p>
-              <a href="https://dnapainter.com/tools/sharedcmv4" target="_blank" class="source-link">
-                dnapainter.com/tools/sharedcmv4
-              </a>
-              <p class="source-usage">Usado para construir relationships.json y los histogramas</p>
-            </div>
-            
-            <div class="source-item">
-              <h5>Probability Curves</h5>
-              <p class="source-author">Leah Larkin (The DNA Geek)</p>
-              <p class="source-description">Curvas de probabilidad por relación según cM compartidos</p>
-              <a href="https://thednageek.com" target="_blank" class="source-link">
-                thednageek.com
-              </a>
-              <p class="source-usage">Usado para probabilidades.json y la interpolación</p>
-            </div>
-          </div>
-
-          <div class="source-group">
-            <h4>Herencia del Cromosoma X</h4>
-            <div class="source-item">
-              <p class="source-description">Basado en investigaciones de:</p>
-              <ul class="source-authors">
-                <li>Cristián Cofré (Medium - X-Match)</li>
-                <li>Roberta Estes (DNAeXplained)</li>
-              </ul>
-              <p class="source-usage">Usado para construir xInheritance.json y determinar líneas ancestrales</p>
-            </div>
-          </div>
-
-          <div class="source-group">
-            <h4>Convenciones Genealógicas</h4>
-            <div class="source-item">
-              <p class="source-description">Códigos de relación estandarizados en genealogía genética</p>
-              <p class="source-usage">Usado para la estructura de datos y visualización de relaciones</p>
-            </div>
-          </div>
-
-          <div class="source-group">
-            <h4>Inferencia de Edad y Segmentos</h4>
-            <div class="source-item">
-              <p class="source-description">Reglas empíricas para análisis:</p>
-              <ul class="source-rules">
-                <li>Edad esperada ≈ generación × 30 años</li>
-                <li>Relación más cercana → más segmentos compartidos</li>
-                <li>Tamaño del segmento más grande como indicador secundario</li>
-              </ul>
-            </div>
-          </div>
-        </n-space>
-      </n-card>
-    </n-modal>
   </div>
+
+  <footer class="app-footer">
+    <div class="footer-content">
+      <div class="footer-links">
+        <a href="mailto:mscanepa@gmail.com" class="footer-link">
+          <n-icon><Mail /></n-icon>
+          Soporte
+        </a>
+        <a href="#" @click="showSourcesModal = true" class="footer-link">
+          <n-icon><Book /></n-icon>
+          Fuentes
+        </a>
+        <a href="https://github.com/mscanepa/genealogy" target="_blank" class="footer-link">
+          <n-icon><LogoGithub /></n-icon>
+          GitHub
+        </a>
+      </div>
+      <div class="footer-license">
+        <p>Licenciado bajo <a href="https://opensource.org/licenses/MIT" target="_blank">MIT License</a></p>
+        <p class="credits">Desarrollado por <a href="mailto:mscanepa@gmail.com">Sole Canepa</a> con asistencia de <a href="https://openai.com" target="_blank">ChatGPT 4</a> y <a href="https://cursor.sh" target="_blank">Cursor</a></p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Modal de Fuentes -->
+  <n-modal
+    v-model:show="showSourcesModal"
+    preset="card"
+    style="width: 700px"
+    title="Fuentes y Referencias"
+    :bordered="false"
+    size="huge"
+    role="dialog"
+    aria-modal="true"
+  >
+    <n-space vertical size="large">
+      <n-text>
+        <h3 class="section-title">Shared cM Project v4</h3>
+        <div class="source-section">
+          <strong>Autor:</strong> Blaine Bettinger
+          <br><br>
+          <strong>Uso en la aplicación:</strong>
+          <ul>
+            <li>Rangos de cM para cada tipo de relación</li>
+            <li>Construcción de relationships.json</li>
+            <li>Generación de histogramas</li>
+          </ul>
+          <a href="https://thegeneticgenealogist.com/2016/03/07/updated-shared-cm-project/" target="_blank">Ver fuente</a>
+        </div>
+
+        <h3 class="section-title">Curvas de Probabilidad</h3>
+        <div class="source-section">
+          <strong>Autora:</strong> Leah Larkin (The DNA Geek)
+          <br><br>
+          <strong>Uso en la aplicación:</strong>
+          <ul>
+            <li>Curvas de probabilidad por relación según cM compartidos</li>
+            <li>Construcción de probabilidades.json</li>
+            <li>Implementación de interpolación</li>
+          </ul>
+          <a href="https://thednageek.com/probability-curves/" target="_blank">Ver fuente</a>
+        </div>
+
+        <h3 class="section-title">Herencia del Cromosoma X</h3>
+        <div class="source-section">
+          <strong>Autores:</strong>
+          <ul>
+            <li>Cristián Cofré (Medium - X-Match)</li>
+            <li>Roberta Estes (DNAeXplained)</li>
+          </ul>
+          <strong>Uso en la aplicación:</strong>
+          <ul>
+            <li>Construcción de xInheritance.json</li>
+            <li>Determinación de líneas ancestrales</li>
+            <li>Análisis de patrones de herencia</li>
+          </ul>
+        </div>
+
+        <h3 class="section-title">Convenciones Genealógicas</h3>
+        <div class="source-section">
+          <strong>Uso en la aplicación:</strong>
+          <ul>
+            <li>Códigos estandarizados de relaciones en genealogía genética</li>
+            <li>Estructura de datos</li>
+            <li>Visualización de relaciones</li>
+          </ul>
+        </div>
+
+        <h3 class="section-title">Inferencia de Edad y Segmentos</h3>
+        <div class="source-section">
+          <strong>Reglas empíricas implementadas:</strong>
+          <ul>
+            <li>Edad esperada ≈ generación × 30 años</li>
+            <li>Relaciones más cercanas → más segmentos compartidos</li>
+            <li>Tamaño del segmento más grande como indicador secundario</li>
+          </ul>
+        </div>
+      </n-text>
+    </n-space>
+  </n-modal>
 </template>
 
 <script setup>
@@ -729,7 +660,9 @@ import {
   ArrowForward,
   Mail,
   Book,
-  LogoGithub
+  LogoGithub,
+  DocumentText,
+  Search
 } from '@vicons/ionicons5'
 import { useMessage } from 'naive-ui'
 
@@ -738,6 +671,8 @@ const store = useRelationshipStore()
 const message = useMessage()
 const showAdvancedOptions = ref(false)
 const showSourcesModal = ref(false)
+const showResearchGuide = ref(false)
+const showSuggestions = ref(true)
 
 // Function to change language
 const changeLocale = (newLocale) => {
@@ -1195,558 +1130,649 @@ const getXMatchGuidance = (xMatch, sexoMatch) => {
   }
   return 'No se cuenta con información sobre coincidencia en el cromosoma X.'
 }
+
+const toggleResearchGuide = () => {
+  showResearchGuide.value = !showResearchGuide.value
+}
+
+const toggleSuggestions = () => {
+  showSuggestions.value = !showSuggestions.value
+}
 </script>
 
 <style>
+/* Variables de color actualizadas */
+:root {
+  --primary-color: #8B7355;
+  --primary-color-light: #A89B8C;
+  --primary-color-dark: #6B5B4A;
+  --secondary-color: #7A9D7E;
+  --secondary-color-light: #E8F0E9;
+  --accent-color: #D4A373;
+  --background-light: #F5F3ED;
+  --background-white: #FFFDF8;
+  --background-yellow: #F9F4E8;
+  --text-primary: #4A3C2C;
+  --text-secondary: #6B5B4A;
+  --border-color: #E5DED3;
+  --success-color: #7A9D7E;
+  --warning-color: #D4A373;
+  --error-color: #C17E61;
+  --shadow-sm: 0 2px 4px rgba(0, 0, 0, 0.03);
+  --shadow-md: 0 4px 6px rgba(0, 0, 0, 0.04);
+  --shadow-lg: 0 8px 16px rgba(0, 0, 0, 0.05);
+  --spacing-xs: 4px;
+  --spacing-sm: 8px;
+  --spacing-md: 16px;
+  --spacing-lg: 24px;
+  --spacing-xl: 32px;
+  --border-radius-sm: 4px;
+  --border-radius-md: 8px;
+  --border-radius-lg: 12px;
+  --n-color: #F5F3ED !important;
+  --n-merged-color: #F5F3ED !important;
+}
+
 /* Estilos base */
 * {
   box-sizing: border-box;
   margin: 0;
   padding: 0;
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
 }
 
 body {
-  background-color: #fafafa;
+  background-color: var(--background-light);
+  color: var(--text-primary);
+  line-height: 1.5;
+}
+
+/* Estilos para el análisis de relación */
+.analysis-card {
+  background: var(--background-white) !important;
+  border: 1px solid var(--border-color) !important;
+  box-shadow: var(--shadow-md);
+  border-radius: var(--border-radius-md);
+  margin-bottom: var(--spacing-md);
+}
+
+.analysis-card :deep(.n-card-header) {
+  border-bottom: 1px solid var(--border-color);
+  padding: var(--spacing-md);
+}
+
+.analysis-card :deep(.n-card-header h3) {
+  color: var(--primary-color);
+  font-size: 1.2rem;
+  font-weight: 600;
+}
+
+.analysis-text {
+  font-size: 1.1rem;
+  line-height: 1.6;
+  color: var(--text-primary);
+  padding: var(--spacing-md);
+  padding-left: 0;
+}
+
+.analysis-text .name {
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+.analysis-text .cm-value {
+  text-decoration: underline;
+  font-weight: 600;
+  color: var(--primary-color);
+}
+
+.analysis-text .highlight {
+  font-weight: 600;
+  color: var(--primary-color);
+}
+
+.analysis-text .relationship-name {
+  font-weight: 600;
+  color: var(--text-primary);
+  background-color: var(--secondary-color-light);
+  padding: 2px 6px;
+  border-radius: var(--border-radius-sm);
+}
+
+.analysis-text .probability {
+  color: var(--primary-color);
+  font-weight: 600;
+}
+
+.analysis-text .x-match-info {
+  margin-top: var(--spacing-md);
+  padding-top: var(--spacing-md);
+  border-top: 1px solid var(--border-color);
+  color: var(--text-secondary);
+  font-size: 0.95rem;
+}
+
+/* Estilos para las sugerencias */
+.suggestions-card {
+  background-color: var(--background-yellow) !important;
+  border: 1px solid var(--border-color) !important;
+  box-shadow: var(--shadow-sm);
+  border-radius: var(--border-radius-md);
+  margin-bottom: var(--spacing-md);
+}
+
+.suggestions-card :deep(.n-list-item) {
+  padding: var(--spacing-md);
+  border-bottom: 1px solid var(--border-color);
+}
+
+.suggestions-card :deep(.n-list-item:last-child) {
+  border-bottom: none;
+}
+
+/* Estilos para la lista de relaciones */
+.relationships-card {
+  background: var(--background-white) !important;
+  border: 1px solid var(--border-color) !important;
+  box-shadow: var(--shadow-sm);
+  border-radius: var(--border-radius-md);
+  margin-bottom: var(--spacing-md);
+}
+
+.relationships-card :deep(.n-list-item) {
+  padding: var(--spacing-md);
+  border-bottom: 1px solid var(--border-color);
+  transition: background-color 0.2s ease;
+}
+
+.relationships-card :deep(.n-list-item:hover) {
+  background-color: #FFFDF8 !important;
+}
+
+.relationships-card :deep(.n-list-item:last-child) {
+  border-bottom: none;
+}
+
+/* Estilos para el tooltip */
+:deep(.n-tooltip),
+:deep(.n-popover) {
+  --n-color: #F5F3ED !important;
+  --n-text-color: #3E3326 !important;
+  --n-box-shadow: none!important;
+  --n-border: 0px !important;
+  --n-border-radius: 0px !important;
+  padding: 0px !important;
+  margin: 0px !important;
+}
+
+.n-popover,
+.n-tooltip {background-color:#F5F3ED !important;}
+
+:deep(.n-tooltip-trigger),
+:deep(.n-popover-trigger) {
+  display: inline-flex;
+  align-items: center;
+}
+
+:deep(.n-tooltip-arrow),
+:deep(.n-popover-arrow) {
+  display: block !important;
+  border-color: #DDD6CC !important;
+  color:#F5F3ED !important; ;
+}
+
+.tooltip-content {
+  max-width: 250px !important;
+  background-color: #FFFFFF !important;
+  color: #333333 !important;
+  padding: var(--spacing-md);
+  border-radius: var(--border-radius-md);
+  box-shadow: var(--shadow-md);
+}
+
+.tooltip-header {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-sm);
+  margin-bottom: var(--spacing-md);
+  padding-bottom: var(--spacing-sm);
+}
+
+.tooltip-header h4 {
   margin: 0;
-  padding: 0;
+  color: #000000 !important;
+  font-size: 1rem;
+  font-weight: 600;
 }
 
-html, body {
-  height: 100%;
+.tooltip-header .n-icon {
+  color: #000000 !important;
+}
+
+.tooltip-body {
+  padding: var(--spacing-sm) 0;
+  line-height: 1.5;
+}
+
+.tooltip-intro {
+  margin: 0 0 var(--spacing-md) 0;
+  color: #000000;
+  font-size: 0.9rem;
+}
+
+.tooltip-note {
+  margin: var(--spacing-md) 0 0 0;
+  padding-top: var(--spacing-sm);
+  border-top: 1px solid rgba(0, 0, 0, 0.1);
+  color: #000000;
+  font-size: 0.9rem;
+}
+
+.info-icon {
+  color: #000000 !important;
+  cursor: pointer;
+  transition: color 0.2s ease;
+}
+
+.info-icon:hover {
+  color: #000000 !important;
+  opacity: 0.8;
+}
+
+/* Forzar estilos de Naive UI */
+:deep(.n-tooltip-trigger) {
+  color: #000000 !important;
+}
+
+:deep(.n-tooltip-trigger:hover) {
+  color: #000000 !important;
+  opacity: 0.8;
+}
+
+/* Forzar eliminación de bordes en botones */
+.app-container .container .main-content .button-section .n-button,
+.app-container .container .main-content .button-section .n-button.n-button--primary-type,
+.app-container .container .main-content .button-section .n-button.n-button--error-type,
+.app-container .container .main-content .button-section .n-button:hover,
+.app-container .container .main-content .button-section .n-button.n-button--primary-type:hover,
+.app-container .container .main-content .button-section .n-button.n-button--error-type:hover,
+.app-container .container .main-content .button-section .n-button:focus,
+.app-container .container .main-content .button-section .n-button.n-button--primary-type:focus,
+.app-container .container .main-content .button-section .n-button.n-button--error-type:focus {
+  border: 0 !important;
+  border-width: 0 !important;
+  border-style: none !important;
+  border-color: transparent !important;
+  outline: none !important;
+  box-shadow: none !important;
+  --n-border: 0 !important;
+  --n-border-hover: 0 !important;
+  --n-border-pressed: 0 !important;
+  --n-border-focus: 0 !important;
+  --n-border-disabled: 0 !important;
+}
+
+/* Estilos específicos para el botón Calcular */
+.app-container .container .main-content .button-section .n-button.n-button--primary-type {
+  background-color: #7A9D7E !important;
+  color: #FFFFFF !important;
+  --n-color: #7A9D7E !important;
+  --n-color-hover: #6A8D6E !important;
+  --n-color-pressed: #6A8D6E !important;
+  --n-border: 0 !important;
+  --n-border-hover: 0 !important;
+  --n-border-pressed: 0 !important;
+}
+
+.app-container .container .main-content .button-section .n-button.n-button--primary-type .n-icon {
+  color: #FFFFFF !important;
+}
+
+.app-container .container .main-content .button-section .n-button.n-button--primary-type:hover .n-icon {
+  color: #FFFFFF !important;
+}
+
+.app-container .container .main-content .button-section .n-button.n-button--primary-type:active .n-icon {
+  color: #FFFFFF !important;
+}
+
+/* Estilos específicos para el botón Limpiar */
+.app-container .container .main-content .button-section .n-button.n-button--error-type {
+  background-color: #E5E5E5 !important;
+  color: #333333 !important;
+  --n-color: #E5E5E5 !important;
+  --n-color-hover: #D5D5D5 !important;
+  --n-color-pressed: #D5D5D5 !important;
+  --n-border: 0 !important;
+  --n-border-hover: 0 !important;
+  --n-border-pressed: 0 !important;
+}
+
+/* Forzar estilos en el estado disabled */
+.app-container .container .main-content .button-section .n-button.n-button--disabled {
+  border: 0 !important;
+  --n-border: 0 !important;
+  --n-border-hover: 0 !important;
+  --n-border-pressed: 0 !important;
+}
+
+/* Estilos para la sección de guía de investigación */
+.research-guide-section {
+  max-width: 800px;
+  margin: 2rem auto;
+  padding: 0 1rem;
+}
+
+.research-guide-toggle {
   width: 100%;
-  overflow-x: hidden;
+  padding: 1rem;
+  background: var(--background-white);
+  border: 1px solid var(--border-color);
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  cursor: pointer;
+  font-size: 1rem;
+  color: var(--text-primary);
+  transition: all 0.3s ease;
 }
 
+.research-guide-toggle:hover {
+  background: var(--background-light);
+  border-color: var(--primary-color);
+}
+
+.toggle-icon {
+  font-size: 0.8rem;
+  color: var(--primary-color);
+}
+
+.research-guide-content {
+  margin-top: 1rem;
+  padding: 1.5rem;
+  background: var(--background-white);
+  border: 1px solid var(--border-color);
+  border-radius: 8px;
+  opacity: 0;
+  transform: translateY(-10px);
+  transition: all 0.3s ease;
+}
+
+.research-guide-content.expanded {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.research-guide-content h3 {
+  color: var(--primary-color);
+  margin-bottom: 1rem;
+  font-size: 1.2rem;
+}
+
+.research-guide-content ol {
+  padding-left: 1.5rem;
+  margin: 0;
+}
+
+.research-guide-content li {
+  margin-bottom: 1rem;
+}
+
+.research-guide-content li:last-child {
+  margin-bottom: 0;
+}
+
+.research-guide-content strong {
+  color: var(--text-primary);
+  display: block;
+  margin-bottom: 0.5rem;
+}
+
+.research-guide-content ul {
+  padding-left: 1.5rem;
+  margin: 0.5rem 0;
+}
+
+.research-guide-content ul li {
+  margin-bottom: 0.5rem;
+  color: var(--text-secondary);
+}
+
+.research-guide-content ul li:last-child {
+  margin-bottom: 0;
+}
+
+/* Ajustes responsivos */
+@media (max-width: 768px) {
+  .research-guide-section {
+    margin: 1.5rem auto;
+  }
+
+  .research-guide-content {
+    padding: 1rem;
+  }
+
+  .research-guide-content h3 {
+  font-size: 1.1rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .research-guide-section {
+    margin: 1rem auto;
+  }
+
+  .research-guide-toggle {
+    padding: 0.8rem;
+    font-size: 0.9rem;
+  }
+
+  .research-guide-content {
+    padding: 0.8rem;
+  }
+
+  .research-guide-content h3 {
+    font-size: 1rem;
+  }
+
+  .research-guide-content ol,
+  .research-guide-content ul {
+    padding-left: 1.2rem;
+  }
+}
+
+/* Estilos para las sugerencias */
+.suggestions-card {
+  margin-bottom: 16px;
+}
+
+.suggestions-toggle {
+  padding: 0.5rem 1rem;
+  background: var(--background-white);
+  border: 1px solid var(--border-color);
+  border-radius: 6px;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  cursor: pointer;
+  font-size: 0.9rem;
+  color: var(--text-primary);
+  transition: all 0.3s ease;
+}
+
+.suggestions-toggle:hover {
+  background: var(--background-light);
+  border-color: var(--primary-color);
+}
+
+.suggestions-toggle .toggle-icon {
+  font-size: 0.8rem;
+  color: var(--primary-color);
+}
+
+/* Ajustes responsivos para sugerencias */
+@media (max-width: 768px) {
+  .suggestions-toggle {
+    padding: 0.4rem 0.8rem;
+  font-size: 0.85rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .suggestions-toggle {
+    padding: 0.3rem 0.6rem;
+    font-size: 0.8rem;
+  }
+}
+
+/* Contenedor principal */
 .app-container {
   min-height: 100vh;
-  background-color: #fafafa;
-  width: 100%;
+  display: flex;
+  flex-direction: column;
+  background: var(--background-light);
+  margin: 0;
+  padding: 0;
 }
 
 .container {
   max-width: 1400px;
   margin: 0 auto;
   padding: 0;
-  background-color: #fafafa;
   width: 100%;
+  flex: 1;
 }
 
-/* Grid y Layout */
-:deep(.n-grid) {
+.main-content {
   margin: 0;
-  padding: 0;
-  gap: 24px;
+  width: 100%;
+  padding: 0 var(--spacing-lg);
 }
 
-:deep(.n-grid-item) {
-  padding: 0;
-  margin: 0;
-}
-
-/* Sobrescribir estilos de Naive UI */
-:deep(.n-space) {
-  padding: 0 !important;
-  margin: 0 !important;
-}
-
-:deep(.n-space-item) {
-  padding: 0 !important;
-  margin: 0 !important;
-}
-
-:deep(.n-space--vertical) {
-  padding: 0 !important;
-  margin: 0 !important;
-}
-
-:deep(.n-space--horizontal) {
-  padding: 0 !important;
-  margin: 0 !important;
-}
-
-:deep(.n-space--flex) {
-  padding: 0 !important;
-  margin: 0 !important;
-}
-
-/* Header */
+/* Estilos del header */
 .header {
-  text-align: center;
-  margin-bottom: 32px;
-  padding: 20px 0;
   position: relative;
-}
-
-.title {
-  font-size: 2rem;
-  margin: 0 0 12px 0;
-  padding-right: 80px;
-}
-
-.subtitle {
-  font-size: 1.1rem;
-}
-
-/* Formularios y Tarjetas */
-.form-section {
-  margin-bottom: 24px;
-}
-
-:deep(.n-card) {
-  height: 100%;
-  display: flex;
-  flex-direction: column;
-  background: linear-gradient(135deg, #ffffff 0%, #fafafa 100%);
-  border: 1px solid #e8e8e8;
-  border-radius: 12px;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
-  transition: all 0.3s ease;
-  margin: 0;
-  padding: 0;
-}
-
-:deep(.n-card:hover) {
-  transform: translateY(-2px);
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
-}
-
-:deep(.n-card-header) {
-  padding: 16px;
-  border-bottom: 1px solid #f0f0f0;
-  margin: 0;
-}
-
-:deep(.n-card-content) {
-  flex: 1;
-  padding: 16px;
-  margin: 0;
-}
-
-/* Resultados */
-.results-section {
-  height: 100%;
-  margin-top: 0;
-  display: flex;
-  flex-direction: column;
-}
-
-.results-section .n-card-content {
-  flex: 1;
-  display: flex;
-  flex-direction: column;
-  min-height: 400px;
-  padding: 0;
-  margin: 0;
-}
-
-/* Estilos para el estado vacío */
-.empty-state {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
+  padding: var(--spacing-xl) var(--spacing-lg);
+  margin-bottom: var(--spacing-xl);
   text-align: center;
-  padding: 48px;
-  height: 100%;
-  min-height: 400px;
-  margin: 0;
+  background: var(--background-light);
 }
 
-.empty-state .n-icon {
-  margin-bottom: 24px;
-}
-
-.empty-state-text {
-  font-size: 1.5rem;
-  font-weight: 500;
-  color: #666;
-}
-
-/* Ajustes responsive */
-@media (max-width: 768px) {
-  .empty-state {
-    padding: 32px;
-    min-height: 300px;
-  }
-
-  .empty-state-text {
-    font-size: 1.3rem;
-  }
-}
-
-:deep(.n-tabs) {
-  height: 100%;
-  margin: 0;
-  padding: 0;
-}
-
-:deep(.n-tab-pane) {
-  height: calc(100vh - 300px);
-  overflow-y: auto;
-  padding: 16px;
-  margin: 0;
-}
-
-/* Media Queries para diferentes tamaños de pantalla */
-@media (min-width: 1401px) {
-  .container {
-    max-width: 1600px;
-  }
-}
-
-@media (max-width: 1400px) {
-  .container {
-    max-width: 100%;
-  }
-  
-  .title {
-    font-size: 1.8rem;
-  }
-}
-
-@media (max-width: 1200px) {
-  .container {
-    max-width: 100%;
-  }
-  
-  :deep(.n-grid) {
-    gap: 20px;
-  }
-}
-
-@media (max-width: 992px) {
-  .container {
-    max-width: 100%;
-  }
-  
-  .title {
-    font-size: 1.6rem;
-  }
-  
-  .subtitle {
-    font-size: 1rem;
-  }
-  
-  :deep(.n-card-header) {
-    padding: 14px;
-  }
-  
-  :deep(.n-card-content) {
-    padding: 14px;
-  }
-}
-
-@media (max-width: 768px) {
-  .container {
-    max-width: 100%;
-  }
-
-  .header {
-    padding: 16px 0;
-    margin-bottom: 24px;
-  }
-
-  .title {
-    font-size: 1.5rem;
-  }
-
-  .subtitle {
-    font-size: 0.95rem;
-  }
-
-  :deep(.n-grid) {
-    gap: 16px;
-  }
-
-  :deep(.n-card) {
-    margin-bottom: 16px;
-  }
-
-  :deep(.n-card-header) {
-    padding: 12px;
-  }
-
-  :deep(.n-card-content) {
-    padding: 12px;
-  }
-
-  :deep(.n-tab-pane) {
-    height: auto;
-    min-height: 300px;
-    padding: 12px;
-  }
-}
-
-@media (max-width: 576px) {
-  .container {
-    max-width: 100%;
-  }
-
-  .title {
-    font-size: 1.3rem;
-  }
-
-  .subtitle {
-    font-size: 0.9rem;
-  }
-
-  :deep(.n-card-header) {
-    padding: 10px;
-  }
-
-  :deep(.n-card-content) {
-    padding: 10px;
-  }
-}
-
-/* Estilos específicos para la tarjeta de ancestro */
-.ancestor-info {
-  background: linear-gradient(135deg, #e6f7ff 0%, #bae7ff 100%);
-  border: 1px solid #91d5ff;
-  border-radius: 12px;
-  box-shadow: 0 4px 12px rgba(24, 144, 255, 0.1);
-  transition: all 0.3s ease;
-}
-
-.ancestor-info:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 6px 16px rgba(24, 144, 255, 0.15);
-}
-
-/* Estilos para el selector de idiomas */
 .language-selector {
   position: absolute;
-  top: 20px;
-  right: 20px;
-  z-index: 1000;
+  right: 0;
+  top: var(--spacing-xl);
+  padding: 0;
 }
 
 .language-selector .n-space {
-  gap: 16px;
+  gap: var(--spacing-md);
+  padding: 0;
 }
 
 .language-selector .n-text {
   display: flex;
   align-items: center;
-  gap: 4px;
+  gap: var(--spacing-xs);
+  padding: var(--spacing-xs) var(--spacing-sm);
+  border-radius: var(--border-radius-sm);
   cursor: pointer;
-  color: #666;
-  font-size: 0.9rem;
-  transition: all 0.3s ease;
+  transition: all 0.2s ease;
+  color: var(--text-secondary);
 }
 
 .language-selector .n-text:hover {
-  color: #1890ff;
+  background-color: var(--background-light);
+  color: var(--text-primary);
 }
 
 .language-selector .n-text.active {
-  color: #1890ff;
-  font-weight: 600;
-  position: relative;
+  background-color: var(--primary-color);
+  color: white;
+  font-weight: 500;
 }
 
-.language-selector .n-text.active::after {
-  content: '';
-  position: absolute;
-  bottom: -4px;
-  left: 0;
-  width: 100%;
-  height: 2px;
-  background: linear-gradient(135deg, #1890ff 0%, #096dd9 100%);
-  border-radius: 2px;
+.language-selector .n-text:focus {
+  outline: 2px solid var(--primary-color);
+  outline-offset: 2px;
+  background-color: var(--primary-color);
+  color: white;
 }
 
-.language-selector .n-icon {
-  font-size: 1rem;
+.title-container {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 0 var(--spacing-lg);
 }
 
-/* Estilos de gradiente para botones */
-:deep(.n-button--primary) {
-  background: linear-gradient(135deg, #e6f7ff 0%, #bae7ff 100%);
-  border: 1px solid #91d5ff;
-  color: #1890ff;
-  box-shadow: 0 2px 8px rgba(24, 144, 255, 0.1);
-  transition: all 0.3s ease;
+.title {
+  font-size: 2.5rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  margin-bottom: var(--spacing-md);
+  line-height: 1.2;
 }
 
-:deep(.n-button--primary:hover) {
-  background: linear-gradient(135deg, #bae7ff 0%, #91d5ff 100%);
-  transform: translateY(-2px);
-  box-shadow: 0 4px 12px rgba(24, 144, 255, 0.15);
-  color: #096dd9;
-}
-
-:deep(.n-button--error) {
-  background: linear-gradient(135deg, #fff1f0 0%, #ffccc7 100%);
-  border: 1px solid #ffa39e;
-  color: #ff4d4f;
-  box-shadow: 0 2px 8px rgba(255, 77, 79, 0.1);
-  transition: all 0.3s ease;
-}
-
-:deep(.n-button--error:hover) {
-  background: linear-gradient(135deg, #ffccc7 0%, #ffa39e 100%);
-  transform: translateY(-2px);
-  box-shadow: 0 4px 12px rgba(255, 77, 79, 0.15);
-  color: #cf1322;
-}
-
-/* Ajustes responsive para el selector de idiomas */
-@media (max-width: 768px) {
-  .language-selector {
-    position: static;
-    margin-bottom: 16px;
-    display: flex;
-    justify-content: center;
-  }
-
-  .language-selector .n-space {
-    gap: 24px;
-  }
-
-  .language-selector .n-text {
-    font-size: 1rem;
-  }
-}
-
-/* Estilos para la sección de sugerencias */
-.suggestions-divider {
-  margin: 5px 0;
-  border-color: #e8e8e8;
-}
-
-.suggestions-section {
-  background: linear-gradient(135deg, #f8f8f8 0%, #f0f0f0 100%);
-  border-radius: 8px;
-  padding: 16px;
-  margin-top: 5px;
-}
-
-.suggestions-title {
-  display: block;
-  font-size: 1.1rem;
-  color: #1890ff;
-  margin-bottom: 12px;
-}
-
-.suggestions-intro {
-  display: block;
-  color: #666;
-  margin-bottom: 16px;
+.subtitle {
+  font-size: 1.2rem;
+  color: var(--text-secondary);
   line-height: 1.5;
-}
-
-.suggestions-list {
-  list-style: none;
-  padding: 0;
   margin: 0;
 }
 
-.suggestion-item {
-  display: flex;
-  align-items: flex-start;
-  margin-bottom: 12px;
-  padding: 8px;
-  background: white;
-  border-radius: 6px;
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
-  transition: all 0.3s ease;
-}
-
-.suggestion-item:hover {
-  transform: translateX(4px);
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
-}
-
-.suggestion-icon {
-  color: #1890ff;
-  margin-right: 12px;
-  margin-top: 2px;
-  font-size: 1.1rem;
-}
-
-/* Ajustes responsive */
+/* Ajustes responsivos para el header */
 @media (max-width: 768px) {
-  .suggestions-section {
-    padding: 12px;
+  .header {
+    padding: var(--spacing-lg) 0;
+    margin-bottom: var(--spacing-lg);
   }
-  
-  .suggestion-item {
-    padding: 6px;
-    margin-bottom: 8px;
+
+  .language-selector {
+    position: relative;
+    right: auto;
+    top: auto;
+    margin-bottom: var(--spacing-lg);
   }
-  
-  .suggestions-title {
-    font-size: 1rem;
+
+  .title {
+    font-size: 2rem;
+  }
+
+  .subtitle {
+    font-size: 1.1rem;
   }
 }
 
-/* Estilos para tooltips y ayuda */
-.info-icon {
-  color: #1890ff;
-  margin-left: 8px;
-  cursor: help;
-  font-size: 1.1rem;
-  transition: all 0.3s ease;
-}
-
-.info-icon:hover {
-  color: #096dd9;
-  transform: scale(1.1);
-}
-
-.tooltip-content {
-  max-width: 300px;
-  padding: 8px;
-}
-
-.tooltip-content h4 {
-  margin: 0 0 8px 0;
-  color: #1890ff;
-}
-
-.tooltip-content p {
-  margin: 0 0 8px 0;
-  line-height: 1.4;
-}
-
-.tooltip-content ul {
-  margin: 0;
-  padding-left: 16px;
-}
-
-.tooltip-content li {
-  margin-bottom: 4px;
-  line-height: 1.4;
-}
-
-.help-button {
-  margin-left: 8px;
-}
-
-/* Ajustes responsive para tooltips */
-@media (max-width: 768px) {
-  .tooltip-content {
-    max-width: 250px;
+@media (max-width: 480px) {
+  .header {
+    padding: var(--spacing-md) 0;
+    margin-bottom: var(--spacing-md);
   }
-  
-  .info-icon {
+
+  .title {
+    font-size: 1.8rem;
+  }
+
+  .subtitle {
     font-size: 1rem;
   }
 }
 
 /* Footer Styles */
 .app-footer {
-  background: linear-gradient(135deg, #f8f8f8 0%, #f0f0f0 100%);
-  border-top: 1px solid #e8e8e8;
-  padding: 24px 0;
-  margin-top: 48px;
+  background: var(--background-light);
+  border-top: 1px solid var(--border-color);
+  padding: 32px var(--spacing-lg);
+  margin: 0;
+  position: relative;
 }
 
 .footer-content {
   max-width: 1200px;
   margin: 0 auto;
-  padding: 0 20px;
+  padding: 0;
   text-align: center;
 }
 
@@ -1761,31 +1787,31 @@ html, body {
   display: flex;
   align-items: center;
   gap: 8px;
-  color: #666;
+  color: var(--text-secondary);
   text-decoration: none;
   font-size: 0.9rem;
   transition: all 0.3s ease;
 }
 
 .footer-link:hover {
-  color: #1890ff;
+  color: var(--primary-color);
   transform: translateY(-2px);
 }
 
 .footer-license {
   margin-top: 16px;
   padding-top: 16px;
-  border-top: 1px solid #e8e8e8;
+  border-top: 1px solid rgba(0, 0, 0, 0.05);
 }
 
 .footer-license p {
-  color: #999;
+  color: var(--text-secondary);
   font-size: 0.85rem;
   margin: 4px 0;
 }
 
 .footer-license a {
-  color: #1890ff;
+  color: var(--primary-color);
   text-decoration: none;
 }
 
@@ -1797,110 +1823,7 @@ html, body {
   margin-top: 8px;
 }
 
-/* Sources Modal Styles */
-.sources-modal {
-  max-width: 800px;
-  width: 90%;
-}
-
-.sources-modal .n-card {
-  max-height: 80vh;
-  overflow-y: auto;
-  border-radius: 16px;
-  background: #ffffff;
-  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
-}
-
-.source-group {
-  margin-bottom: 32px;
-}
-
-.source-group h4 {
-  color: #1890ff;
-  margin-bottom: 16px;
-  font-size: 1.2rem;
-  font-weight: 600;
-}
-
-.source-item {
-  background: #f8f8f8;
-  padding: 20px;
-  border-radius: 12px;
-  margin-bottom: 20px;
-  transition: all 0.3s ease;
-}
-
-.source-item:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
-}
-
-.source-item h5 {
-  color: #1890ff;
-  margin: 0 0 12px 0;
-  font-size: 1.1rem;
-  font-weight: 600;
-}
-
-.source-author {
-  color: #666;
-  font-size: 0.95rem;
-  margin-bottom: 12px;
-}
-
-.source-description {
-  color: #666;
-  margin-bottom: 12px;
-  line-height: 1.6;
-}
-
-.source-link {
-  color: #1890ff;
-  text-decoration: none;
-  font-size: 0.95rem;
-  display: inline-block;
-  margin-bottom: 12px;
-  transition: all 0.3s ease;
-}
-
-.source-link:hover {
-  color: #096dd9;
-  text-decoration: underline;
-}
-
-.source-usage {
-  color: #999;
-  font-size: 0.9rem;
-  font-style: italic;
-  margin-top: 12px;
-}
-
-.source-authors,
-.source-rules {
-  list-style: none;
-  padding: 0;
-  margin: 12px 0;
-}
-
-.source-authors li,
-.source-rules li {
-  color: #666;
-  font-size: 0.95rem;
-  margin-bottom: 8px;
-  padding-left: 20px;
-  position: relative;
-  line-height: 1.6;
-}
-
-.source-authors li::before,
-.source-rules li::before {
-  content: "•";
-  position: absolute;
-  left: 0;
-  color: #1890ff;
-}
-
-/* Responsive adjustments */
+/* Responsive adjustments for footer */
 @media (max-width: 768px) {
   .footer-links {
     flex-wrap: wrap;
@@ -1910,21 +1833,304 @@ html, body {
   .footer-link {
     font-size: 0.85rem;
   }
+}
 
-  .sources-modal {
-    width: 95%;
-  }
+/* Estilos para las tarjetas de formulario */
+.form-section {
+  background-color: var(--background-light) !important;
+  border: 1px solid var(--border-color) !important;
+  margin-bottom: var(--spacing-md);
+}
 
-  .source-item {
-    padding: 16px;
-  }
+.form-row {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--spacing-md);
+  margin-bottom: 0;
+  width: 100%;
+  flex-wrap: nowrap;
+  min-width: 0;
+}
 
-  .source-group h4 {
-    font-size: 1.1rem;
-  }
+.name-field {
+  width: 300px;
+  min-width: 200px;
+  flex: 1;
+}
 
-  .source-item h5 {
-    font-size: 1rem;
+.gender-field {
+  width: 100px;
+  min-width: 80px;
+  flex: none;
+}
+
+.age-field {
+  width: 60px;
+  min-width: 60px;
+  flex: none;
+}
+
+:deep(.n-form-item) {
+  margin-bottom: 0;
+  min-width: 0;
+}
+
+:deep(.n-input-number) {
+  width: 100%;
+  min-width: 0;
+}
+
+:deep(.n-input-number-input) {
+  text-align: center;
+  width: 100%;
+  padding: 0 4px;
+}
+
+:deep(.n-radio-group) {
+  display: flex;
+  gap: var(--spacing-sm);
+  justify-content: center;
+  min-width: 0;
+}
+
+:deep(.n-radio) {
+  margin-right: 0;
+  min-width: 0;
+}
+
+:deep(.n-form-item-label) {
+  padding-bottom: 4px;
+  font-size: 0.9rem;
+  white-space: nowrap;
+}
+
+:deep(.n-input) {
+  width: 100%;
+  min-width: 0;
+}
+
+/* Ajustes responsivos */
+@media (max-width: 768px) {
+  .form-row {
+    flex-wrap: wrap;
   }
+  
+  .name-field {
+    width: 100%;
+    min-width: 100%;
+  }
+  
+  .gender-field {
+    width: 100px;
+    min-width: 80px;
+  }
+  
+  .age-field {
+    width: 60px;
+    min-width: 60px;
+  }
+}
+
+/* Estilos para el estado vacío */
+.empty-state {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 300px;
+  padding: var(--spacing-xl) 0;
+  text-align: center;
+}
+
+.empty-state .n-icon {
+  margin-bottom: var(--spacing-md);
+  font-size: 48px;
+  color: var(--text-secondary);
+}
+
+.empty-state p {
+  color: var(--text-secondary);
+  font-size: 1rem;
+  line-height: 1.5;
+  margin: 0;
+  max-width: 400px;
+}
+
+/* Ajustar el contenedor de resultados */
+.results-container {
+  background: transparent !important;
+  border: none !important;
+  box-shadow: none !important;
+  padding: 0 !important;
+  display: flex;
+  flex-direction: column;
+  min-height: 400px;
+}
+
+.results-container :deep(.n-card-header) {
+  padding: 0 !important;
+  margin-bottom: var(--spacing-md);
+}
+
+.results-container :deep(.n-card__content) {
+  padding: 0 !important;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.n-list {
+  --n-merged-border-color: var(--n-border-color);
+  --n-merged-color: #FFFDF8 !important;
+  --n-merged-color-hover: #FFFDF8 !important;
+}
+
+.suggestions-list {
+  padding-left: var(--spacing-md);
+}
+
+.tooltip-body {
+  padding: var(--spacing-sm) 0;
+  line-height: 1.5;
+}
+
+.tooltip-list {
+  list-style-type: disc;
+  padding-left: var(--spacing-md);
+}
+
+.tooltip-list li {
+  margin-bottom: var(--spacing-xs);
+}
+
+/* Estilos para el Modal de Fuentes */
+:deep(.n-modal) {
+  --n-color: var(--background-white) !important;
+  --n-text-color: var(--text-primary) !important;
+}
+
+:deep(.n-modal .n-card-header) {
+  padding: var(--spacing-md) var(--spacing-lg) !important;
+  border-bottom: 1px solid var(--border-color) !important;
+}
+
+:deep(.n-modal .n-card-header h3) {
+  color: var(--text-primary) !important;
+  font-size: 1.2rem !important;
+  font-weight: 600 !important;
+  margin: 0 !important;
+}
+
+:deep(.n-modal .n-card__content) {
+  padding: var(--spacing-lg) !important;
+}
+
+:deep(.n-modal h3) {
+  color: var(--text-primary) !important;
+  font-size: 1.1rem !important;
+  font-weight: 600 !important;
+  margin: var(--spacing-md) 0 var(--spacing-sm) 0 !important;
+}
+
+:deep(.n-modal ul) {
+  list-style-type: none !important;
+  padding: 0 !important;
+  margin: 0 0 var(--spacing-md) 0 !important;
+}
+
+:deep(.n-modal li) {
+  margin-bottom: var(--spacing-md) !important;
+  padding-left: var(--spacing-md) !important;
+  position: relative !important;
+}
+
+:deep(.n-modal li:before) {
+  content: "•" !important;
+  position: absolute !important;
+  left: 0 !important;
+  color: var(--primary-color) !important;
+}
+
+:deep(.n-modal a) {
+  color: var(--primary-color) !important;
+  text-decoration: none !important;
+  transition: color 0.2s ease !important;
+}
+
+:deep(.n-modal a:hover) {
+  color: var(--primary-color-dark) !important;
+  text-decoration: underline !important;
+}
+
+:deep(.n-modal strong) {
+  color: var(--text-primary) !important;
+  font-weight: 600 !important;
+}
+
+.section-title {
+  color: var(--text-primary) !important;
+  font-size: 1.2rem !important;
+  font-weight: 600 !important;
+  margin: var(--spacing-xl) 0 var(--spacing-md) 0 !important;
+  padding-bottom: var(--spacing-sm) !important;
+  border-bottom: 2px solid var(--primary-color) !important;
+}
+
+.section-title:first-child {
+  margin-top: 0 !important;
+}
+
+.source-section {
+  background-color: var(--background-light) !important;
+  padding: var(--spacing-md) var(--spacing-lg) !important;
+  border-radius: var(--border-radius-md) !important;
+  margin-bottom: var(--spacing-lg) !important;
+}
+
+.source-section strong {
+  color: var(--text-primary) !important;
+  font-weight: 600 !important;
+  display: block !important;
+  margin-bottom: var(--spacing-xs) !important;
+}
+
+.source-section ul {
+  list-style-type: disc !important;
+  padding-left: var(--spacing-lg) !important;
+  margin: var(--spacing-sm) 0 !important;
+}
+
+.source-section li {
+  margin-bottom: var(--spacing-xs) !important;
+  color: var(--text-secondary) !important;
+}
+
+.source-section a {
+  color: var(--primary-color) !important;
+  text-decoration: none !important;
+  transition: color 0.2s ease !important;
+  display: inline-block !important;
+  margin-top: var(--spacing-sm) !important;
+}
+
+.source-section a:hover {
+  color: var(--primary-color-dark) !important;
+  text-decoration: underline !important;
+}
+
+/* Estilos para el layout */
+:deep(.n-layout) {
+  padding: 0 !important;
+  background-color: var(--background-light);
+}
+
+.n-layout {
+  padding: 0px!important;
+  background-color: var(--background-light);
+}
+
+:deep(.n-layout-scroll-container) {
+  padding: 0 !important;
+  background-color: var(--background-light);
 }
 </style>

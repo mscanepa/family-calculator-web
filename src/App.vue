@@ -13,7 +13,7 @@
 </template>
 
 <script setup>
-import { NConfigProvider, NMessageProvider, NLayout, NLayoutHeader, NLayoutContent, NSpace } from 'naive-ui'
+import { NConfigProvider, NMessageProvider, NLayout, NLayoutContent, NSpace } from 'naive-ui'
 import SharedCmApp from './components/SharedCmApp.vue'
 </script>
 

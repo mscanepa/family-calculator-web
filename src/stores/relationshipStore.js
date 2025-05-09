@@ -27,6 +27,8 @@ export const useRelationshipStore = defineStore('relationship', () => {
   const relationships = ref([])
   const selectedRelationship = ref(null)
   const histogram = ref({})
+  const analysisSummary = ref('')
+  const investigationSuggestions = ref([])
 
   // Computed properties
   const ageDiff = computed(() => 
@@ -98,6 +100,8 @@ export const useRelationshipStore = defineStore('relationship', () => {
       relationships.value = []
       selectedRelationship.value = null
       histogram.value = {}
+      analysisSummary.value = ''
+      investigationSuggestions.value = []
       
       const response = await fetch(`${API_URL}/api/${API_VERSION}/analyze`, {
         method: 'POST',
@@ -106,6 +110,8 @@ export const useRelationshipStore = defineStore('relationship', () => {
         },
         body: JSON.stringify({
           cm: cmValue.value,
+          person1_age: age1.value,
+          person2_age: age2.value,
           generation: null,
           sex: sex1.value,
           x_inheritance: xMatch.value === 'yes',
@@ -118,10 +124,14 @@ export const useRelationshipStore = defineStore('relationship', () => {
       if (!response.ok) throw new Error('Error calculating relationships')
       
       const data = await response.json()
-      relationships.value = data
       
-      if (data.length > 0) {
-        selectedRelationship.value = data[0].code
+      // Actualizar los resultados
+      relationships.value = data.relationships
+      analysisSummary.value = data.summary
+      investigationSuggestions.value = data.suggestions
+      
+      if (data.relationships.length > 0) {
+        selectedRelationship.value = data.relationships[0].code
         await loadHistogram(selectedRelationship.value)
       }
     } catch (error) {
@@ -142,9 +152,7 @@ export const useRelationshipStore = defineStore('relationship', () => {
       const data = await response.json();
       
       if (data.histogram) {
-        // Los datos ya vienen en el formato correcto de rangos y porcentajes
         histogram.value[relationshipCode] = data.histogram;
-        console.log(`Histograma cargado para ${relationshipCode}:`, data.histogram);
       }
     } catch (error) {
       console.error("Error al cargar el histograma:", error);
@@ -172,6 +180,8 @@ export const useRelationshipStore = defineStore('relationship', () => {
     selectedRelationship.value = null
     relationships.value = []
     histogram.value = {}
+    analysisSummary.value = ''
+    investigationSuggestions.value = []
   }
 
   const updateRelationships = () => {
@@ -202,6 +212,8 @@ export const useRelationshipStore = defineStore('relationship', () => {
     relationships,
     selectedRelationship,
     histogram,
+    analysisSummary,
+    investigationSuggestions,
     
     // Computed
     ageDiff,
