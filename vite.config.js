@@ -6,6 +6,7 @@ export default defineConfig({
   server: {
     host: true,
     port: 3000,
+    strictPort: true,
     allowedHosts: [
       'localhost',
       'familycalc.app',
@@ -18,6 +19,12 @@ export default defineConfig({
         changeOrigin: true,
         secure: false
       }
+    },
+    hmr: {
+      protocol: 'ws',
+      host: 'familycalc.app',
+      port: 443,
+      clientPort: 443
     }
   }
 })
