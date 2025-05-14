@@ -41,7 +41,7 @@
           <n-card :title="$t('app.search.title')" hoverable class="form-section">
               <div class="form-row">
                 <n-form-item :label="$t('app.search.name')" class="name-field">
-                  <n-input v-model:value="store.name1" :placeholder="$t('app.search.example')">
+                  <n-input v-model:value="store.name1" :placeholder="$t('app.search.placeholder.name')">
                     <template #prefix>
                       <n-icon><Person /></n-icon>
                     </template>
@@ -73,7 +73,7 @@
           <n-card :title="$t('app.match.title')" hoverable class="form-section">
               <div class="form-row">
                 <n-form-item :label="$t('app.match.name')" class="name-field">
-                  <n-input v-model:value="store.name2" :placeholder="$t('app.match.example')">
+                  <n-input v-model:value="store.name2" :placeholder="$t('app.match.placeholder.name')">
                     <template #prefix>
                       <n-icon><Person /></n-icon>
                     </template>
@@ -121,11 +121,11 @@
                     <div class="tooltip-content">
                         <div class="tooltip-header">
                           <n-icon size="18" color="#1e90ff"><Calculator /></n-icon>
-                          <h4>¿Qué son los centimorgans (cM)?</h4>
+                          <h4>{{ $t('app.dna.cm.tooltip.title') }}</h4>
                         </div>
                         <div class="tooltip-body">
-                          <p class="tooltip-intro">Los centimorgans (cM) indican cuánto ADN compartís con otra persona. Cuanto mayor es el número de centimorgans, más cercana suele ser la relación familiar.</p>
-                          <p class="tooltip-note">La aplicación usa este valor (cM) como dato principal para estimar qué parentesco podrían tener dos personas.</p>
+                          <p class="tooltip-intro">{{ $t('app.dna.cm.tooltip.intro') }}</p>
+                          <p class="tooltip-note">{{ $t('app.dna.cm.tooltip.note') }}</p>
                         </div>
                     </div>
                   </n-tooltip>
@@ -152,11 +152,12 @@
                       v-model:value="store.endogamy"
                       :options="[
                         { label: t('app.dna.endogamy.none'), value: 'none' },
-                        { label: t('app.dna.endogamy.light'), value: 'light' },
-                        { label: t('app.dna.endogamy.moderate'), value: 'moderate' },
-                        { label: t('app.dna.endogamy.high'), value: 'high' },
-                        { label: t('app.dna.endogamy.very_high'), value: 'very_high' }
+                        { label: t('app.dna.endogamy.light') + ' (-9%)', value: 'light' },
+                        { label: t('app.dna.endogamy.moderate') + ' (-17%)', value: 'moderate' },
+                        { label: t('app.dna.endogamy.high') + ' (-23%)', value: 'high' },
+                        { label: t('app.dna.endogamy.very_high') + ' (-29%)', value: 'very_high' }
                       ]"
+                      :placeholder="$t('app.dna.endogamy.placeholder')"
                     />
                     <n-tooltip trigger="hover">
                       <template #trigger>
@@ -165,28 +166,28 @@
                       <div class="tooltip-content">
                           <div class="tooltip-header">
                             <n-icon size="18" color="#1e90ff"><Calculator /></n-icon>
-                            <h4>Nivel de Endogamia</h4>
+                            <h4>{{ $t('app.dna.endogamy.title') }}</h4>
                           </div>
                           <div class="tooltip-body">
-                            <p class="tooltip-intro">La endogamia ocurre cuando hay matrimonios entre parientes en el árbol genealógico. Esto afecta la cantidad de ADN compartido entre familiares.</p>
+                            <p class="tooltip-intro">{{ $t('app.dna.endogamy.tooltip.intro') }}</p>
                             
-                            <p class="tooltip-section">Niveles de endogamia:</p>
+                            <p class="tooltip-section">{{ $t('app.dna.endogamy.tooltip.levels.title') }}</p>
                             <ul class="tooltip-list">
-                              <li><strong>Sin endogamia:</strong> Familias sin matrimonios entre parientes cercanos.</li>
-                              <li><strong>Ligera (-9%):</strong> Algunos matrimonios entre primos terceros o más lejanos.</li>
-                              <li><strong>Moderada (-17%):</strong> Varios matrimonios entre primos segundos o terceros.</li>
-                              <li><strong>Alta (-23%):</strong> Matrimonios frecuentes entre primos hermanos o segundos.</li>
-                              <li><strong>Muy alta (-29%):</strong> Comunidades muy endogámicas con matrimonios frecuentes entre parientes cercanos.</li>
+                              <li><strong>{{ $t('app.dna.endogamy.none') }}:</strong> {{ $t('app.dna.endogamy.tooltip.levels.none') }}</li>
+                              <li><strong>{{ $t('app.dna.endogamy.light') }}:</strong> {{ $t('app.dna.endogamy.tooltip.levels.light') }}</li>
+                              <li><strong>{{ $t('app.dna.endogamy.moderate') }}:</strong> {{ $t('app.dna.endogamy.tooltip.levels.moderate') }}</li>
+                              <li><strong>{{ $t('app.dna.endogamy.high') }}:</strong> {{ $t('app.dna.endogamy.tooltip.levels.high') }}</li>
+                              <li><strong>{{ $t('app.dna.endogamy.very_high') }}:</strong> {{ $t('app.dna.endogamy.tooltip.levels.very_high') }}</li>
                             </ul>
 
-                            <p class="tooltip-section">¿Cómo afecta al cálculo?</p>
+                            <p class="tooltip-section">{{ $t('app.dna.endogamy.tooltip.effects.title') }}</p>
                             <ul class="tooltip-list">
-                              <li>Reduce los cM compartidos según el nivel de endogamia</li>
-                              <li>Ajusta los rangos esperados de ADN compartido</li>
-                              <li>Considera relaciones más lejanas como posibles</li>
+                              <li>{{ $t('app.dna.endogamy.tooltip.effects.adjust') }}</li>
+                              <li>{{ $t('app.dna.endogamy.tooltip.effects.higher') }}</li>
+                              <li>{{ $t('app.dna.endogamy.tooltip.effects.consider') }}</li>
                             </ul>
 
-                            <p class="tooltip-note">Por ejemplo: Si dos primos hermanos comparten 850 cM en una familia sin endogamia, en una familia con endogamia moderada podrían compartir hasta 1020 cM (-17%).</p>
+                            <p class="tooltip-note">{{ $t('app.dna.endogamy.tooltip.example') }}</p>
                           </div>
                       </div>
                     </n-tooltip>
@@ -214,6 +215,7 @@
                         { label: $t('app.dna.x_chromosome.options.no'), value: 'no' },
                         { label: $t('app.dna.x_chromosome.options.unknown'), value: 'unknown' }
                       ]"
+                      :placeholder="$t('app.dna.x_chromosome.placeholder')"
                     />
                     <n-tooltip trigger="hover">
                       <template #trigger>
@@ -246,7 +248,7 @@
                       :min="0" 
                       :max="200"
                       :show-button="false"
-                      placeholder=""
+                      :placeholder="$t('app.dna.x_chromosome.placeholder_cm')"
                       class="compact-input"
                     />
                     <n-tooltip trigger="hover">
@@ -274,7 +276,7 @@
                       :min="1" 
                       :max="50"
                       :show-button="false"
-                      placeholder=""
+                      :placeholder="$t('app.dna.segments.placeholder_count')"
                       class="compact-input"
                     />
                     <n-tooltip trigger="hover">
@@ -306,7 +308,7 @@
                       :min="1" 
                       :max="200"
                       :show-button="false"
-                      placeholder=""
+                      :placeholder="$t('app.dna.segments.placeholder_largest')"
                       class="compact-input"
                     />
                     <n-tooltip trigger="hover">
@@ -372,7 +374,7 @@
               </template>
               <template v-else-if="store.relationships.length > 0">
                 <!-- Analysis Summary -->
-                <n-card title="Informe de Relación" class="analysis-card">
+                <n-card :title="$t('app.results.analysis_title')" class="analysis-card">
                   <template #header-extra>
                     <n-tooltip trigger="hover" placement="right">
                       <template #trigger>
@@ -474,7 +476,7 @@
                 </n-card>
 
                 <!-- Investigation Suggestions -->
-                <n-card title="Sugerencias para Investigar" class="suggestions-card">
+                <n-card :title="$t('app.results.suggestions_title')" class="suggestions-card">
                   <template #header-extra>
                     <n-button text @click="toggleSuggestions">
                       <template #icon>
@@ -528,7 +530,7 @@
                 </n-card>
 
                 <!-- Relationships List -->
-                <n-card title="Lista de Relaciones Posibles" class="relationships-card">
+                <n-card :title="$t('app.results.relationships_title')" class="relationships-card">
                   <n-space vertical>
                   <n-list>
                       <n-list-item v-for="rel in store.relationships" :key="rel.code">
@@ -552,7 +554,7 @@
                   <n-icon size="48" color="#9CA3AF">
                     <DocumentText />
                   </n-icon>
-                  <p>Aquí aparecerán los resultados una vez que completes el formulario con los datos.</p>
+                  <p>{{ $t('app.results.empty_state') }}</p>
                 </div>
               </template>
           </n-card>
@@ -756,6 +758,9 @@ onMounted(() => {
   const savedLocale = localStorage.getItem('locale')
   if (savedLocale) {
     locale.value = savedLocale
+  } else {
+    locale.value = 'es' // Establecer español como idioma por defecto
+    localStorage.setItem('locale', 'es')
   }
   if (store.relationships && store.relationships.length > 0) {
     store.relationships = store.relationships.map(rel => ({
@@ -833,10 +838,10 @@ watch(() => store.selectedRelationship, (newValue) => {
 // Options for endogamy
 const endogamyOptions = [
   { label: t('app.dna.endogamy.none'), value: 'none' },
-  { label: t('app.dna.endogamy.light') + ' (9%)', value: 'light' },
-  { label: t('app.dna.endogamy.moderate') + ' (17%)', value: 'moderate' },
-  { label: t('app.dna.endogamy.high') + ' (23%)', value: 'high' },
-  { label: t('app.dna.endogamy.very_high') + ' (29%)', value: 'very_high' }
+  { label: t('app.dna.endogamy.light') + ' (-9%)', value: 'light' },
+  { label: t('app.dna.endogamy.moderate') + ' (-17%)', value: 'moderate' },
+  { label: t('app.dna.endogamy.high') + ' (-23%)', value: 'high' },
+  { label: t('app.dna.endogamy.very_high') + ' (-29%)', value: 'very_high' }
 ]
 
 const showHelpModal = ref(false)

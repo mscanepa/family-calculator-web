@@ -1,4 +1,7 @@
 import { createI18n } from 'vue-i18n'
+import en from './en'
+import es from './es'
+import pt from './pt'
 
 const messages = {
   en: {
@@ -530,10 +533,13 @@ const messages = {
 
 const i18n = createI18n({
   legacy: false,
-  globalInjection: true,
-  locale: localStorage.getItem('locale') || 'es',
-  fallbackLocale: 'en',
-  messages
+  locale: 'es',
+  fallbackLocale: 'es',
+  messages: {
+    en,
+    es,
+    pt
+  }
 })
 
 export default i18n
