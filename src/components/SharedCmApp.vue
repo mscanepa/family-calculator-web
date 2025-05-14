@@ -838,10 +838,10 @@ watch(() => store.selectedRelationship, (newValue) => {
 // Options for endogamy
 const endogamyOptions = [
   { label: t('app.dna.endogamy.none'), value: 'none' },
-  { label: t('app.dna.endogamy.light') + ' (-9%)', value: 'light' },
-  { label: t('app.dna.endogamy.moderate') + ' (-17%)', value: 'moderate' },
-  { label: t('app.dna.endogamy.high') + ' (-23%)', value: 'high' },
-  { label: t('app.dna.endogamy.very_high') + ' (-29%)', value: 'very_high' }
+  { label: t('app.dna.endogamy.light'), value: 'light' },
+  { label: t('app.dna.endogamy.moderate'), value: 'moderate' },
+  { label: t('app.dna.endogamy.high'), value: 'high' },
+  { label: t('app.dna.endogamy.very_high'), value: 'very_high' }
 ]
 
 const showHelpModal = ref(false)
