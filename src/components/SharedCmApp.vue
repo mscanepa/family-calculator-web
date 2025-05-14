@@ -41,7 +41,7 @@
           <n-card :title="$t('app.search.title')" hoverable class="form-section">
               <div class="form-row">
                 <n-form-item :label="$t('app.search.name')" class="name-field">
-                  <n-input v-model:value="store.name1" :placeholder="$t('app.search.example')">
+                  <n-input v-model:value="store.name1" :placeholder="$t('app.search.placeholder.name')">
                     <template #prefix>
                       <n-icon><Person /></n-icon>
                     </template>
@@ -73,7 +73,7 @@
           <n-card :title="$t('app.match.title')" hoverable class="form-section">
               <div class="form-row">
                 <n-form-item :label="$t('app.match.name')" class="name-field">
-                  <n-input v-model:value="store.name2" :placeholder="$t('app.match.example')">
+                  <n-input v-model:value="store.name2" :placeholder="$t('app.match.placeholder.name')">
                     <template #prefix>
                       <n-icon><Person /></n-icon>
                     </template>
@@ -121,11 +121,11 @@
                     <div class="tooltip-content">
                         <div class="tooltip-header">
                           <n-icon size="18" color="#1e90ff"><Calculator /></n-icon>
-                          <h4>¿Qué son los centimorgans (cM)?</h4>
+                          <h4>{{ $t('app.dna.cm.tooltip.title') }}</h4>
                         </div>
                         <div class="tooltip-body">
-                          <p class="tooltip-intro">Los centimorgans (cM) indican cuánto ADN compartís con otra persona. Cuanto mayor es el número de centimorgans, más cercana suele ser la relación familiar.</p>
-                          <p class="tooltip-note">La aplicación usa este valor (cM) como dato principal para estimar qué parentesco podrían tener dos personas.</p>
+                          <p class="tooltip-intro">{{ $t('app.dna.cm.tooltip.intro') }}</p>
+                          <p class="tooltip-note">{{ $t('app.dna.cm.tooltip.note') }}</p>
                         </div>
                     </div>
                   </n-tooltip>
@@ -150,8 +150,14 @@
                   <n-form-item :label="$t('app.dna.endogamy.title')" class="compact-form-item">
                     <n-select
                       v-model:value="store.endogamy"
-                      :options="endogamyOptions"
-                      :placeholder="$t('app.dna.endogamy.title')"
+                      :options="[
+                        { label: t('app.dna.endogamy.none'), value: 'none' },
+                        { label: t('app.dna.endogamy.light') + ' (-9%)', value: 'light' },
+                        { label: t('app.dna.endogamy.moderate') + ' (-17%)', value: 'moderate' },
+                        { label: t('app.dna.endogamy.high') + ' (-23%)', value: 'high' },
+                        { label: t('app.dna.endogamy.very_high') + ' (-29%)', value: 'very_high' }
+                      ]"
+                      :placeholder="$t('app.dna.endogamy.placeholder')"
                     />
                     <n-tooltip trigger="hover">
                       <template #trigger>
@@ -160,17 +166,28 @@
                       <div class="tooltip-content">
                           <div class="tooltip-header">
                             <n-icon size="18" color="#1e90ff"><Calculator /></n-icon>
-                        <h4>Endogamia</h4>
+                            <h4>{{ $t('app.dna.endogamy.title') }}</h4>
                           </div>
                           <div class="tooltip-body">
-                            <p class="tooltip-intro">La endogamia ocurre cuando hay matrimonios entre parientes cercanos en el árbol genealógico.</p>
-                            <p class="tooltip-section">Cuando se selecciona un nivel de endogamia:</p>
+                            <p class="tooltip-intro">{{ $t('app.dna.endogamy.tooltip.intro') }}</p>
+                            
+                            <p class="tooltip-section">{{ $t('app.dna.endogamy.tooltip.levels.title') }}</p>
                             <ul class="tooltip-list">
-                          <li>El sistema ajusta los rangos esperados de cM</li>
-                          <li>Considera relaciones más lejanas como posibles</li>
-                          <li>Ajusta las probabilidades basándose en patrones de herencia endogámica</li>
-                        </ul>
-                            <p class="tooltip-note">El sistema ajusta los rangos esperados de cM y considera relaciones más lejanas como posibles.</p>
+                              <li><strong>{{ $t('app.dna.endogamy.none') }}:</strong> {{ $t('app.dna.endogamy.tooltip.levels.none') }}</li>
+                              <li><strong>{{ $t('app.dna.endogamy.light') }}:</strong> {{ $t('app.dna.endogamy.tooltip.levels.light') }}</li>
+                              <li><strong>{{ $t('app.dna.endogamy.moderate') }}:</strong> {{ $t('app.dna.endogamy.tooltip.levels.moderate') }}</li>
+                              <li><strong>{{ $t('app.dna.endogamy.high') }}:</strong> {{ $t('app.dna.endogamy.tooltip.levels.high') }}</li>
+                              <li><strong>{{ $t('app.dna.endogamy.very_high') }}:</strong> {{ $t('app.dna.endogamy.tooltip.levels.very_high') }}</li>
+                            </ul>
+
+                            <p class="tooltip-section">{{ $t('app.dna.endogamy.tooltip.effects.title') }}</p>
+                            <ul class="tooltip-list">
+                              <li>{{ $t('app.dna.endogamy.tooltip.effects.adjust') }}</li>
+                              <li>{{ $t('app.dna.endogamy.tooltip.effects.higher') }}</li>
+                              <li>{{ $t('app.dna.endogamy.tooltip.effects.consider') }}</li>
+                            </ul>
+
+                            <p class="tooltip-note">{{ $t('app.dna.endogamy.tooltip.example') }}</p>
                           </div>
                       </div>
                     </n-tooltip>
@@ -198,6 +215,7 @@
                         { label: $t('app.dna.x_chromosome.options.no'), value: 'no' },
                         { label: $t('app.dna.x_chromosome.options.unknown'), value: 'unknown' }
                       ]"
+                      :placeholder="$t('app.dna.x_chromosome.placeholder')"
                     />
                     <n-tooltip trigger="hover">
                       <template #trigger>
@@ -209,13 +227,13 @@
                         <h4>Cromosoma X</h4>
                           </div>
                           <div class="tooltip-body">
-                            <p class="tooltip-intro">El cromosoma X tiene patrones de herencia específicos que pueden ayudar a determinar la línea ancestral.</p>
-                            <p class="tooltip-section">Cuando se comparte ADN en el cromosoma X:</p>
+                            <p class="tooltip-intro">🧬 El cromosoma X tiene un patrón de herencia diferente al resto del ADN.</p>
                             <ul class="tooltip-list">
-                          <li>Se puede identificar si la relación es por línea materna o paterna</li>
-                          <li>Se ajustan las probabilidades de ciertas relaciones</li>
-                          <li>Se puede excluir ciertas líneas ancestrales</li>
-                        </ul>
+                              <li>Si <strong>hay coincidencia</strong>, puede ser una pista para identificar si el parentesco viene por la línea materna o por una vía femenina específica.</li>
+                              <li>Si <strong>NO hay coincidencia</strong>, <strong>no descarta</strong> la relación genética: muchas relaciones reales no comparten ADN en el X.</li>
+                              <li>Si elegís "No sé", la app no aplica ajustes por cromosoma X y muestra el análisis general.</li>
+                            </ul>
+                            <p class="tooltip-note">👉 Para entender mejor cómo funciona, podés leer esta guía de Cristian Cofré: <a href="https://www.cristiancofre.cl/post/x-match" target="_blank">X-Match</a></p>
                           </div>
                       </div>
                     </n-tooltip>
@@ -230,7 +248,7 @@
                       :min="0" 
                       :max="200"
                       :show-button="false"
-                      placeholder=""
+                      :placeholder="$t('app.dna.x_chromosome.placeholder_cm')"
                       class="compact-input"
                     />
                     <n-tooltip trigger="hover">
@@ -258,7 +276,7 @@
                       :min="1" 
                       :max="50"
                       :show-button="false"
-                      placeholder=""
+                      :placeholder="$t('app.dna.segments.placeholder_count')"
                       class="compact-input"
                     />
                     <n-tooltip trigger="hover">
@@ -290,7 +308,7 @@
                       :min="1" 
                       :max="200"
                       :show-button="false"
-                      placeholder=""
+                      :placeholder="$t('app.dna.segments.placeholder_largest')"
                       class="compact-input"
                     />
                     <n-tooltip trigger="hover">
@@ -356,7 +374,7 @@
               </template>
               <template v-else-if="store.relationships.length > 0">
                 <!-- Analysis Summary -->
-                <n-card title="Informe de Relación" class="analysis-card">
+                <n-card :title="$t('app.results.analysis_title')" class="analysis-card">
                   <template #header-extra>
                     <n-tooltip trigger="hover" placement="right">
                       <template #trigger>
@@ -434,10 +452,10 @@
                           <div class="x-match-info">
                             Se comparten <span class="highlight">{{ store.xcmValue }}cM</span> en el cromosoma X.
                             <template v-if="store.sex2 === 'M'">
-                              Esto indica que la relación probablemente viene por la línea materna del match.
-            </template>
-            <template v-else>
-                              Esto sugiere que la relación podría venir por líneas femeninas en el árbol.
+                              Esto confirma que hay una conexión por línea materna (el match heredó el X de su madre).
+                            </template>
+                            <template v-else>
+                              Esto confirma que hay una conexión por línea materna (ya sea directa o a través del padre, que heredó el X de su madre).
                             </template>
                           </div>
                         </template>
@@ -445,7 +463,10 @@
                           <div class="x-match-info">
                             No se comparten segmentos en el cromosoma X.
                             <template v-if="store.sex2 === 'M'">
-                              Esto descarta la línea materna del match como posible origen de la relación.
+                              Esto sugiere que la relación probablemente viene por línea paterna (el match heredó el X de su madre, pero no hay coincidencia).
+                            </template>
+                            <template v-else>
+                              Esto sugiere que la relación probablemente viene por línea paterna (ya sea directa o a través de la madre, que heredó el X de su madre).
                             </template>
                           </div>
                         </template>
@@ -455,7 +476,7 @@
                 </n-card>
 
                 <!-- Investigation Suggestions -->
-                <n-card title="Sugerencias para Investigar" class="suggestions-card">
+                <n-card :title="$t('app.results.suggestions_title')" class="suggestions-card">
                   <template #header-extra>
                     <n-button text @click="toggleSuggestions">
                       <template #icon>
@@ -467,6 +488,39 @@
                   <n-collapse-transition :show="showSuggestions">
                     <div class="suggestions-content">
                       <ul class="suggestions-list">
+                        <template v-if="store.xMatch === 'yes' && store.xcmValue">
+                          <li class="x-match-suggestion">
+                            <strong>Como marcaste que hay coincidencia en el cromosoma X, estas sugerencias pueden ayudarte a investigar mejor:</strong>
+                            <ul>
+                              <li>El X no se hereda de cualquier antepasado: solo ciertas líneas familiares lo transmiten.</li>
+                              <li v-if="store.sex2 === 'M'">Si tu match es varón, el parentesco tiene que venir por su línea materna (porque los hombres solo heredan el X de su madre).</li>
+                              <li v-else>Si tu match es mujer, el parentesco puede venir tanto por el lado materno como paterno, pero solo si esos antepasados transmiten el X:
+                                <ul>
+                                  <li>Por ejemplo: madre, abuela materna, abuela paterna, tías abuelas por esas líneas.</li>
+                                </ul>
+                              </li>
+                              <li>Podés usar el patrón de herencia del X para descartar ramas imposibles y enfocarte en los caminos más probables.</li>
+                            </ul>
+                            <p class="x-match-guide">
+                              📘 Si querés entender mejor cómo funciona el X-DNA, te recomiendo esta guía clara y en español:
+                              <a href="https://www.cristiancofre.cl/post/x-match" target="_blank">X-Match</a>
+                            </p>
+                          </li>
+                        </template>
+                        <template v-else-if="store.xMatch === 'no'">
+                          <li class="x-match-suggestion">
+                            <strong>Como marcaste que no hay coincidencia en el cromosoma X, esto también puede ayudarte:</strong>
+                            <ul>
+                              <li>Podés usar la ausencia de coincidencia en el X para descartar algunas ramas, especialmente si estás analizando conexiones posibles por línea materna.</li>
+                              <li>Por ejemplo, si ambas son mujeres pero no comparten segmentos en el cromosoma X, es menos probable que la conexión venga por una línea puramente materna (como madre → abuela materna → bisabuela materna).</li>
+                              <li>Aun así, esto no descarta completamente la relación, porque el X puede no haberse heredado incluso si hay un antepasado en común por esa vía.</li>
+                            </ul>
+                            <p class="x-match-guide">
+                              📘 Más detalles sobre herencia del X en esta guía:
+                              <a href="https://www.cristiancofre.cl/post/x-match" target="_blank">Guía de Cristian Cofré sobre X-Match</a>
+                            </p>
+                          </li>
+                        </template>
                         <li v-for="(suggestion, index) in store.investigationSuggestions" :key="index">
                           {{ suggestion }}
                         </li>
@@ -476,7 +530,7 @@
                 </n-card>
 
                 <!-- Relationships List -->
-                <n-card title="Lista de Relaciones Posibles" class="relationships-card">
+                <n-card :title="$t('app.results.relationships_title')" class="relationships-card">
                   <n-space vertical>
                   <n-list>
                       <n-list-item v-for="rel in store.relationships" :key="rel.code">
@@ -500,7 +554,7 @@
                   <n-icon size="48" color="#9CA3AF">
                     <DocumentText />
                   </n-icon>
-                  <p>Aquí aparecerán los resultados una vez que completes el formulario con los datos.</p>
+                  <p>{{ $t('app.results.empty_state') }}</p>
                 </div>
               </template>
           </n-card>
@@ -704,6 +758,9 @@ onMounted(() => {
   const savedLocale = localStorage.getItem('locale')
   if (savedLocale) {
     locale.value = savedLocale
+  } else {
+    locale.value = 'es' // Establecer español como idioma por defecto
+    localStorage.setItem('locale', 'es')
   }
   if (store.relationships && store.relationships.length > 0) {
     store.relationships = store.relationships.map(rel => ({
@@ -780,11 +837,11 @@ watch(() => store.selectedRelationship, (newValue) => {
 
 // Options for endogamy
 const endogamyOptions = [
-  { label: t('app.dna.endogamy.levels.none'), value: 'none' },
-  { label: t('app.dna.endogamy.levels.light'), value: 'light' },
-  { label: t('app.dna.endogamy.levels.moderate'), value: 'moderate' },
-  { label: t('app.dna.endogamy.levels.high'), value: 'high' },
-  { label: t('app.dna.endogamy.levels.very_high'), value: 'very_high' }
+  { label: t('app.dna.endogamy.none'), value: 'none' },
+  { label: t('app.dna.endogamy.light') + ' (-9%)', value: 'light' },
+  { label: t('app.dna.endogamy.moderate') + ' (-17%)', value: 'moderate' },
+  { label: t('app.dna.endogamy.high') + ' (-23%)', value: 'high' },
+  { label: t('app.dna.endogamy.very_high') + ' (-29%)', value: 'very_high' }
 ]
 
 const showHelpModal = ref(false)
@@ -1322,7 +1379,7 @@ body {
 }
 
 .tooltip-content {
-  max-width: 250px !important;
+  max-width: 350px !important;
   background-color: #FFFFFF !important;
   color: #333333 !important;
   padding: var(--spacing-md);
@@ -1336,6 +1393,7 @@ body {
   gap: var(--spacing-sm);
   margin-bottom: var(--spacing-md);
   padding-bottom: var(--spacing-sm);
+  border-bottom: 1px solid var(--border-color);
 }
 
 .tooltip-header h4 {
@@ -1351,7 +1409,7 @@ body {
 
 .tooltip-body {
   padding: var(--spacing-sm) 0;
-  line-height: 1.5;
+  line-height: 1.6;
 }
 
 .tooltip-intro {
@@ -1363,9 +1421,10 @@ body {
 .tooltip-note {
   margin: var(--spacing-md) 0 0 0;
   padding-top: var(--spacing-sm);
-  border-top: 1px solid rgba(0, 0, 0, 0.1);
-  color: #000000;
+  border-top: 1px solid var(--border-color);
+  color: var(--text-secondary);
   font-size: 0.9rem;
+  font-style: italic;
 }
 
 .info-icon {
@@ -1997,10 +2056,26 @@ body {
 .tooltip-list {
   list-style-type: disc;
   padding-left: var(--spacing-md);
+  margin: var(--spacing-sm) 0;
 }
 
 .tooltip-list li {
   margin-bottom: var(--spacing-xs);
+  color: var(--text-secondary);
+}
+
+.tooltip-list li strong {
+  color: var(--text-primary);
+  font-weight: 600;
+}
+
+.tooltip-note {
+  margin: var(--spacing-md) 0 0 0;
+  padding-top: var(--spacing-sm);
+  border-top: 1px solid var(--border-color);
+  color: var(--text-secondary);
+  font-size: 0.9rem;
+  font-style: italic;
 }
 
 /* Estilos para el Modal de Fuentes */
@@ -2132,5 +2207,49 @@ body {
 :deep(.n-layout-scroll-container) {
   padding: 0 !important;
   background-color: var(--background-light);
+}
+
+.x-match-suggestion {
+  background-color: var(--background-yellow);
+  padding: var(--spacing-md);
+  border-radius: var(--border-radius-md);
+  margin-bottom: var(--spacing-md);
+}
+
+.x-match-suggestion strong {
+  color: var(--text-primary);
+  display: block;
+  margin-bottom: var(--spacing-sm);
+}
+
+.x-match-suggestion ul {
+  list-style-type: disc;
+  padding-left: var(--spacing-lg);
+  margin: var(--spacing-sm) 0;
+}
+
+.x-match-suggestion ul ul {
+  list-style-type: circle;
+  margin: var(--spacing-xs) 0;
+}
+
+.x-match-suggestion li {
+  margin-bottom: var(--spacing-xs);
+  color: var(--text-secondary);
+}
+
+.x-match-guide {
+  margin-top: var(--spacing-md);
+  padding-top: var(--spacing-sm);
+  border-top: 1px solid var(--border-color);
+}
+
+.x-match-guide a {
+  color: var(--primary-color);
+  text-decoration: none;
+}
+
+.x-match-guide a:hover {
+  text-decoration: underline;
 }
 </style>

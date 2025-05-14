@@ -1,4 +1,7 @@
 import { createI18n } from 'vue-i18n'
+import en from './en'
+import es from './es'
+import pt from './pt'
 
 const messages = {
   en: {
@@ -10,14 +13,14 @@ const messages = {
         name: 'Name',
         gender: 'Gender',
         age: 'Age',
-        example: 'e.g. Sole'
+        example: 'Ex: James Wilson'
       },
       match: {
         title: 'Match',
         name: 'Name',
         gender: 'Gender',
         age: 'Age',
-        example: 'e.g. Javier'
+        example: 'Ex: Sarah Thompson'
       },
       dna: {
         title: 'DNA',
@@ -26,13 +29,11 @@ const messages = {
         endogamy: {
           title: 'Endogamy Level',
           help: 'Help',
-          levels: {
-            none: 'No endogamy',
-            light: 'Light endogamy',
-            moderate: 'Moderate endogamy',
-            high: 'High endogamy',
-            very_high: 'Very high endogamy'
-          }
+          none: 'No endogamy (0%)',
+          light: 'Light endogamy (-9%)',
+          moderate: 'Moderate endogamy (-17%)',
+          high: 'High endogamy (-23%)',
+          very_high: 'Very high endogamy (-29%)'
         },
         x_chromosome: {
           title: 'X Chromosome Match',
@@ -182,14 +183,14 @@ const messages = {
         name: 'Nombre',
         gender: 'Género',
         age: 'Edad',
-        example: 'Ej. Sole'
+        example: 'Ej: Carlos Rodríguez'
       },
       match: {
         title: 'Match',
         name: 'Nombre',
         gender: 'Género',
         age: 'Edad',
-        example: 'Ej. Javier'
+        example: 'Ej: Ana Martínez'
       },
       dna: {
         title: 'ADN',
@@ -198,13 +199,11 @@ const messages = {
         endogamy: {
           title: 'Nivel de endogamia',
           help: 'Ayuda',
-          levels: {
-            none: 'Sin endogamia',
-            light: 'Endogamia ligera',
-            moderate: 'Endogamia moderada',
-            high: 'Endogamia alta',
-            very_high: 'Endogamia muy alta'
-          }
+          none: 'Sin endogamia (0%)',
+          light: 'Ligera (-9%)',
+          moderate: 'Moderada (-17%)',
+          high: 'Alta (-23%)',
+          very_high: 'Muy alta (-29%)'
         },
         x_chromosome: {
           title: 'Coincidencia en cromosoma X',
@@ -369,14 +368,14 @@ const messages = {
         name: 'Nome',
         gender: 'Gênero',
         age: 'Idade',
-        example: 'Ex. Sole'
+        example: 'Ex: Pedro Oliveira'
       },
       match: {
         title: 'Match',
         name: 'Nome',
         gender: 'Gênero',
         age: 'Idade',
-        example: 'Ex. Javier'
+        example: 'Ex: Sofia Costa'
       },
       dna: {
         title: 'DNA',
@@ -385,13 +384,11 @@ const messages = {
         endogamy: {
           title: 'Nível de Endogamia',
           help: 'Ajuda',
-          levels: {
-            none: 'Sem endogamia',
-            light: 'Endogamia leve',
-            moderate: 'Endogamia moderada',
-            high: 'Endogamia alta',
-            very_high: 'Endogamia muito alta'
-          }
+          none: 'Sem endogamia (0%)',
+          light: 'Leve (-9%)',
+          moderate: 'Moderada (-17%)',
+          high: 'Alta (-23%)',
+          very_high: 'Muito alta (-29%)'
         },
         x_chromosome: {
           title: 'Coincidência no Cromossomo X',
@@ -536,10 +533,13 @@ const messages = {
 
 const i18n = createI18n({
   legacy: false,
-  globalInjection: true,
-  locale: localStorage.getItem('locale') || 'es',
-  fallbackLocale: 'en',
-  messages
+  locale: 'es',
+  fallbackLocale: 'es',
+  messages: {
+    en,
+    es,
+    pt
+  }
 })
 
 export default i18n
