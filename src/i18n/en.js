@@ -5,14 +5,14 @@ export default {
     search: {
       title: 'Person 1',
       name: 'Name',
-      example: 'Ex: John Smith',
+      example: 'Ex: James Wilson',
       gender: 'Gender',
       age: 'Age'
     },
     match: {
       title: 'Person 2',
       name: 'Name',
-      example: 'Ex: Mary Johnson',
+      example: 'Ex: Sarah Thompson',
       gender: 'Gender',
       age: 'Age'
     },
@@ -23,13 +23,11 @@ export default {
       endogamy: {
         title: 'Endogamy Level',
         help: 'Help',
-        levels: {
-          none: 'None',
-          light: 'Light',
-          moderate: 'Moderate',
-          high: 'High',
-          very_high: 'Very High'
-        }
+        none: 'None (0%)',
+        light: 'Light (9%)',
+        moderate: 'Moderate (17%)',
+        high: 'High (23%)',
+        very_high: 'Very High (29%)'
       },
       x_chromosome: {
         title: 'X Match',
