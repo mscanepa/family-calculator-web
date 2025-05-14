@@ -152,10 +152,10 @@
                       v-model:value="store.endogamy"
                       :options="[
                         { label: t('app.dna.endogamy.none'), value: 'none' },
-                        { label: t('app.dna.endogamy.light') + ' (-9%)', value: 'light' },
-                        { label: t('app.dna.endogamy.moderate') + ' (-17%)', value: 'moderate' },
-                        { label: t('app.dna.endogamy.high') + ' (-23%)', value: 'high' },
-                        { label: t('app.dna.endogamy.very_high') + ' (-29%)', value: 'very_high' }
+                        { label: t('app.dna.endogamy.light'), value: 'light' },
+                        { label: t('app.dna.endogamy.moderate'), value: 'moderate' },
+                        { label: t('app.dna.endogamy.high'), value: 'high' },
+                        { label: t('app.dna.endogamy.very_high'), value: 'very_high' }
                       ]"
                       :placeholder="$t('app.dna.endogamy.placeholder')"
                     />
@@ -201,7 +201,6 @@
                       <template #icon>
                         <n-icon><InformationCircle /></n-icon>
                       </template>
-                      {{ $t('app.dna.endogamy.help') }}
                     </n-button>
                   </n-form-item>
                 </n-grid-item>
