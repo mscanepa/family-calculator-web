@@ -6,7 +6,7 @@ import pt from './pt'
 const messages = {
   en: {
     app: {
-      title: 'cM Relationship Calculator',
+      title: 'Family Calc - cM Relationship Calculator',
       subtitle: 'Analyze shared DNA to determine possible family relationships',
       search: {
         title: 'Searcher',
@@ -361,7 +361,7 @@ const messages = {
   },
   pt: {
     app: {
-      title: 'Calculadora de Relação por cM',
+      title: 'Family Calc - Calculadora de Relação por cM',
       subtitle: 'Analise o DNA compartilhado para determinar possíveis relações familiares',
       search: {
         title: 'Pesquisador',

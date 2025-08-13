@@ -1,6 +1,6 @@
 export default {
   app: {
-    title: 'Calculadora de Relaciones Familiares',
+    title: 'Family Calc - Calculadora de Relaciones Familiares',
     subtitle: 'Analiza el ADN compartido para determinar posibles relaciones familiares',
     search: {
       title: 'Buscador',
