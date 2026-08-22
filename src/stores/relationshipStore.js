@@ -19,7 +19,10 @@ export const useRelationshipStore = defineStore('relationship', () => {
   const numSegments = ref(null)
   const largestSegment = ref(null)
   const endogamy = ref(null)
-  
+
+  // Motor de scoring del backend: 'classic' (gaussiano) o 'empirical' (paper)
+  const engine = ref('classic')
+
   // Results
   const loading = ref(false)
   const relationships = ref([])
@@ -27,6 +30,8 @@ export const useRelationshipStore = defineStore('relationship', () => {
   const histogram = ref({})
   const analysisSummary = ref('')
   const investigationSuggestions = ref([])
+  // Motor con el que se calcularon los resultados en pantalla
+  const resultsEngine = ref(null)
 
   // Computed properties
   const ageDiff = computed(() => 
@@ -117,7 +122,8 @@ export const useRelationshipStore = defineStore('relationship', () => {
           x_inheritance: xMatch.value === 'yes',
           segments: numSegments.value,
           largest_segment: largestSegment.value,
-          endogamia: endogamy.value
+          endogamia: endogamy.value,
+          engine: engine.value
         })
       })
       
@@ -134,6 +140,7 @@ export const useRelationshipStore = defineStore('relationship', () => {
       }))
       analysisSummary.value = data.summary
       investigationSuggestions.value = data.suggestions
+      resultsEngine.value = data.engine ?? 'classic'
       
       if (data.relationships.length > 0) {
         selectedRelationship.value = data.relationships[0].code
@@ -191,6 +198,7 @@ export const useRelationshipStore = defineStore('relationship', () => {
     histogram.value = {}
     analysisSummary.value = ''
     investigationSuggestions.value = []
+    resultsEngine.value = null
   }
 
   const clearData = () => {
@@ -211,6 +219,7 @@ export const useRelationshipStore = defineStore('relationship', () => {
     histogram.value = {}
     analysisSummary.value = ''
     investigationSuggestions.value = []
+    resultsEngine.value = null
   }
 
   const updateRelationships = () => {
@@ -237,12 +246,14 @@ export const useRelationshipStore = defineStore('relationship', () => {
     numSegments,
     largestSegment,
     endogamy,
+    engine,
     loading,
     relationships,
     selectedRelationship,
     histogram,
     analysisSummary,
     investigationSuggestions,
+    resultsEngine,
     
     // Computed
     ageDiff,
