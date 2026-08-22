@@ -102,35 +102,35 @@ export default {
       cases: {
         javierSoledadFs: {
           label: 'Javier ↔ Soledad — irmãos completos (2730 cM)',
-          note: 'Caso real do projeto. {cm} cM, sem dados de segmentos no teste original. Coincidência no X: sim. Esperado: {expected}.',
+          note: 'Caso real do projeto (idades estimadas). {cm} cM, sem dados de segmentos no teste original. Coincidência no X: sim. Esperado: {expected}.',
         },
         sebastianAlejo1c: {
           label: 'Sebastian ↔ Alejo — primos 1.º (884.6 cM)',
-          note: 'Caso real do projeto. {cm} cM, {segments} segmentos, bloco {largest} cM. Sem X compartilhado. Esperado: {expected}.',
+          note: 'Caso real do projeto (idades estimadas). {cm} cM, {segments} segmentos, bloco {largest} cM. Sem X compartilhado. A idade descarta tio-avô. Esperado: {expected}.',
         },
         bettinaMariana2c: {
           label: 'Bettina ↔ Mariana — primas 2.º (286.3 cM)',
-          note: 'Caso real do projeto. {cm} cM, {segments} segmentos, bloco {largest} cM. Coincidência no X: sim. Esperado: {expected}.',
+          note: 'Caso real do projeto (idades estimadas). {cm} cM, {segments} segmentos, bloco {largest} cM. Coincidência no X: sim. Esperado: {expected}.',
         },
         soledadElizabeth3c: {
           label: 'Soledad ↔ Elizabeth — primas 3.º (65.8 cM)',
-          note: 'Caso real do projeto. {cm} cM, {segments} segmentos, bloco {largest} cM. Sem X compartilhado. Esperado: {expected}.',
+          note: 'Caso real do projeto (idades estimadas). {cm} cM, {segments} segmentos, bloco {largest} cM. Sem X compartilhado. Esperado: {expected}.',
         },
         hsHalfSisters: {
-          label: 'Meias-irmãs — teste backend (1800 cM)',
-          note: 'Caso adicional do backend (test_half_sisters). {cm} cM, {segments} segmentos, bloco {largest} cM. Esperado: {expected}.',
+          label: 'Meias-irmãs (1800 cM)',
+          note: '{cm} cM, {segments} segmentos, bloco {largest} cM, idades próximas. A idade descarta avó/tia. Esperado: {expected}.',
         },
         h1cHalfFirst: {
           label: 'Meio-primo 1.º (435 cM)',
-          note: '{cm} cM, {segments} segmentos. Esperado: {expected}.',
+          note: '{cm} cM, {segments} segmentos, idades próximas. Sobrepõe com 1C1R; a idade discrimina. Esperado: {expected}.',
         },
-        hsVs1cFewLarge: {
-          label: 'Ambíguo 1300 cM — poucos segmentos grandes',
-          note: 'Mesmos {cm} cM, {segments} segmentos, bloco {largest} cM → favorece {expected}.',
+        hsClear1550: {
+          label: '1550 cM + idades próximas → meio-irmão/ã',
+          note: '{cm} cM com {segments} segmentos e idades similares: DNA demais para primo 1.º e a idade descarta avô/tio. Esperado: {expected}.',
         },
-        hsVs1cManySmall: {
-          label: 'Ambíguo 1300 cM — muitos segmentos pequenos',
-          note: 'Mesmos {cm} cM, {segments} segmentos, bloco {largest} cM → favorece {expected}.',
+        cousin1cClear1050: {
+          label: '1050 cM + idades próximas → primo 1.º',
+          note: '{cm} cM, {segments} segmentos: abaixo do mínimo de meio-irmão e dentro da faixa de primo 1.º. Esperado: {expected}.',
         },
         same1cConsolidated: {
           label: '884.6 cM — perfil original Sebastian/Alejo',

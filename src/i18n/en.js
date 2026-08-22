@@ -95,35 +95,35 @@ export default {
       cases: {
         javierSoledadFs: {
           label: 'Javier ↔ Soledad — full siblings (2730 cM)',
-          note: 'Real project case. {cm} cM, no segment data in the original test. X match: yes. Expected: {expected}.',
+          note: 'Real project case (estimated ages). {cm} cM, no segment data in the original test. X match: yes. Expected: {expected}.',
         },
         sebastianAlejo1c: {
           label: 'Sebastian ↔ Alejo — 1st cousins (884.6 cM)',
-          note: 'Real project case. {cm} cM, {segments} segments, block {largest} cM. No X match. Expected: {expected}.',
+          note: 'Real project case (estimated ages). {cm} cM, {segments} segments, block {largest} cM. No X match. Age rules out great-uncle. Expected: {expected}.',
         },
         bettinaMariana2c: {
           label: 'Bettina ↔ Mariana — 2nd cousins (286.3 cM)',
-          note: 'Real project case. {cm} cM, {segments} segments, block {largest} cM. X match: yes. Expected: {expected}.',
+          note: 'Real project case (estimated ages). {cm} cM, {segments} segments, block {largest} cM. X match: yes. Expected: {expected}.',
         },
         soledadElizabeth3c: {
           label: 'Soledad ↔ Elizabeth — 3rd cousins (65.8 cM)',
-          note: 'Real project case. {cm} cM, {segments} segments, block {largest} cM. No X match. Expected: {expected}.',
+          note: 'Real project case (estimated ages). {cm} cM, {segments} segments, block {largest} cM. No X match. Expected: {expected}.',
         },
         hsHalfSisters: {
-          label: 'Half sisters — backend test (1800 cM)',
-          note: 'Additional backend case (test_half_sisters). {cm} cM, {segments} segments, block {largest} cM. Expected: {expected}.',
+          label: 'Half sisters (1800 cM)',
+          note: '{cm} cM, {segments} segments, block {largest} cM, close ages. Age rules out grandparent/aunt. Expected: {expected}.',
         },
         h1cHalfFirst: {
           label: 'Half 1st cousin (435 cM)',
-          note: '{cm} cM, {segments} segments. Expected: {expected}.',
+          note: '{cm} cM, {segments} segments, close ages. Overlaps 1C1R and great-great-uncle; age discriminates. Expected: {expected}.',
         },
-        hsVs1cFewLarge: {
-          label: 'Ambiguous 1300 cM — few large segments',
-          note: 'Same {cm} cM, {segments} segments, block {largest} cM → favors {expected}.',
+        hsClear1550: {
+          label: '1550 cM + close ages → half sibling',
+          note: '{cm} cM with {segments} segments and similar ages: too much DNA for a 1st cousin and age rules out grandparent/uncle. Expected: {expected}.',
         },
-        hsVs1cManySmall: {
-          label: 'Ambiguous 1300 cM — many small segments',
-          note: 'Same {cm} cM, {segments} segments, block {largest} cM → more recombination, favors {expected}.',
+        cousin1cClear1050: {
+          label: '1050 cM + close ages → 1st cousin',
+          note: '{cm} cM, {segments} segments: below the half-sibling minimum and within 1st-cousin range. Expected: {expected}.',
         },
         same1cConsolidated: {
           label: '884.6 cM — original Sebastian/Alejo profile',
