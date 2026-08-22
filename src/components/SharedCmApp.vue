@@ -483,12 +483,20 @@
                         </template>
                         <template v-if="store.xMatch === 'yes'">
                           <div class="x-match-info">
-                            Se comparten <span class="highlight">{{ store.xcmValue }}cM</span> en el cromosoma X.
-                            <template v-if="store.sex2 === 'M'">
-                              Esto confirma que hay una conexión por línea materna (el match heredó el X de su madre).
+                            <template v-if="store.xcmValue">
+                              Se comparten <span class="highlight">{{ store.xcmValue }}cM</span> en el cromosoma X.
                             </template>
                             <template v-else>
-                              Esto confirma que hay una conexión por línea materna (ya sea directa o a través del padre, que heredó el X de su madre).
+                              Hay coincidencia en el cromosoma X.
+                            </template>
+                            <template v-if="store.sex2 === 'M'">
+                              Como el match es varón y los varones heredan el X únicamente de su madre, la conexión tiene que pasar por la línea materna del match.
+                            </template>
+                            <template v-else>
+                              Como el match es mujer, el X pudo llegarle por su padre o por su madre: la coincidencia no señala una línea única, pero descarta las rutas que pasan por dos varones seguidos (por ejemplo, el abuelo paterno del match).
+                            </template>
+                            <template v-if="store.sex1 === 'M'">
+                              Del lado de {{ store.name1 }}, al ser varón, la conexión también debe pasar por su línea materna.
                             </template>
                           </div>
                         </template>
@@ -496,10 +504,10 @@
                           <div class="x-match-info">
                             No se comparten segmentos en el cromosoma X.
                             <template v-if="store.sex2 === 'M'">
-                              Esto sugiere que la relación probablemente viene por línea paterna (el match heredó el X de su madre, pero no hay coincidencia).
+                              Esto baja la prioridad de la línea materna del match, pero no la descarta: el X puede perderse por recombinación aun cuando el parentesco exista por esa vía.
                             </template>
                             <template v-else>
-                              Esto sugiere que la relación probablemente viene por línea paterna (ya sea directa o a través de la madre, que heredó el X de su madre).
+                              Esto no señala una línea concreta: solo hace algo menos probables las rutas por las que se transmite el X. Usalo como pista secundaria, no como descarte.
                             </template>
                           </div>
                         </template>

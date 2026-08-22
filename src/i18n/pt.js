@@ -165,9 +165,9 @@ export default {
         title: 'Ancestral Comum Mais Provável',
         probability: 'Com base em {probability}% de probabilidade',
         x_inheritance: {
-          maternal: 'Com base no cromossomo X, procure na linha materna da correspondência',
-          female: 'Com base no cromossomo X, procure nas linhas femininas',
-          exclude: 'Excluir linha materna da correspondência'
+          maternal: 'Com base no cromossomo X, procure na linha materna da correspondência (homens herdam o X apenas da mãe)',
+          female: 'Com base no cromossomo X, a conexão pode vir pelo pai ou pela mãe da correspondência; apenas rotas com dois homens seguidos ficam descartadas',
+          exclude: 'A ausência de coincidência no X torna menos prováveis (sem descartar) as linhas que transmitem o X'
         }
       },
       average: 'Média',

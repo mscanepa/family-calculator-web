@@ -77,12 +77,12 @@ export const useRelationshipStore = defineStore('relationship', () => {
     // Agregar información de X si es relevante
     if (xMatch.value === 'yes') {
       if (sex2.value === 'M') {
-        text += ' y basado en el cromosoma X, busca en la línea materna del match.'
+        text += ' y basado en el cromosoma X, buscá en la línea materna del match (los varones heredan el X solo de su madre).'
       } else {
-        text += ' y basado en el cromosoma X, busca en las líneas femeninas.'
+        text += ' y basado en el cromosoma X, la conexión puede venir por el padre o la madre del match; solo quedan descartadas las rutas con dos varones seguidos.'
       }
     } else if (xMatch.value === 'no') {
-      text += ' y basado en el cromosoma X, excluye la línea materna del match.'
+      text += ' y la ausencia de coincidencia en X hace menos probables (sin descartarlas) las líneas que transmiten el X.'
     }
     
     return text
