@@ -172,6 +172,88 @@ export default {
         nephew: 'sobrino/sobrina',
         default: 'ancestro {level} generaciones atrás'
       }
-    }
-  }
+    },
+    relationships: {
+      PC: {
+        narrative: 'Padre/Madre',
+        description: 'Padre o madre biológico',
+      },
+      FS: {
+        narrative: 'Hermano/a completo',
+        description: 'Comparten ambos progenitores',
+      },
+      HS: {
+        narrative: 'Medio hermano/a',
+        description: 'Comparten un progenitor',
+      },
+      GP: {
+        narrative: 'Abuelo/a – Nieto/a',
+        description: 'Padres de tus padres',
+      },
+      AU: {
+        narrative: 'Tío/a – Sobrino/a',
+        description: 'Hermanos de tus padres',
+      },
+      GAU: {
+        narrative: 'Tío/a abuelo/a – Sobrino nieto/a',
+        description: 'Hermanos de tus abuelos',
+      },
+      GGAU: {
+        narrative: 'Tío/a bisabuelo/a – Sobrino bisnieto/a',
+        description: 'Hermanos de tus bisabuelos',
+      },
+      '1C': {
+        narrative: 'Primo/a hermano/a',
+        description: 'Hijos de tus tíos',
+      },
+      H1C: {
+        narrative: 'Medio primo/a hermano/a',
+        description: 'Hijos de tus medios tíos',
+      },
+      '1C1R': {
+        narrative: 'Primo/a hermano/a una vez removido/a',
+        description: 'Hijo/a de tu primo hermano o primo hermano de tu padre/madre',
+      },
+      '1C2R': {
+        narrative: 'Primo/a hermano/a dos veces removido/a',
+        description: 'Nieto/a de tu primo hermano o primo hermano de tus abuelos',
+      },
+      '2C': {
+        narrative: 'Primo/a segundo/a',
+        description: 'Hijos de los primos hermanos de tus padres',
+      },
+      '2C1R': {
+        narrative: 'Primo/a segundo/a una vez removido/a',
+        description: 'Hijo/a de tu primo segundo o primo segundo de tu padre/madre',
+      },
+      H2C: {
+        narrative: 'Medio primo/a segundo/a',
+        description: 'Hijo/a del medio primo hermano de tus padres',
+      },
+      '3C': {
+        narrative: 'Primo/a tercero/a',
+        description: 'Hijos de los primos segundos de tus padres',
+      },
+      '4C': {
+        narrative: 'Primo/a cuarto/a',
+        description: 'Hijos de los primos terceros de tus padres',
+      },
+      '5C': {
+        narrative: 'Primo/a quinto/a',
+        description: 'Hijos de los primos cuartos de tus padres',
+      },
+      '6C': {
+        narrative: 'Primo/a sexto/a',
+        description: 'Hijos de los primos quintos de tus padres',
+      },
+      '7C': {
+        narrative: 'Primo/a séptimo/a',
+        description: 'Hijos de los primos sextos de tus padres',
+      },
+      '8C+': {
+        narrative: 'Primo/a octavo/a o más distante',
+        description: 'Relación más lejana que primos séptimos',
+      },
+    },
+  },
 } 

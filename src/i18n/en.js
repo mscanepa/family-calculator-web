@@ -165,6 +165,88 @@ export default {
         nephew: 'nephew/niece',
         default: 'ancestor {level} generations back'
       }
-    }
-  }
+    },
+    relationships: {
+      PC: {
+        narrative: 'Parent',
+        description: 'Biological parent',
+      },
+      FS: {
+        narrative: 'Full sibling',
+        description: 'Share both parents',
+      },
+      HS: {
+        narrative: 'Half sibling',
+        description: 'Share one parent',
+      },
+      GP: {
+        narrative: 'Grandparent – Grandchild',
+        description: 'Parents of your parents',
+      },
+      AU: {
+        narrative: 'Aunt/Uncle – Niece/Nephew',
+        description: 'Siblings of your parents',
+      },
+      GAU: {
+        narrative: 'Great aunt/uncle – Grand-niece/nephew',
+        description: 'Siblings of your grandparents',
+      },
+      GGAU: {
+        narrative: 'Great-great aunt/uncle',
+        description: 'Siblings of your great-grandparents',
+      },
+      '1C': {
+        narrative: 'First cousin',
+        description: 'Children of your aunts/uncles',
+      },
+      H1C: {
+        narrative: 'Half first cousin',
+        description: 'Children of your half aunts/uncles',
+      },
+      '1C1R': {
+        narrative: 'First cousin once removed',
+        description: 'Child of your first cousin or first cousin of your parent',
+      },
+      '1C2R': {
+        narrative: 'First cousin twice removed',
+        description: 'Grandchild of your first cousin or first cousin of your grandparent',
+      },
+      '2C': {
+        narrative: 'Second cousin',
+        description: "Children of your parents' first cousins",
+      },
+      '2C1R': {
+        narrative: 'Second cousin once removed',
+        description: 'Child of your second cousin or second cousin of your parent',
+      },
+      H2C: {
+        narrative: 'Half second cousin',
+        description: "Child of your parents' half first cousin",
+      },
+      '3C': {
+        narrative: 'Third cousin',
+        description: "Children of your parents' second cousins",
+      },
+      '4C': {
+        narrative: 'Fourth cousin',
+        description: "Children of your parents' third cousins",
+      },
+      '5C': {
+        narrative: 'Fifth cousin',
+        description: "Children of your parents' fourth cousins",
+      },
+      '6C': {
+        narrative: 'Sixth cousin',
+        description: "Children of your parents' fifth cousins",
+      },
+      '7C': {
+        narrative: 'Seventh cousin',
+        description: "Children of your parents' sixth cousins",
+      },
+      '8C+': {
+        narrative: 'Eighth cousin or more distant',
+        description: 'More distant than seventh cousins',
+      },
+    },
+  },
 } 
