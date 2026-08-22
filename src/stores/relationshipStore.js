@@ -49,7 +49,7 @@ export const useRelationshipStore = defineStore('relationship', () => {
     
     // Construir el texto base
     let text = `Ancestro Común Más Probable\n`
-    text += `Según el ${probability}% de probabilidad, la relación entre ${name1.value} y ${name2.value} es de ${topRelationship.name}.\n`
+    text += `Según el ${probability}% de probabilidad, la relación entre ${name1.value} y ${name2.value} es de ${topRelationship.name || topRelationship.nombre}.\n`
     
     // Agregar información de ADN
     text += `Se comparten ${cmValue.value} cM`
@@ -125,8 +125,13 @@ export const useRelationshipStore = defineStore('relationship', () => {
       
       const data = await response.json()
       
-      // Actualizar los resultados
-      relationships.value = data.relationships
+      // Normalizar campos del API para la UI
+      relationships.value = data.relationships.map(rel => ({
+        ...rel,
+        probability: rel.adjustedProb ?? rel.probability,
+        avg_cm: rel.promedio_cm ?? rel.avg_cm,
+        name: rel.nombre ?? rel.name,
+      }))
       analysisSummary.value = data.summary
       investigationSuggestions.value = data.suggestions
       

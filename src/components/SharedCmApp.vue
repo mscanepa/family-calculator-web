@@ -439,12 +439,12 @@
                         </template>
                         <template v-if="store.relationships && store.relationships.length > 0">
                           La relación más probable es 
-                          <span class="relationship-name">{{ store.relationships[0].name }}</span> 
-                          (<span class="probability">{{ (store.relationships[0].probability * 100).toFixed(1) }}%</span> de probabilidad).
+                          <span class="relationship-name">{{ $t(`app.relationships.${store.relationships[0].code}.narrative`) }}</span> 
+                          (<span class="probability">{{ ((store.relationships[0].adjustedProb ?? store.relationships[0].probability) * 100).toFixed(1) }}%</span> de probabilidad).
                           <template v-if="store.relationships.length > 1">
                             También es posible que sean 
-                            <span class="relationship-name">{{ store.relationships[1].name }}</span> 
-                            (<span class="probability">{{ (store.relationships[1].probability * 100).toFixed(1) }}%</span> de probabilidad).
+                            <span class="relationship-name">{{ $t(`app.relationships.${store.relationships[1].code}.narrative`) }}</span> 
+                            (<span class="probability">{{ ((store.relationships[1].adjustedProb ?? store.relationships[1].probability) * 100).toFixed(1) }}%</span> de probabilidad).
                           </template>
                         </template>
                         <template v-if="store.xMatch === 'yes'">
@@ -535,13 +535,13 @@
                       <n-list-item v-for="rel in store.relationships" :key="rel.code">
                         <n-space justify="space-between" align="center">
                           <n-space vertical>
-                            <n-text strong>{{ rel.name }}</n-text>
-                            <n-text depth="3">{{ rel.description }}</n-text>
+                            <n-text strong>{{ rel.name || $t(`app.relationships.${rel.code}.narrative`) }}</n-text>
+                            <n-text depth="3">{{ rel.description || $t(`app.relationships.${rel.code}.description`) }}</n-text>
                             <n-text>
-                              Promedio: {{ rel.avg_cm }} cM • Rango típico: {{ rel.min_cm }}–{{ rel.max_cm }} cM
+                              Promedio: {{ rel.promedio_cm ?? rel.avg_cm }} cM • Rango típico: {{ rel.min_cm }}–{{ rel.max_cm }} cM
                             </n-text>
                           </n-space>
-                          <n-text strong>{{ (rel.probability * 100).toFixed(1) }}%</n-text>
+                          <n-text strong>{{ ((rel.adjustedProb ?? rel.probability) * 100).toFixed(1) }}%</n-text>
                         </n-space>
                     </n-list-item>
                   </n-list>
