@@ -112,12 +112,14 @@ export const useRelationshipStore = defineStore('relationship', () => {
           cm: cmValue.value,
           person1_age: age1.value,
           person2_age: age2.value,
-          generation: null,
-          sex: sex1.value,
+          generacion: null,
+          sexo: sex1.value,
+          person1_sex: sex1.value,
+          person2_sex: sex2.value,
           x_inheritance: xMatch.value === 'yes',
           segments: numSegments.value,
           largest_segment: largestSegment.value,
-          endogamy: endogamy.value
+          endogamia: endogamy.value
         })
       })
       

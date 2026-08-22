@@ -388,7 +388,7 @@
                           <p class="tooltip-intro">El análisis considera los siguientes factores:</p>
                           <div class="factors-grid">
                             <div class="factor-item">
-                              <span class="factor-label">Distancia al promedio cM</span>
+                              <span class="factor-label">Curva empírica de probabilidad</span>
                               <span class="factor-value">30%</span>
                             </div>
                             <div class="factor-item">
@@ -846,9 +846,11 @@ const endogamyOptions = [
 const showHelpModal = ref(false)
 const endogamyInfo = ref(null)
 
+const API_URL = import.meta.env.VITE_API_URL || window.location.origin
+
 const showEndogamyHelp = async () => {
   try {
-    const response = await fetch('http://localhost:8001/api/endogamy/help')
+    const response = await fetch(`${API_URL}/api/endogamy/help`)
     if (!response.ok) throw new Error('Error loading help information')
     endogamyInfo.value = await response.json()
     showHelpModal.value = true
