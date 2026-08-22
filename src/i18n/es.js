@@ -154,7 +154,7 @@ export default {
       label: 'Motor de análisis',
       classic: 'Clásico',
       empirical: 'Empírico',
-      hint: 'Elige cómo se calcula la verosimilitud de tus cM, el término P(cM | relación) del modelo. Clásico: curva normal (gaussiana) centrada en el promedio publicado del Shared cM Project para cada parentesco; es el motor de producción. Empírico (experimental): distribuciones ajustadas a simulaciones de herencia de ADN (Villaverde 2026), que capturan la asimetría y las colas reales de cada parentesco en vez de asumir una campana simétrica. El resto del cálculo —segmentos, bloque más grande, cromosoma X, edad y la normalización a 100%— es idéntico en ambos motores; solo cambia cómo se evalúa qué tan típico es tu total de cM.',
+      hint: 'Elige cómo se calcula la verosimilitud de tus cM, el término P(cM | relación) del modelo. Clásico: curva normal (gaussiana) centrada en el promedio publicado del Shared cM Project para cada parentesco; es el motor de producción. Empírico (experimental): distribuciones ajustadas a simulaciones de herencia de ADN, que capturan la asimetría y las colas reales de cada parentesco en vez de asumir una campana simétrica. El resto del cálculo —segmentos, bloque más grande, cromosoma X, edad y la normalización a 100%— es idéntico en ambos motores; solo cambia cómo se evalúa qué tan típico es tu total de cM.',
       usedTag: 'Motor: {name}',
     },
     calculation: {
@@ -162,7 +162,7 @@ export default {
       intro: 'El puntaje de esta hipótesis es el producto de estos términos. El porcentaje final es este puntaje dividido por la suma de los puntajes de todas las hipótesis.',
       adjustedCm: 'cM usados en el cálculo (ajustados por endogamia)',
       cmLikelihood: 'Verosimilitud de los cM',
-      cmLikelihoodEmpirical: 'distribución empírica del paper',
+      cmLikelihoodEmpirical: 'distribución empírica (simulaciones)',
       cmLikelihoodClassic: 'curva gaussiana (Shared cM Project)',
       range: 'Rango publicado de cM',
       segments: 'Número de segmentos',
@@ -175,6 +175,15 @@ export default {
       penalty: 'penaliza esta hipótesis',
       excluded: 'excluye esta hipótesis (genéticamente imposible)',
       finalNote: 'Probabilidad final tras normalizar entre todas las hipótesis: {prob}%',
+      onlyCm: 'solo cM',
+      short: {
+        range: 'rango',
+        segments: 'segm.',
+        largestSegment: 'bloque',
+        x: 'X',
+        age: 'edad',
+        generation: 'gen.',
+      },
     },
     methodology: {
       link: 'Cómo funciona',
@@ -188,6 +197,7 @@ export default {
         likelihood: {
           title: '2. Verosimilitud de los cM',
           text: 'Para cada uno de los 20 parentescos del catálogo se evalúa qué tan típico es tu total de cM respecto de su distribución publicada, centrada en el promedio del Shared cM Project. Un valor fuera del rango publicado penaliza fuerte a esa hipótesis (sin eliminarla del todo).',
+          engineNote: 'Con el selector "Motor de análisis" (arriba de la página) elegís cómo se modela esta verosimilitud: Clásico usa una curva normal centrada en el promedio publicado; Empírico usa distribuciones ajustadas a simulaciones de herencia de ADN, que capturan la asimetría real de cada parentesco. El resto del cálculo no cambia.',
         },
         evidence: {
           title: '3. Evidencia adicional',

@@ -585,7 +585,18 @@
                               Promedio: {{ rel.promedio_cm ?? rel.avg_cm }} cM • Rango típico: {{ rel.min_cm }}–{{ rel.max_cm }} cM
                             </n-text>
                           </n-space>
-                          <n-text strong>{{ ((rel.adjustedProb ?? rel.probability) * 100).toFixed(1) }}%</n-text>
+                          <div class="prob-column">
+                            <n-text strong>{{ ((rel.adjustedProb ?? rel.probability) * 100).toFixed(1) }}%</n-text>
+                            <div v-if="rel.factors" class="factor-chips" @click="toggleCalc(rel.code)">
+                              <span
+                                v-for="chip in factorChips(rel)"
+                                :key="chip.key"
+                                class="factor-chip"
+                                :class="chip.cls"
+                                :title="chip.note"
+                              >{{ chip.label }} {{ chip.display }}</span>
+                            </div>
+                          </div>
                         </n-space>
                         <div v-if="rel.factors" class="calc-breakdown">
                           <a href="#" class="calc-toggle" @click.prevent="toggleCalc(rel.code)">
@@ -761,7 +772,10 @@
         <div class="source-section">{{ $t('app.methodology.steps.endogamy.text') }}</div>
 
         <h3 class="section-title">{{ $t('app.methodology.steps.likelihood.title') }}</h3>
-        <div class="source-section">{{ $t('app.methodology.steps.likelihood.text') }}</div>
+        <div class="source-section">
+          <p>{{ $t('app.methodology.steps.likelihood.text') }}</p>
+          <p>{{ $t('app.methodology.steps.likelihood.engineNote') }}</p>
+        </div>
 
         <h3 class="section-title">{{ $t('app.methodology.steps.evidence.title') }}</h3>
         <div class="source-section">{{ $t('app.methodology.steps.evidence.text') }}</div>
@@ -966,6 +980,42 @@ const factorRows = (rel) => {
     display: `×${Number(row.value).toFixed(2)}`,
     note: factorNote(Number(row.value)),
   }))
+}
+
+// Chips compactos al lado del %: solo los factores que ponderaron (≠ 1)
+const factorChips = (rel) => {
+  const f = rel.factors
+  if (!f) return []
+  const defs = [
+    { key: 'range', value: f.range },
+    { key: 'segments', value: f.segments },
+    { key: 'largestSegment', value: f.largestSegment },
+    { key: 'x', value: f.x },
+    { key: 'age', value: f.age },
+    { key: 'generation', value: f.generation },
+  ]
+  const chips = defs
+    .filter(d => Number(d.value) !== 1)
+    .map(d => {
+      const value = Number(d.value)
+      return {
+        key: d.key,
+        label: t(`app.calculation.short.${d.key}`),
+        display: `×${value.toFixed(2)}`,
+        cls: value === 0 ? 'chip-excluded' : value > 1 ? 'chip-boost' : 'chip-penalty',
+        note: `${t(`app.calculation.${d.key}`)}: ${factorNote(value)}`,
+      }
+    })
+  if (chips.length === 0) {
+    return [{
+      key: 'onlyCm',
+      label: t('app.calculation.onlyCm'),
+      display: '',
+      cls: 'chip-neutral',
+      note: t('app.calculation.neutral'),
+    }]
+  }
+  return chips
 }
 
 // Cambiar de motor recalcula si ya hay un análisis en pantalla
@@ -2052,6 +2102,50 @@ body {
 .engine-selector .engine-label {
   font-size: 0.85rem;
   font-weight: 600;
+}
+
+.prob-column {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 4px;
+  max-width: 180px;
+}
+
+.factor-chips {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+  gap: 4px;
+  cursor: pointer;
+}
+
+.factor-chip {
+  font-size: 0.68rem;
+  line-height: 1.4;
+  padding: 1px 7px;
+  border-radius: 10px;
+  white-space: nowrap;
+}
+
+.chip-boost {
+  background-color: rgba(24, 160, 88, 0.12);
+  color: #146e42;
+}
+
+.chip-penalty {
+  background-color: rgba(240, 160, 32, 0.15);
+  color: #8a5a08;
+}
+
+.chip-excluded {
+  background-color: rgba(208, 48, 80, 0.12);
+  color: #a02040;
+}
+
+.chip-neutral {
+  background-color: rgba(0, 0, 0, 0.06);
+  color: var(--text-secondary);
 }
 
 .calc-breakdown {

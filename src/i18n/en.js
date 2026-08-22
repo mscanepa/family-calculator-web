@@ -147,7 +147,7 @@ export default {
       label: 'Analysis engine',
       classic: 'Classic',
       empirical: 'Empirical',
-      hint: 'Chooses how the likelihood of your cM is computed, the P(cM | relationship) term of the model. Classic: a normal (Gaussian) curve centered on the published Shared cM Project average for each relationship; this is the production engine. Empirical (experimental): distributions fitted to DNA inheritance simulations (Villaverde 2026), which capture each relationship\'s real skew and tails instead of assuming a symmetric bell curve. Everything else — segments, largest block, X chromosome, age and the normalization to 100% — is identical in both engines; only the way your total cM is evaluated changes.',
+      hint: 'Chooses how the likelihood of your cM is computed, the P(cM | relationship) term of the model. Classic: a normal (Gaussian) curve centered on the published Shared cM Project average for each relationship; this is the production engine. Empirical (experimental): distributions fitted to DNA inheritance simulations, which capture each relationship\'s real skew and tails instead of assuming a symmetric bell curve. Everything else — segments, largest block, X chromosome, age and the normalization to 100% — is identical in both engines; only the way your total cM is evaluated changes.',
       usedTag: 'Engine: {name}',
     },
     calculation: {
@@ -155,7 +155,7 @@ export default {
       intro: 'The score for this hypothesis is the product of these terms. The final percentage is this score divided by the sum of the scores of all hypotheses.',
       adjustedCm: 'cM used in the calculation (adjusted for endogamy)',
       cmLikelihood: 'cM likelihood',
-      cmLikelihoodEmpirical: 'empirical distribution from the paper',
+      cmLikelihoodEmpirical: 'empirical distribution (simulations)',
       cmLikelihoodClassic: 'Gaussian curve (Shared cM Project)',
       range: 'Published cM range',
       segments: 'Segment count',
@@ -168,6 +168,15 @@ export default {
       penalty: 'penalizes this hypothesis',
       excluded: 'excludes this hypothesis (genetically impossible)',
       finalNote: 'Final probability after normalizing across all hypotheses: {prob}%',
+      onlyCm: 'cM only',
+      short: {
+        range: 'range',
+        segments: 'segm.',
+        largestSegment: 'block',
+        x: 'X',
+        age: 'age',
+        generation: 'gen.',
+      },
     },
     methodology: {
       link: 'How it works',
@@ -181,6 +190,7 @@ export default {
         likelihood: {
           title: '2. cM likelihood',
           text: 'For each of the 20 relationships in the catalog, the app evaluates how typical your total cM is against its published distribution, centered on the Shared cM Project average. Values outside the published range strongly penalize that hypothesis (without fully removing it).',
+          engineNote: 'The "Analysis engine" selector at the top of the page chooses how this likelihood is modeled: Classic uses a normal curve centered on the published average; Empirical uses distributions fitted to DNA inheritance simulations, capturing each relationship\'s real skew. The rest of the calculation is unchanged.',
         },
         evidence: {
           title: '3. Additional evidence',
