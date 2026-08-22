@@ -45,7 +45,7 @@ Este proyecto usa **Cloudflare Workers con assets estáticos** (SPA Vue). No nec
 
 ### Archivos clave
 
-- `wrangler.toml` — configura `./dist` como SPA
+- `wrangler.toml` — configura `./dist` como SPA (`not_found_handling = "single-page-application"`)
 - `public/_headers` — headers de seguridad
 
 ### Configuración en el dashboard de Cloudflare
@@ -102,4 +102,4 @@ Si preferís Pages clásico en lugar de Workers:
 | Build command | `npm run build` |
 | Build output | `dist` |
 
-Sin `wrangler deploy`. Ver `public/_redirects` para SPA routing.
+Sin `wrangler deploy`. Usá `public/_redirects` con `/* /index.html 200` para SPA routing en Pages.
