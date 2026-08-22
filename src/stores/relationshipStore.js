@@ -169,6 +169,30 @@ export const useRelationshipStore = defineStore('relationship', () => {
     loadHistogram(code)
   }
 
+  const loadTestCase = (testCase) => {
+    if (!testCase?.data) return
+
+    const data = testCase.data
+    name1.value = data.name1 ?? ''
+    name2.value = data.name2 ?? ''
+    sex1.value = data.sex1 ?? ''
+    sex2.value = data.sex2 ?? ''
+    age1.value = data.age1 ?? null
+    age2.value = data.age2 ?? null
+    cmValue.value = data.cmValue ?? null
+    xMatch.value = data.xMatch ?? 'unknown'
+    xcmValue.value = data.xcmValue ?? null
+    numSegments.value = data.numSegments ?? null
+    largestSegment.value = data.largestSegment ?? null
+    endogamy.value = data.endogamy ?? null
+
+    relationships.value = []
+    selectedRelationship.value = null
+    histogram.value = {}
+    analysisSummary.value = ''
+    investigationSuggestions.value = []
+  }
+
   const clearData = () => {
     name1.value = ''
     name2.value = ''
@@ -229,6 +253,7 @@ export const useRelationshipStore = defineStore('relationship', () => {
     calculateResults,
     loadHistogram,
     selectRelationship,
+    loadTestCase,
     clearData,
     updateRelationships
   }

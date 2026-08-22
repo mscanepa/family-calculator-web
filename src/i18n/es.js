@@ -83,6 +83,72 @@ export default {
       calculate: 'Calcular',
       clear: 'Limpiar'
     },
+    testCases: {
+      badge: 'QA',
+      title: 'Casos de prueba',
+      placeholder: 'Elegí un escenario…',
+      load: 'Cargar caso',
+      loadAndCalculate: 'Cargar y calcular',
+      groups: {
+        simple: 'Parentescos claros',
+        half: 'Medio parentesco y ambigüedad',
+        segments: 'Mismo cM, distinta recombinación',
+      },
+      cases: {
+        fsClassic: {
+          label: 'Hermano/a completo — perfil típico (2730 cM)',
+          note: '{cm} cM, {segments} segmentos, bloque máx. {largest} cM. Perfil de hermanos completos con bloques grandes. Esperado principal: {expected}.',
+        },
+        cousin1cTypical: {
+          label: 'Primo 1.º — caso real (885 cM)',
+          note: '{cm} cM, {segments} segmentos, bloque {largest} cM. Caso de referencia del proyecto. Esperado: {expected}.',
+        },
+        cousin2cTypical: {
+          label: 'Primo 2.º — caso real (286 cM)',
+          note: '{cm} cM, {segments} segmentos. Relación más lejana con menos ADN compartido. Esperado: {expected}.',
+        },
+        parentChild: {
+          label: 'Padre/madre — hijo/a (3400 cM)',
+          note: '{cm} cM con bloque muy grande ({largest} cM). Esperado: {expected}.',
+        },
+        hsTypical: {
+          label: 'Medio hermano/a — perfil típico (1760 cM)',
+          note: '{cm} cM, {segments} segmentos (menos que HS completos). Esperado: {expected}.',
+        },
+        h1cHalfFirst: {
+          label: 'Medio primo 1.º (435 cM)',
+          note: '{cm} cM, {segments} segmentos. Comparte la mitad del tramo de un primo completo. Esperado: {expected}.',
+        },
+        hsVs1cFewLarge: {
+          label: 'Ambiguo 1300 cM — pocos segmentos grandes',
+          note: 'Mismos {cm} cM pero solo {segments} segmentos y bloque {largest} cM → favorece medio hermano/a ({expected}).',
+        },
+        hsVs1cManySmall: {
+          label: 'Ambiguo 1300 cM — muchos segmentos chicos',
+          note: 'Mismos {cm} cM con {segments} segmentos y bloque {largest} cM → más recombinación, favorece primo ({expected}).',
+        },
+        same1cConsolidated: {
+          label: '884 cM — bloques consolidados (1C)',
+          note: '{cm} cM, {segments} seg., bloque {largest} cM. Patrón esperado de primo 1.º sin mucha fragmentación.',
+        },
+        same1cRecombined: {
+          label: '884 cM — mucha recombinación (1C)',
+          note: 'Mismos {cm} cM pero {segments} segmentos y bloque máx. {largest} cM. La recombinación partió el ADN en trozos más chicos.',
+        },
+        same2cFewSegments: {
+          label: '230 cM — pocos segmentos (2C)',
+          note: '{cm} cM, {segments} segmentos, bloque {largest} cM. Perfil más “consolidado” para primo 2.º.',
+        },
+        same2cManySegments: {
+          label: '230 cM — muchos segmentos (2C)',
+          note: 'Mismos {cm} cM con {segments} segmentos y bloque {largest} cM. Más eventos de recombinación entre generaciones.',
+        },
+        endogamyInflated1c: {
+          label: '1020 cM con endogamia moderada',
+          note: '{cm} cM aparentes (endogamia). Tras ajuste del backend debería acercarse a primo 1.º ({expected}). {segments} seg., bloque {largest} cM.',
+        },
+      },
+    },
     results: {
       title: 'Resultados',
       analysis_title: 'Informe de Relación',

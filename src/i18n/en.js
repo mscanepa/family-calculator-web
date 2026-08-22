@@ -76,6 +76,72 @@ export default {
       calculate: 'Calculate',
       clear: 'Clear'
     },
+    testCases: {
+      badge: 'QA',
+      title: 'Test cases',
+      placeholder: 'Choose a scenario…',
+      load: 'Load case',
+      loadAndCalculate: 'Load & calculate',
+      groups: {
+        simple: 'Clear relationships',
+        half: 'Half relationships & ambiguity',
+        segments: 'Same cM, different recombination',
+      },
+      cases: {
+        fsClassic: {
+          label: 'Full siblings — typical (2730 cM)',
+          note: '{cm} cM, {segments} segments, largest block {largest} cM. Expected: {expected}.',
+        },
+        cousin1cTypical: {
+          label: '1st cousins — real case (885 cM)',
+          note: '{cm} cM, {segments} segments, block {largest} cM. Expected: {expected}.',
+        },
+        cousin2cTypical: {
+          label: '2nd cousins — real case (286 cM)',
+          note: '{cm} cM, {segments} segments. Expected: {expected}.',
+        },
+        parentChild: {
+          label: 'Parent–child (3400 cM)',
+          note: '{cm} cM, large block {largest} cM. Expected: {expected}.',
+        },
+        hsTypical: {
+          label: 'Half siblings — typical (1760 cM)',
+          note: '{cm} cM, {segments} segments. Expected: {expected}.',
+        },
+        h1cHalfFirst: {
+          label: 'Half 1st cousin (435 cM)',
+          note: '{cm} cM, {segments} segments. Expected: {expected}.',
+        },
+        hsVs1cFewLarge: {
+          label: 'Ambiguous 1300 cM — few large segments',
+          note: 'Same {cm} cM, {segments} segments, block {largest} cM → favors {expected}.',
+        },
+        hsVs1cManySmall: {
+          label: 'Ambiguous 1300 cM — many small segments',
+          note: 'Same {cm} cM, {segments} segments, block {largest} cM → more recombination, favors {expected}.',
+        },
+        same1cConsolidated: {
+          label: '884 cM — consolidated blocks (1C)',
+          note: '{cm} cM, {segments} seg., block {largest} cM. Typical 1st cousin pattern.',
+        },
+        same1cRecombined: {
+          label: '884 cM — high recombination (1C)',
+          note: 'Same {cm} cM but {segments} segments and max block {largest} cM.',
+        },
+        same2cFewSegments: {
+          label: '230 cM — few segments (2C)',
+          note: '{cm} cM, {segments} segments, block {largest} cM.',
+        },
+        same2cManySegments: {
+          label: '230 cM — many segments (2C)',
+          note: 'Same {cm} cM with {segments} segments and block {largest} cM.',
+        },
+        endogamyInflated1c: {
+          label: '1020 cM with moderate endogamy',
+          note: '{cm} cM apparent; backend adjusts down toward {expected}. {segments} seg., block {largest} cM.',
+        },
+      },
+    },
     results: {
       title: 'Results',
       analysis_title: 'Relationship Report',

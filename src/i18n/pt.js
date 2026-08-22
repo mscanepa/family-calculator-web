@@ -83,6 +83,72 @@ export default {
       calculate: 'Calcular',
       clear: 'Limpar'
     },
+    testCases: {
+      badge: 'QA',
+      title: 'Casos de teste',
+      placeholder: 'Escolha um cenário…',
+      load: 'Carregar caso',
+      loadAndCalculate: 'Carregar e calcular',
+      groups: {
+        simple: 'Parentescos claros',
+        half: 'Meio parentesco e ambiguidade',
+        segments: 'Mesmo cM, recombinação diferente',
+      },
+      cases: {
+        fsClassic: {
+          label: 'Irmãos completos — típico (2730 cM)',
+          note: '{cm} cM, {segments} segmentos, bloco máx. {largest} cM. Esperado: {expected}.',
+        },
+        cousin1cTypical: {
+          label: 'Primos 1.º — caso real (885 cM)',
+          note: '{cm} cM, {segments} segmentos. Esperado: {expected}.',
+        },
+        cousin2cTypical: {
+          label: 'Primos 2.º — caso real (286 cM)',
+          note: '{cm} cM, {segments} segmentos. Esperado: {expected}.',
+        },
+        parentChild: {
+          label: 'Pai/mãe — filho/a (3400 cM)',
+          note: '{cm} cM, bloco {largest} cM. Esperado: {expected}.',
+        },
+        hsTypical: {
+          label: 'Meio-irmão/a — típico (1760 cM)',
+          note: '{cm} cM, {segments} segmentos. Esperado: {expected}.',
+        },
+        h1cHalfFirst: {
+          label: 'Meio-primo 1.º (435 cM)',
+          note: '{cm} cM, {segments} segmentos. Esperado: {expected}.',
+        },
+        hsVs1cFewLarge: {
+          label: 'Ambíguo 1300 cM — poucos segmentos grandes',
+          note: 'Mesmos {cm} cM, {segments} segmentos, bloco {largest} cM → favorece {expected}.',
+        },
+        hsVs1cManySmall: {
+          label: 'Ambíguo 1300 cM — muitos segmentos pequenos',
+          note: 'Mesmos {cm} cM, {segments} segmentos, bloco {largest} cM → favorece {expected}.',
+        },
+        same1cConsolidated: {
+          label: '884 cM — blocos consolidados (1C)',
+          note: '{cm} cM, {segments} seg., bloco {largest} cM.',
+        },
+        same1cRecombined: {
+          label: '884 cM — alta recombinação (1C)',
+          note: 'Mesmos {cm} cM com {segments} segmentos e bloco {largest} cM.',
+        },
+        same2cFewSegments: {
+          label: '230 cM — poucos segmentos (2C)',
+          note: '{cm} cM, {segments} segmentos, bloco {largest} cM.',
+        },
+        same2cManySegments: {
+          label: '230 cM — muitos segmentos (2C)',
+          note: 'Mesmos {cm} cM com {segments} segmentos e bloco {largest} cM.',
+        },
+        endogamyInflated1c: {
+          label: '1020 cM com endogamia moderada',
+          note: '{cm} cM aparentes; ajuste esperado para {expected}.',
+        },
+      },
+    },
     results: {
       title: 'Resultados',
       analysis_title: 'Relatório de Relacionamento',

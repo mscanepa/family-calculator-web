@@ -32,6 +32,32 @@
           <p class="subtitle">{{ $t('app.subtitle') }}</p>
         </div>
       </div>
+
+      <n-card class="test-cases-bar" size="small" :bordered="true">
+        <n-space vertical :size="8">
+          <n-space align="center" wrap :size="12">
+            <n-tag type="info" size="small">{{ $t('app.testCases.badge') }}</n-tag>
+            <n-text strong>{{ $t('app.testCases.title') }}</n-text>
+            <n-select
+              v-model:value="selectedTestCaseId"
+              :options="testCaseOptions"
+              :placeholder="$t('app.testCases.placeholder')"
+              class="test-case-select"
+              filterable
+              clearable
+            />
+            <n-button type="primary" secondary :disabled="!selectedTestCaseId" @click="loadSelectedTestCase(false)">
+              {{ $t('app.testCases.load') }}
+            </n-button>
+            <n-button type="primary" :disabled="!selectedTestCaseId || store.loading" @click="loadSelectedTestCase(true)">
+              {{ $t('app.testCases.loadAndCalculate') }}
+            </n-button>
+          </n-space>
+          <n-alert v-if="activeTestCaseNote" type="default" :bordered="false" class="test-case-note">
+            {{ activeTestCaseNote }}
+          </n-alert>
+        </n-space>
+      </n-card>
       
       <div class="main-content">
       <n-grid :cols="24" :x-gap="24" responsive="screen">
@@ -699,6 +725,7 @@ import {
 } from 'naive-ui'
 import { useRelationshipStore } from '../stores/relationshipStore'
 import { API_URL } from '../config/api'
+import { buildTestCaseSelectOptions, getTestCaseById } from '../data/testCases'
 import { 
   Person,
   Woman,
@@ -727,6 +754,33 @@ const showAdvancedOptions = ref(false)
 const showSourcesModal = ref(false)
 const showResearchGuide = ref(false)
 const showSuggestions = ref(true)
+const selectedTestCaseId = ref(null)
+const activeTestCaseNote = ref('')
+
+const testCaseOptions = computed(() => buildTestCaseSelectOptions(t))
+
+const loadSelectedTestCase = async (autoCalculate = false) => {
+  const testCase = getTestCaseById(selectedTestCaseId.value)
+  if (!testCase) return
+
+  store.loadTestCase(testCase)
+  showAdvancedOptions.value = Boolean(
+    testCase.data.numSegments != null ||
+    testCase.data.largestSegment != null ||
+    testCase.data.endogamy ||
+    testCase.data.xMatch !== 'unknown'
+  )
+  activeTestCaseNote.value = t(testCase.noteKey, {
+    expected: testCase.expectedCode,
+    cm: testCase.data.cmValue,
+    segments: testCase.data.numSegments ?? '—',
+    largest: testCase.data.largestSegment ?? '—',
+  })
+
+  if (autoCalculate) {
+    await store.calculateResults()
+  }
+}
 
 // Function to change language
 const changeLocale = (newLocale) => {
@@ -1228,6 +1282,30 @@ const toggleSuggestions = () => {
   --border-radius-lg: 12px;
   --n-color: #F5F3ED !important;
   --n-merged-color: #F5F3ED !important;
+}
+
+.test-cases-bar {
+  margin-bottom: 1.25rem;
+  background: var(--background-yellow, #f9f4e8);
+  border: 1px solid var(--border-color, #e5ded3);
+}
+
+.test-case-select {
+  min-width: 280px;
+  max-width: 420px;
+}
+
+.test-case-note {
+  margin: 0;
+  font-size: 0.9rem;
+  line-height: 1.45;
+}
+
+@media (max-width: 768px) {
+  .test-case-select {
+    min-width: 100%;
+    max-width: 100%;
+  }
 }
 
 /* Estilos base */
