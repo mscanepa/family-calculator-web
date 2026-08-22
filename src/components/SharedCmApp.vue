@@ -31,6 +31,25 @@
           <h1 class="title">{{ $t('app.title') }}</h1>
           <p class="subtitle">{{ $t('app.subtitle') }}</p>
         </div>
+        <div class="engine-selector">
+          <n-space align="center" :size="8" justify="center" wrap>
+            <n-text depth="2" class="engine-label">{{ $t('app.engine.label') }}</n-text>
+            <n-radio-group
+              :value="store.engine"
+              size="small"
+              @update:value="onEngineChange"
+            >
+              <n-radio-button value="classic">{{ $t('app.engine.classic') }}</n-radio-button>
+              <n-radio-button value="empirical">{{ $t('app.engine.empirical') }}</n-radio-button>
+            </n-radio-group>
+            <n-tooltip trigger="hover" placement="bottom" style="max-width: 340px">
+              <template #trigger>
+                <n-icon class="info-icon"><InformationCircle /></n-icon>
+              </template>
+              {{ $t('app.engine.hint') }}
+            </n-tooltip>
+          </n-space>
+        </div>
       </div>
 
       <n-card class="test-cases-bar" size="small" :bordered="true">
@@ -409,6 +428,10 @@
                 <!-- Analysis Summary -->
                 <n-card :title="$t('app.results.analysis_title')" class="analysis-card">
                   <template #header-extra>
+                    <n-space align="center" :size="8">
+                    <n-tag v-if="store.resultsEngine" size="small" round type="info" :bordered="false">
+                      {{ $t('app.engine.usedTag', { name: store.resultsEngine === 'empirical' ? $t('app.engine.empirical') : $t('app.engine.classic') }) }}
+                    </n-tag>
                     <n-tooltip trigger="hover" placement="right">
                       <template #trigger>
                         <n-icon class="info-icon"><InformationCircle /></n-icon>
@@ -428,6 +451,7 @@
                         </div>
                       </div>
                     </n-tooltip>
+                    </n-space>
                   </template>
                   <n-space vertical>
                     <n-text class="analysis-text">
@@ -563,8 +587,39 @@
                           </n-space>
                           <n-text strong>{{ ((rel.adjustedProb ?? rel.probability) * 100).toFixed(1) }}%</n-text>
                         </n-space>
+                        <div v-if="rel.factors" class="calc-breakdown">
+                          <a href="#" class="calc-toggle" @click.prevent="toggleCalc(rel.code)">
+                            {{ $t('app.calculation.show') }}
+                          </a>
+                          <n-collapse-transition :show="isCalcExpanded(rel.code)">
+                            <div class="calc-detail">
+                              <p class="calc-intro">{{ $t('app.calculation.intro') }}</p>
+                              <ul>
+                                <li v-if="store.endogamy && store.endogamy !== 'none'">
+                                  {{ $t('app.calculation.adjustedCm') }}:
+                                  <strong>{{ rel.factors.adjustedCm.toFixed(1) }} cM</strong>
+                                </li>
+                                <li>
+                                  {{ $t('app.calculation.cmLikelihood') }}
+                                  ({{ rel.factors.empirical ? $t('app.calculation.cmLikelihoodEmpirical') : $t('app.calculation.cmLikelihoodClassic') }}):
+                                  <strong>{{ formatDensity(rel.factors.cmLikelihood) }}</strong>
+                                </li>
+                                <li v-for="row in factorRows(rel)" :key="row.key">
+                                  {{ row.label }}: <strong>{{ row.display }}</strong>
+                                  <span class="calc-note"> — {{ row.note }}</span>
+                                </li>
+                              </ul>
+                              <p class="calc-final">
+                                {{ $t('app.calculation.finalNote', { prob: ((rel.adjustedProb ?? rel.probability) * 100).toFixed(1) }) }}
+                              </p>
+                            </div>
+                          </n-collapse-transition>
+                        </div>
                     </n-list-item>
                   </n-list>
+                  <n-text depth="3" class="methodology-inline-link">
+                    <a href="#" @click.prevent="showMethodologyModal = true">{{ $t('app.methodology.link') }} →</a>
+                  </n-text>
                   </n-space>
                 </n-card>
               </template>
@@ -749,6 +804,7 @@ import {
   NInput,
   NRadioGroup,
   NRadio,
+  NRadioButton,
   NInputNumber,
   NSelect,
   NButton,
@@ -866,6 +922,57 @@ const loadSelectedTestCase = async (autoCalculate = false) => {
 
   if (autoCalculate) {
     await store.calculateResults()
+  }
+}
+
+// Desglose "Ver cómo se calculó" por relación
+const expandedCalcs = ref([])
+
+const toggleCalc = (code) => {
+  if (expandedCalcs.value.includes(code)) {
+    expandedCalcs.value = expandedCalcs.value.filter(c => c !== code)
+  } else {
+    expandedCalcs.value = [...expandedCalcs.value, code]
+  }
+}
+
+const isCalcExpanded = (code) => expandedCalcs.value.includes(code)
+
+const formatDensity = (value) => {
+  if (value == null) return '—'
+  const num = Number(value)
+  if (num === 0) return '0'
+  return num >= 0.01 ? num.toFixed(4) : num.toExponential(2)
+}
+
+const factorNote = (value) => {
+  if (value === 0) return t('app.calculation.excluded')
+  if (value === 1) return t('app.calculation.neutral')
+  return value > 1 ? t('app.calculation.boost') : t('app.calculation.penalty')
+}
+
+const factorRows = (rel) => {
+  const f = rel.factors
+  if (!f) return []
+  return [
+    { key: 'range', label: t('app.calculation.range'), value: f.range },
+    { key: 'segments', label: t('app.calculation.segments'), value: f.segments },
+    { key: 'largestSegment', label: t('app.calculation.largestSegment'), value: f.largestSegment },
+    { key: 'x', label: t('app.calculation.x'), value: f.x },
+    { key: 'age', label: t('app.calculation.age'), value: f.age },
+    { key: 'generation', label: t('app.calculation.generation'), value: f.generation },
+  ].map(row => ({
+    ...row,
+    display: `×${Number(row.value).toFixed(2)}`,
+    note: factorNote(Number(row.value)),
+  }))
+}
+
+// Cambiar de motor recalcula si ya hay un análisis en pantalla
+const onEngineChange = (value) => {
+  store.engine = value
+  if (store.cmValue && store.relationships.length > 0) {
+    store.calculateResults()
   }
 }
 
@@ -1929,6 +2036,68 @@ body {
   max-width: 800px;
   margin: 0 auto;
   padding: 0 var(--spacing-lg);
+}
+
+.engine-selector {
+  margin-top: var(--spacing-md);
+}
+
+.engine-selector .engine-label {
+  font-size: 0.85rem;
+  font-weight: 600;
+}
+
+.calc-breakdown {
+  margin-top: var(--spacing-sm);
+}
+
+.calc-toggle {
+  font-size: 0.82rem;
+  color: #1e90ff;
+  text-decoration: none;
+}
+
+.calc-toggle:hover {
+  text-decoration: underline;
+}
+
+.calc-detail {
+  margin-top: var(--spacing-sm);
+  padding: var(--spacing-sm) var(--spacing-md);
+  background-color: rgba(30, 144, 255, 0.05);
+  border-left: 3px solid #1e90ff;
+  border-radius: var(--border-radius-sm);
+  font-size: 0.85rem;
+}
+
+.calc-detail ul {
+  margin: var(--spacing-sm) 0;
+  padding-left: var(--spacing-lg);
+}
+
+.calc-detail li {
+  margin-bottom: 4px;
+}
+
+.calc-intro,
+.calc-final {
+  margin: 0;
+  color: var(--text-secondary);
+}
+
+.calc-final {
+  font-weight: 600;
+}
+
+.calc-note {
+  color: var(--text-secondary);
+}
+
+.methodology-inline-link {
+  display: block;
+  margin-top: var(--spacing-sm);
+  text-align: right;
+  font-size: 0.82rem;
 }
 
 .title {
