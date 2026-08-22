@@ -698,6 +698,7 @@ import {
   NDivider
 } from 'naive-ui'
 import { useRelationshipStore } from '../stores/relationshipStore'
+import { API_URL } from '../config/api'
 import { 
   Person,
   Woman,
@@ -845,8 +846,6 @@ const endogamyOptions = [
 
 const showHelpModal = ref(false)
 const endogamyInfo = ref(null)
-
-const API_URL = import.meta.env.VITE_API_URL || window.location.origin
 
 const showEndogamyHelp = async () => {
   try {
