@@ -64,7 +64,7 @@ Al conectar el repo `family-calculator-web`, usá estos valores:
 |----------|-------|
 | `VITE_API_URL` | `https://relationship-calculator-api.onrender.com` |
 | `VITE_API_VERSION` | `v1` |
-| `NODE_VERSION` | `20` |
+| `NODE_VERSION` | `22` |
 
 > `VITE_*` se embeben en el build. Si las cambiás, redeployá.
 
