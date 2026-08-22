@@ -150,6 +150,38 @@ export default {
         },
       },
     },
+    methodology: {
+      link: 'Como funciona',
+      title: 'O que o app faz por trás',
+      intro: 'O app não adivinha: compara os dados que você insere com as distribuições estatísticas publicadas de DNA compartilhado para cada parentesco (Shared cM Project, Blaine Bettinger) e calcula o quão compatível é a sua observação com cada hipótese. O resultado é um ranking de probabilidades que somam 100%.',
+      steps: {
+        endogamy: {
+          title: '1. Ajuste por endogamia',
+          text: 'Se você indicou endogamia, os cM são deflacionados conforme o nível escolhido antes de comparar, porque famílias endogâmicas compartilham mais DNA do que o esperado para o parentesco real.',
+        },
+        likelihood: {
+          title: '2. Verossimilhança dos cM',
+          text: 'Para cada um dos 20 parentescos do catálogo, avalia-se o quão típico é o seu total de cM em relação à distribuição publicada, centrada na média do Shared cM Project. Valores fora da faixa publicada penalizam fortemente essa hipótese (sem eliminá-la por completo).',
+        },
+        evidence: {
+          title: '3. Evidência adicional',
+          text: 'A pontuação é ajustada com fatores multiplicativos: número de segmentos e maior bloco (onde existem faixas confiáveis), coincidência no cromossomo X (uma coincidência geneticamente impossível elimina a hipótese) e diferença de idade (fora da faixa típica penaliza gradualmente).',
+        },
+        normalization: {
+          title: '4. Normalização',
+          text: 'As pontuações são normalizadas para somar 100%: a porcentagem que você vê é a probabilidade relativa de cada parentesco frente aos demais, dado exatamente o que você inseriu. Hipóteses abaixo de 1% são omitidas.',
+        },
+      },
+      formulaTitle: 'O modelo em uma linha',
+      formulaNote: 'Cada relação recebe a verossimilhança dos seus cM multiplicada pelos fatores de evidência; depois tudo é normalizado.',
+      limitationsTitle: 'Limitações (de propósito, para ser honestos)',
+      limitations: {
+        overlap: 'Vários parentescos têm distribuições quase idênticas (avô/avó, tio/tia e meio-irmão/ã giram em torno de 1750 cM): apenas com cM são indistinguíveis. Idades e o cromossomo X é o que ajuda a separá-los.',
+        dependence: 'O total de cM, a quantidade de segmentos e o maior bloco não são medidas independentes entre si, por isso a evidência secundária é ponderada de forma conservadora.',
+        xCaveat: 'A ausência de coincidência no X não descarta linhas: o X pode se perder por recombinação mesmo quando o parentesco existe.',
+      },
+      openSource: 'O modelo completo está documentado no repositório (código aberto) e você pode validá-lo com os casos de teste da barra QA.',
+    },
     results: {
       title: 'Resultados',
       analysis_title: 'Relatório de Relacionamento',
