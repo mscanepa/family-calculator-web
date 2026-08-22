@@ -89,31 +89,36 @@ export default {
       placeholder: 'Escolha um cenário…',
       load: 'Carregar caso',
       loadAndCalculate: 'Carregar e calcular',
+      validation: {
+        pass: '✓ O algoritmo retornou {expected} como resultado principal ({probability}% de probabilidade).',
+        fail: '✗ Esperado {expected}, mas o algoritmo retornou {actual} ({probability}%). O scoring não coincide com o caso de referência.',
+        failRank: '✗ Esperado {expected} em primeiro lugar, mas o algoritmo retornou {actual} ({probability}%). {expected} ficou na posição #{rank}.',
+      },
       groups: {
-        simple: 'Parentescos claros',
+        real: 'Casos reais (projeto)',
         half: 'Meio parentesco e ambiguidade',
         segments: 'Mesmo cM, recombinação diferente',
       },
       cases: {
-        fsClassic: {
-          label: 'Irmãos completos — típico (2730 cM)',
-          note: '{cm} cM, {segments} segmentos, bloco máx. {largest} cM. Esperado: {expected}.',
+        javierSoledadFs: {
+          label: 'Javier ↔ Soledad — irmãos completos (2730 cM)',
+          note: 'Caso real do projeto. {cm} cM, sem dados de segmentos no teste original. Coincidência no X: sim. Esperado: {expected}.',
         },
-        cousin1cTypical: {
-          label: 'Primos 1.º — caso real (885 cM)',
-          note: '{cm} cM, {segments} segmentos. Esperado: {expected}.',
+        sebastianAlejo1c: {
+          label: 'Sebastian ↔ Alejo — primos 1.º (884.6 cM)',
+          note: 'Caso real do projeto. {cm} cM, {segments} segmentos, bloco {largest} cM. Sem X compartilhado. Esperado: {expected}.',
         },
-        cousin2cTypical: {
-          label: 'Primos 2.º — caso real (286 cM)',
-          note: '{cm} cM, {segments} segmentos. Esperado: {expected}.',
+        bettinaMariana2c: {
+          label: 'Bettina ↔ Mariana — primas 2.º (286.3 cM)',
+          note: 'Caso real do projeto. {cm} cM, {segments} segmentos, bloco {largest} cM. Coincidência no X: sim. Esperado: {expected}.',
         },
-        parentChild: {
-          label: 'Pai/mãe — filho/a (3400 cM)',
-          note: '{cm} cM, bloco {largest} cM. Esperado: {expected}.',
+        soledadElizabeth3c: {
+          label: 'Soledad ↔ Elizabeth — primas 3.º (65.8 cM)',
+          note: 'Caso real do projeto. {cm} cM, {segments} segmentos, bloco {largest} cM. Sem X compartilhado. Esperado: {expected}.',
         },
-        hsTypical: {
-          label: 'Meio-irmão/a — típico (1760 cM)',
-          note: '{cm} cM, {segments} segmentos. Esperado: {expected}.',
+        hsHalfSisters: {
+          label: 'Meias-irmãs — teste backend (1800 cM)',
+          note: 'Caso adicional do backend (test_half_sisters). {cm} cM, {segments} segmentos, bloco {largest} cM. Esperado: {expected}.',
         },
         h1cHalfFirst: {
           label: 'Meio-primo 1.º (435 cM)',
@@ -128,24 +133,20 @@ export default {
           note: 'Mesmos {cm} cM, {segments} segmentos, bloco {largest} cM → favorece {expected}.',
         },
         same1cConsolidated: {
-          label: '884 cM — blocos consolidados (1C)',
-          note: '{cm} cM, {segments} seg., bloco {largest} cM.',
+          label: '884.6 cM — perfil original Sebastian/Alejo',
+          note: 'Mesmos dados reais do caso Sebastian ↔ Alejo ({cm} cM, {segments} seg., bloco {largest} cM).',
         },
         same1cRecombined: {
-          label: '884 cM — alta recombinação (1C)',
-          note: 'Mesmos {cm} cM com {segments} segmentos e bloco {largest} cM.',
+          label: '884.6 cM — variante com alta recombinação',
+          note: 'Mesmos {cm} cM do caso real mas {segments} segmentos e bloco máx. {largest} cM (sintético).',
         },
         same2cFewSegments: {
-          label: '230 cM — poucos segmentos (2C)',
-          note: '{cm} cM, {segments} segmentos, bloco {largest} cM.',
+          label: '286.3 cM — poucos segmentos (variante 2C)',
+          note: 'Mesmos {cm} cM de Bettina ↔ Mariana mas apenas {segments} segmentos e bloco {largest} cM (sintético).',
         },
         same2cManySegments: {
-          label: '230 cM — muitos segmentos (2C)',
-          note: 'Mesmos {cm} cM com {segments} segmentos e bloco {largest} cM.',
-        },
-        endogamyInflated1c: {
-          label: '1020 cM com endogamia moderada',
-          note: '{cm} cM aparentes; ajuste esperado para {expected}.',
+          label: '286.3 cM — muitos segmentos (variante 2C)',
+          note: 'Mesmos {cm} cM de Bettina ↔ Mariana com {segments} segmentos e bloco {largest} cM (sintético).',
         },
       },
     },

@@ -56,6 +56,14 @@
           <n-alert v-if="activeTestCaseNote" type="default" :bordered="false" class="test-case-note">
             {{ activeTestCaseNote }}
           </n-alert>
+          <n-alert
+            v-if="testCaseValidation"
+            :type="testCaseValidation.passed ? 'success' : 'error'"
+            :bordered="false"
+            class="test-case-validation"
+          >
+            {{ testCaseValidationMessage }}
+          </n-alert>
         </n-space>
       </n-card>
       
@@ -725,7 +733,11 @@ import {
 } from 'naive-ui'
 import { useRelationshipStore } from '../stores/relationshipStore'
 import { API_URL } from '../config/api'
-import { buildTestCaseSelectOptions, getTestCaseById } from '../data/testCases'
+import {
+  buildTestCaseSelectOptions,
+  getTestCaseById,
+  validateTestCaseResult,
+} from '../data/testCases'
 import { 
   Person,
   Woman,
@@ -756,13 +768,48 @@ const showResearchGuide = ref(false)
 const showSuggestions = ref(true)
 const selectedTestCaseId = ref(null)
 const activeTestCaseNote = ref('')
+const activeTestCase = ref(null)
 
 const testCaseOptions = computed(() => buildTestCaseSelectOptions(t))
+
+const testCaseValidation = computed(() => {
+  if (!activeTestCase.value || !store.relationships.length) return null
+  return validateTestCaseResult(activeTestCase.value, store.relationships)
+})
+
+const testCaseValidationMessage = computed(() => {
+  if (!testCaseValidation.value) return ''
+  const { passed, expectedCode, actualCode, probability, expectedRank } = testCaseValidation.value
+  const probPct = ((probability ?? 0) * 100).toFixed(1)
+
+  if (passed) {
+    return t('app.testCases.validation.pass', { expected: expectedCode, actual: actualCode, probability: probPct })
+  }
+
+  if (expectedRank != null && expectedRank > 1) {
+    return t('app.testCases.validation.failRank', {
+      expected: expectedCode,
+      actual: actualCode,
+      probability: probPct,
+      rank: expectedRank,
+    })
+  }
+
+  return t('app.testCases.validation.fail', { expected: expectedCode, actual: actualCode, probability: probPct })
+})
+
+watch(selectedTestCaseId, (id) => {
+  if (!id) {
+    activeTestCaseNote.value = ''
+    activeTestCase.value = null
+  }
+})
 
 const loadSelectedTestCase = async (autoCalculate = false) => {
   const testCase = getTestCaseById(selectedTestCaseId.value)
   if (!testCase) return
 
+  activeTestCase.value = testCase
   store.loadTestCase(testCase)
   showAdvancedOptions.value = Boolean(
     testCase.data.numSegments != null ||

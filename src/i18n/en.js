@@ -82,31 +82,36 @@ export default {
       placeholder: 'Choose a scenario…',
       load: 'Load case',
       loadAndCalculate: 'Load & calculate',
+      validation: {
+        pass: '✓ Algorithm returned {expected} as top result ({probability}% probability).',
+        fail: '✗ Expected {expected}, but algorithm returned {actual} ({probability}%). Scoring does not match the reference case.',
+        failRank: '✗ Expected {expected} first, but algorithm returned {actual} ({probability}%). {expected} ranked #{rank}.',
+      },
       groups: {
-        simple: 'Clear relationships',
+        real: 'Real project cases',
         half: 'Half relationships & ambiguity',
         segments: 'Same cM, different recombination',
       },
       cases: {
-        fsClassic: {
-          label: 'Full siblings — typical (2730 cM)',
-          note: '{cm} cM, {segments} segments, largest block {largest} cM. Expected: {expected}.',
+        javierSoledadFs: {
+          label: 'Javier ↔ Soledad — full siblings (2730 cM)',
+          note: 'Real project case. {cm} cM, no segment data in the original test. X match: yes. Expected: {expected}.',
         },
-        cousin1cTypical: {
-          label: '1st cousins — real case (885 cM)',
-          note: '{cm} cM, {segments} segments, block {largest} cM. Expected: {expected}.',
+        sebastianAlejo1c: {
+          label: 'Sebastian ↔ Alejo — 1st cousins (884.6 cM)',
+          note: 'Real project case. {cm} cM, {segments} segments, block {largest} cM. No X match. Expected: {expected}.',
         },
-        cousin2cTypical: {
-          label: '2nd cousins — real case (286 cM)',
-          note: '{cm} cM, {segments} segments. Expected: {expected}.',
+        bettinaMariana2c: {
+          label: 'Bettina ↔ Mariana — 2nd cousins (286.3 cM)',
+          note: 'Real project case. {cm} cM, {segments} segments, block {largest} cM. X match: yes. Expected: {expected}.',
         },
-        parentChild: {
-          label: 'Parent–child (3400 cM)',
-          note: '{cm} cM, large block {largest} cM. Expected: {expected}.',
+        soledadElizabeth3c: {
+          label: 'Soledad ↔ Elizabeth — 3rd cousins (65.8 cM)',
+          note: 'Real project case. {cm} cM, {segments} segments, block {largest} cM. No X match. Expected: {expected}.',
         },
-        hsTypical: {
-          label: 'Half siblings — typical (1760 cM)',
-          note: '{cm} cM, {segments} segments. Expected: {expected}.',
+        hsHalfSisters: {
+          label: 'Half sisters — backend test (1800 cM)',
+          note: 'Additional backend case (test_half_sisters). {cm} cM, {segments} segments, block {largest} cM. Expected: {expected}.',
         },
         h1cHalfFirst: {
           label: 'Half 1st cousin (435 cM)',
@@ -121,24 +126,20 @@ export default {
           note: 'Same {cm} cM, {segments} segments, block {largest} cM → more recombination, favors {expected}.',
         },
         same1cConsolidated: {
-          label: '884 cM — consolidated blocks (1C)',
-          note: '{cm} cM, {segments} seg., block {largest} cM. Typical 1st cousin pattern.',
+          label: '884.6 cM — original Sebastian/Alejo profile',
+          note: 'Same real data as Sebastian ↔ Alejo ({cm} cM, {segments} seg., block {largest} cM).',
         },
         same1cRecombined: {
-          label: '884 cM — high recombination (1C)',
-          note: 'Same {cm} cM but {segments} segments and max block {largest} cM.',
+          label: '884.6 cM — high recombination variant',
+          note: 'Same {cm} cM as the real case but {segments} segments and max block {largest} cM (synthetic).',
         },
         same2cFewSegments: {
-          label: '230 cM — few segments (2C)',
-          note: '{cm} cM, {segments} segments, block {largest} cM.',
+          label: '286.3 cM — few segments (2C variant)',
+          note: 'Same {cm} cM as Bettina ↔ Mariana but only {segments} segments and block {largest} cM (synthetic).',
         },
         same2cManySegments: {
-          label: '230 cM — many segments (2C)',
-          note: 'Same {cm} cM with {segments} segments and block {largest} cM.',
-        },
-        endogamyInflated1c: {
-          label: '1020 cM with moderate endogamy',
-          note: '{cm} cM apparent; backend adjusts down toward {expected}. {segments} seg., block {largest} cM.',
+          label: '286.3 cM — many segments (2C variant)',
+          note: 'Same {cm} cM as Bettina ↔ Mariana with {segments} segments and block {largest} cM (synthetic).',
         },
       },
     },
