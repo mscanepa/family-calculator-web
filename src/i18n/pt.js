@@ -153,7 +153,7 @@ export default {
     engine: {
       label: 'Motor de análise',
       classic: 'Clássico',
-      empirical: 'Empírico (paper)',
+      empirical: 'Empírico',
       hint: 'Escolhe como é calculada a verossimilhança dos seus cM, o termo P(cM | parentesco) do modelo. Clássico: curva normal (gaussiana) centrada na média publicada do Shared cM Project para cada parentesco; é o motor de produção. Empírico (experimental): distribuições ajustadas a simulações de herança de DNA (Villaverde 2026), que capturam a assimetria e as caudas reais de cada parentesco em vez de assumir um sino simétrico. O resto do cálculo — segmentos, maior bloco, cromossomo X, idade e a normalização para 100% — é idêntico nos dois motores; só muda como se avalia o quão típico é o seu total de cM.',
       usedTag: 'Motor: {name}',
     },

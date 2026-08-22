@@ -42,7 +42,7 @@
               <n-radio-button value="classic">{{ $t('app.engine.classic') }}</n-radio-button>
               <n-radio-button value="empirical">{{ $t('app.engine.empirical') }}</n-radio-button>
             </n-radio-group>
-            <n-tooltip trigger="hover" placement="bottom" style="max-width: 340px">
+            <n-tooltip trigger="hover" placement="bottom" style="max-width: min(340px, 88vw)">
               <template #trigger>
                 <n-icon class="info-icon"><InformationCircle /></n-icon>
               </template>
@@ -669,7 +669,7 @@
   <n-modal
     v-model:show="showSourcesModal"
     preset="card"
-    style="width: 700px"
+    style="width: min(700px, 92vw)"
     title="Fuentes y Referencias"
     :bordered="false"
     size="huge"
@@ -746,7 +746,7 @@
   <n-modal
     v-model:show="showMethodologyModal"
     preset="card"
-    style="width: 700px"
+    style="width: min(700px, 92vw)"
     :title="$t('app.methodology.title')"
     :bordered="false"
     size="huge"
@@ -1634,8 +1634,15 @@ body {
   margin: 0px !important;
 }
 
+/* Los tooltips se renderizan fuera del componente: forzamos texto oscuro
+   porque Naive UI usa blanco por defecto y el fondo global es claro */
 .n-popover,
-.n-tooltip {background-color:#F5F3ED !important;}
+.n-tooltip {
+  background-color: #F5F3ED !important;
+  color: #3E3326 !important;
+  --n-text-color: #3E3326 !important;
+  --n-color: #F5F3ED !important;
+}
 
 :deep(.n-tooltip-trigger),
 :deep(.n-popover-trigger) {
@@ -2135,6 +2142,30 @@ body {
 
   .subtitle {
     font-size: 1.1rem;
+  }
+}
+
+/* Ajustes responsivos para el selector de motor y el desglose de cálculo */
+@media (max-width: 768px) {
+  .engine-selector {
+    padding: 0 var(--spacing-md);
+  }
+
+  .engine-selector .n-radio-group {
+    flex-wrap: wrap;
+  }
+
+  .calc-detail {
+    padding: var(--spacing-sm);
+    font-size: 0.8rem;
+  }
+
+  .calc-detail ul {
+    padding-left: var(--spacing-md);
+  }
+
+  .methodology-inline-link {
+    text-align: left;
   }
 }
 

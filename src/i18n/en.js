@@ -146,7 +146,7 @@ export default {
     engine: {
       label: 'Analysis engine',
       classic: 'Classic',
-      empirical: 'Empirical (paper)',
+      empirical: 'Empirical',
       hint: 'Chooses how the likelihood of your cM is computed, the P(cM | relationship) term of the model. Classic: a normal (Gaussian) curve centered on the published Shared cM Project average for each relationship; this is the production engine. Empirical (experimental): distributions fitted to DNA inheritance simulations (Villaverde 2026), which capture each relationship\'s real skew and tails instead of assuming a symmetric bell curve. Everything else — segments, largest block, X chromosome, age and the normalization to 100% — is identical in both engines; only the way your total cM is evaluated changes.',
       usedTag: 'Engine: {name}',
     },
