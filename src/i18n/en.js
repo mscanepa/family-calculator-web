@@ -143,6 +143,38 @@ export default {
         },
       },
     },
+    methodology: {
+      link: 'How it works',
+      title: 'What the app does behind the scenes',
+      intro: 'The app does not guess: it compares your input against the published statistical distributions of shared DNA for each relationship (Shared cM Project, Blaine Bettinger) and computes how compatible your observation is with each hypothesis. The result is a ranking of probabilities that sum to 100%.',
+      steps: {
+        endogamy: {
+          title: '1. Endogamy adjustment',
+          text: 'If you indicated endogamy, the cM value is deflated by the chosen level before comparing, because endogamous families share more DNA than expected for their actual relationship.',
+        },
+        likelihood: {
+          title: '2. cM likelihood',
+          text: 'For each of the 20 relationships in the catalog, the app evaluates how typical your total cM is against its published distribution, centered on the Shared cM Project average. Values outside the published range strongly penalize that hypothesis (without fully removing it).',
+        },
+        evidence: {
+          title: '3. Additional evidence',
+          text: 'The score is adjusted with multiplicative factors: segment count and largest block (where reliable ranges exist), X chromosome match (a genetically impossible match eliminates the hypothesis) and age difference (values outside the typical range for the relationship are penalized gradually).',
+        },
+        normalization: {
+          title: '4. Normalization',
+          text: 'Scores are normalized to sum to 100%: the percentage you see is the relative probability of each relationship versus the others, given exactly what you entered. Hypotheses below 1% are omitted.',
+        },
+      },
+      formulaTitle: 'The model in one line',
+      formulaNote: 'Each relationship gets the likelihood of your cM multiplied by the evidence factors; everything is then normalized.',
+      limitationsTitle: 'Limitations (on purpose, to stay honest)',
+      limitations: {
+        overlap: 'Several relationships have nearly identical distributions (grandparent, aunt/uncle and half sibling all hover around 1750 cM): with cM alone they are indistinguishable. Ages and the X chromosome are what helps separate them.',
+        dependence: 'Total cM, segment count and largest block are not independent measurements, which is why secondary evidence is weighted conservatively.',
+        xCaveat: 'The absence of an X match does not rule out lines: the X can be lost to recombination even when the relationship exists.',
+      },
+      openSource: 'The full model is documented in the repository (open source) and you can validate it with the test cases in the QA bar.',
+    },
     results: {
       title: 'Results',
       analysis_title: 'Relationship Report',

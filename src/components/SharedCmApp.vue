@@ -419,34 +419,12 @@
                           <h4>Cálculo de Probabilidad</h4>
                         </div>
                         <div class="tooltip-body">
-                          <p class="tooltip-intro">El análisis considera los siguientes factores:</p>
-                          <div class="factors-grid">
-                            <div class="factor-item">
-                              <span class="factor-label">Curva empírica de probabilidad</span>
-                              <span class="factor-value">30%</span>
-                            </div>
-                            <div class="factor-item">
-                              <span class="factor-label">Rango de cM</span>
-                              <span class="factor-value">20%</span>
-                            </div>
-                            <div class="factor-item">
-                              <span class="factor-label">Número de segmentos</span>
-                              <span class="factor-value">20%</span>
-                            </div>
-                            <div class="factor-item">
-                              <span class="factor-label">Tamaño del segmento más grande</span>
-                              <span class="factor-value">15%</span>
-                            </div>
-                            <div class="factor-item">
-                              <span class="factor-label">Coincidencia en cromosoma X</span>
-                              <span class="factor-value">5%</span>
-                            </div>
-                            <div class="factor-item">
-                              <span class="factor-label">Rango de edad esperado</span>
-                              <span class="factor-value">10%</span>
-                            </div>
-                          </div>
-                          <p class="tooltip-note">Nota: El rango de edad ayuda a validar la plausibilidad de la relación. Por ejemplo, un tatarabuelo no suele tener una diferencia de edad menor a 60 años con su descendiente.</p>
+                          <p class="tooltip-intro">{{ $t('app.methodology.steps.likelihood.text') }}</p>
+                          <p class="tooltip-note">{{ $t('app.methodology.steps.normalization.text') }}</p>
+                          <p class="tooltip-note">
+                            {{ $t('app.methodology.link') }}:
+                            <a href="#" @click.prevent="showMethodologyModal = true">{{ $t('app.methodology.title') }}</a>
+                          </p>
                         </div>
                       </div>
                     </n-tooltip>
@@ -616,6 +594,10 @@
           <n-icon><Book /></n-icon>
           Fuentes
         </a>
+        <a href="#" @click="showMethodologyModal = true" class="footer-link">
+          <n-icon><Calculator /></n-icon>
+          {{ $t('app.methodology.link') }}
+        </a>
         <a href="https://github.com/mscanepa/genealogy" target="_blank" class="footer-link">
           <n-icon><LogoGithub /></n-icon>
           GitHub
@@ -654,17 +636,17 @@
           <a href="https://thegeneticgenealogist.com/2016/03/07/updated-shared-cm-project/" target="_blank">Ver fuente</a>
         </div>
 
-        <h3 class="section-title">Curvas de Probabilidad</h3>
+        <h3 class="section-title">Modelo de Scoring Bayesiano</h3>
         <div class="source-section">
-          <strong>Autora:</strong> Leah Larkin (The DNA Geek)
+          <strong>Desarrollo propio</strong>, basado en los promedios y rangos del Shared cM Project.
           <br><br>
           <strong>Uso en la aplicación:</strong>
           <ul>
-            <li>Curvas de probabilidad por relación según cM compartidos</li>
-            <li>Construcción de probabilidades.json</li>
-            <li>Implementación de interpolación</li>
+            <li>Verosimilitud gaussiana centrada en el promedio de cM de cada relación</li>
+            <li>Factores multiplicativos por segmentos, bloque más grande, cromosoma X y edad</li>
+            <li>Normalización de probabilidades (suman 100%)</li>
           </ul>
-          <a href="https://thednageek.com/probability-curves/" target="_blank">Ver fuente</a>
+          <a href="#" @click.prevent="showSourcesModal = false; showMethodologyModal = true">Ver "Cómo funciona"</a>
         </div>
 
         <h3 class="section-title">Herencia del Cromosoma X</h3>
@@ -700,6 +682,55 @@
             <li>Relaciones más cercanas → más segmentos compartidos</li>
             <li>Tamaño del segmento más grande como indicador secundario</li>
           </ul>
+        </div>
+      </n-text>
+    </n-space>
+  </n-modal>
+
+  <!-- Modal Cómo funciona -->
+  <n-modal
+    v-model:show="showMethodologyModal"
+    preset="card"
+    style="width: 700px"
+    :title="$t('app.methodology.title')"
+    :bordered="false"
+    size="huge"
+    role="dialog"
+    aria-modal="true"
+  >
+    <n-space vertical size="large">
+      <n-text>
+        <p>{{ $t('app.methodology.intro') }}</p>
+
+        <h3 class="section-title">{{ $t('app.methodology.steps.endogamy.title') }}</h3>
+        <div class="source-section">{{ $t('app.methodology.steps.endogamy.text') }}</div>
+
+        <h3 class="section-title">{{ $t('app.methodology.steps.likelihood.title') }}</h3>
+        <div class="source-section">{{ $t('app.methodology.steps.likelihood.text') }}</div>
+
+        <h3 class="section-title">{{ $t('app.methodology.steps.evidence.title') }}</h3>
+        <div class="source-section">{{ $t('app.methodology.steps.evidence.text') }}</div>
+
+        <h3 class="section-title">{{ $t('app.methodology.steps.normalization.title') }}</h3>
+        <div class="source-section">{{ $t('app.methodology.steps.normalization.text') }}</div>
+
+        <h3 class="section-title">{{ $t('app.methodology.formulaTitle') }}</h3>
+        <div class="source-section">
+          <code class="methodology-formula">P(relación | datos) ∝ P(cM | relación) × f<sub>rango</sub> × f<sub>segmentos</sub> × f<sub>bloque</sub> × f<sub>X</sub> × f<sub>edad</sub></code>
+          <p>{{ $t('app.methodology.formulaNote') }}</p>
+        </div>
+
+        <h3 class="section-title">{{ $t('app.methodology.limitationsTitle') }}</h3>
+        <div class="source-section">
+          <ul>
+            <li>{{ $t('app.methodology.limitations.overlap') }}</li>
+            <li>{{ $t('app.methodology.limitations.dependence') }}</li>
+            <li>{{ $t('app.methodology.limitations.xCaveat') }}</li>
+          </ul>
+          <p>
+            {{ $t('app.methodology.openSource') }}
+            <a href="https://github.com/mscanepa/genealogy" target="_blank">GitHub</a>
+          </p>
         </div>
       </n-text>
     </n-space>
@@ -772,6 +803,7 @@ const store = useRelationshipStore()
 const message = useMessage()
 const showAdvancedOptions = ref(false)
 const showSourcesModal = ref(false)
+const showMethodologyModal = ref(false)
 const showResearchGuide = ref(false)
 const showSuggestions = ref(true)
 const selectedTestCaseId = ref(null)
@@ -2293,6 +2325,17 @@ body {
   padding: var(--spacing-md) var(--spacing-lg) !important;
   border-radius: var(--border-radius-md) !important;
   margin-bottom: var(--spacing-lg) !important;
+}
+
+.methodology-formula {
+  display: block;
+  padding: var(--spacing-sm) var(--spacing-md);
+  margin-bottom: var(--spacing-sm);
+  background-color: rgba(30, 144, 255, 0.08);
+  border-left: 3px solid #1e90ff;
+  border-radius: var(--border-radius-sm);
+  font-size: 0.9rem;
+  overflow-x: auto;
 }
 
 .source-section strong {
