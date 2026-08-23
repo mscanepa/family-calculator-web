@@ -13,11 +13,15 @@ export default {
       goalMother: 'Busco a mi madre',
       goalUnknown: 'No sé qué busco',
       goalOther: 'Busco otro familiar (no padre ni madre)',
-      goalHint: 'Esto fija cómo se lee el cromosoma X y las sugerencias. Si buscás a tu padre, el match se interpreta por línea paterna; si buscás a tu madre, por la materna. Si no sabés o buscás otro pariente, no se asume un lado.',
-      goalContextFather: 'Este match se va a interpretar como posible pariente por tu línea paterna (conocés a tu madre, el misterio es papá).',
-      goalContextMother: 'Este match se va a interpretar como posible pariente por tu línea materna (conocés a tu padre, el misterio es mamá).',
-      goalContextUnknown: 'Sin un objetivo fijo: el motor compara todas las hipótesis por igual.',
-      goalContextOther: 'No estás buscando a un progenitor: el match se trata como un pariente a identificar, sin asumir línea paterna o materna.',
+      goalHint: 'Define cómo se interpreta la evidencia de la línea: cromosoma X y vías genéticamente posibles. Buscar al padre aplica las reglas de la rama paterna; buscar a la madre, las de la materna. Si no se indica un progenitor, no se asume un lado.',
+      goalContextFather: 'El match se evaluará por la línea paterna. Se tendrán en cuenta las características de esa rama según el sexo del buscador, en particular la transmisión del cromosoma X.',
+      goalContextFatherMale: 'El match se evaluará por la línea paterna. Un varón no hereda el cromosoma X de su padre: una coincidencia en X no puede atribuirse a esa rama.',
+      goalContextFatherFemale: 'El match se evaluará por la línea paterna. Una mujer sí puede compartir el cromosoma X por esa rama; dos hijas del mismo padre suelen coincidir en X.',
+      goalContextMother: 'El match se evaluará por la línea materna. Se tendrán en cuenta las características de esa rama según el sexo del buscador, en particular la transmisión del cromosoma X.',
+      goalContextMotherMale: 'El match se evaluará por la línea materna. Un varón hereda el cromosoma X solo de su madre: una coincidencia en X es compatible con esa rama.',
+      goalContextMotherFemale: 'El match se evaluará por la línea materna. Se aplican las vías maternas posibles, incluida la transmisión del cromosoma X según el sexo de ambas personas.',
+      goalContextUnknown: 'Sin línea asignada. El cálculo no prioriza rama paterna ni materna.',
+      goalContextOther: 'Sin línea asignada. El match se identifica como pariente, sin aplicar reglas de rama paterna o materna.',
       placeholder: {
         name: 'Ej: Juan Pérez'
       }

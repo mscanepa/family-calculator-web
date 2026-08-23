@@ -13,11 +13,15 @@ export default {
       goalMother: 'Busco a minha mãe',
       goalUnknown: 'Não sei o que busco',
       goalOther: 'Busco outro familiar (não pai nem mãe)',
-      goalHint: 'Isso define como o cromossomo X e as sugestões são lidos. Se busca o pai, o match se interpreta pela linha paterna; se busca a mãe, pela materna. Se não sabe ou busca outro parente, não se assume um lado.',
-      goalContextFather: 'Este match será lido como possível parente pela sua linha paterna (você conhece a mãe; o mistério é o pai).',
-      goalContextMother: 'Este match será lido como possível parente pela sua linha materna (você conhece o pai; o mistério é a mãe).',
-      goalContextUnknown: 'Sem um objetivo fixo: o motor compara todas as hipóteses por igual.',
-      goalContextOther: 'Você não está buscando um progenitor: o match é um parente a identificar, sem assumir linha paterna ou materna.',
+      goalHint: 'Define como a evidência da linha é lida: cromossomo X e vias geneticamente possíveis. Buscar o pai aplica as regras do ramo paterno; buscar a mãe, as da materna. Se não se indica um progenitor, não se assume um lado.',
+      goalContextFather: 'O match será avaliado pela linha paterna. Serão consideradas as características desse ramo segundo o sexo do pesquisador, em especial a transmissão do cromossomo X.',
+      goalContextFatherMale: 'O match será avaliado pela linha paterna. Um homem não herda o cromossomo X do pai: uma coincidência em X não pode ser atribuída a esse ramo.',
+      goalContextFatherFemale: 'O match será avaliado pela linha paterna. Uma mulher pode compartilhar o cromossomo X por esse ramo; duas filhas do mesmo pai costumam coincidir no X.',
+      goalContextMother: 'O match será avaliado pela linha materna. Serão consideradas as características desse ramo segundo o sexo do pesquisador, em especial a transmissão do cromossomo X.',
+      goalContextMotherMale: 'O match será avaliado pela linha materna. Um homem herda o cromossomo X apenas da mãe: uma coincidência em X é compatível com esse ramo.',
+      goalContextMotherFemale: 'O match será avaliado pela linha materna. Aplicam-se as vias maternas possíveis, inclusive a transmissão do cromossomo X segundo o sexo de ambas as pessoas.',
+      goalContextUnknown: 'Nenhuma linha atribuída. O cálculo não prioriza ramo paterno nem materno.',
+      goalContextOther: 'Nenhuma linha atribuída. O match é identificado como parente, sem regras de ramo paterno ou materno.',
       placeholder: {
         name: 'Ex: João Silva'
       }

@@ -13,11 +13,15 @@ export default {
       goalMother: 'I am looking for my mother',
       goalUnknown: "I don't know what I am looking for",
       goalOther: 'I am looking for another relative (not a parent)',
-      goalHint: 'This sets how the X chromosome and suggestions are read. Looking for your father treats the match on the paternal line; looking for your mother, on the maternal line. If you are unsure or looking for someone else, no side is assumed.',
-      goalContextFather: 'This match will be read as a possible relative on your paternal line (you know your mother; the mystery is dad).',
-      goalContextMother: 'This match will be read as a possible relative on your maternal line (you know your father; the mystery is mom).',
-      goalContextUnknown: 'No fixed goal: the engine compares all hypotheses equally.',
-      goalContextOther: 'You are not looking for a parent: the match is treated as a relative to identify, without assuming a paternal or maternal line.',
+      goalHint: 'This sets how line evidence is read: X chromosome and genetically possible paths. Looking for your father applies paternal-branch rules; looking for your mother, maternal ones. If no parent is specified, no side is assumed.',
+      goalContextFather: 'The match will be evaluated on the paternal line. The expected traits of that branch will be applied according to the searcher’s sex, especially X-chromosome transmission.',
+      goalContextFatherMale: 'The match will be evaluated on the paternal line. A male does not inherit an X chromosome from his father: an X match cannot be attributed to that branch.',
+      goalContextFatherFemale: 'The match will be evaluated on the paternal line. A female can share the X chromosome on that branch; two daughters of the same father typically share X.',
+      goalContextMother: 'The match will be evaluated on the maternal line. The expected traits of that branch will be applied according to the searcher’s sex, especially X-chromosome transmission.',
+      goalContextMotherMale: 'The match will be evaluated on the maternal line. A male inherits his X chromosome only from his mother: an X match is compatible with that branch.',
+      goalContextMotherFemale: 'The match will be evaluated on the maternal line. Possible maternal paths are applied, including X-chromosome transmission given both people’s sex.',
+      goalContextUnknown: 'No line is assigned. The calculation does not prioritize a paternal or maternal branch.',
+      goalContextOther: 'No line is assigned. The match is treated as a relative to identify, without paternal or maternal branch rules.',
       placeholder: {
         name: 'Ex: John Smith'
       }

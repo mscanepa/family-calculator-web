@@ -929,8 +929,17 @@ const testCaseValidationMessage = computed(() => {
 
 const searchGoalContext = computed(() => {
   const goal = store.searchGoal
-  if (goal === 'father') return t('app.search.goalContextFather')
-  if (goal === 'mother') return t('app.search.goalContextMother')
+  const sex = store.sex1
+  if (goal === 'father') {
+    if (sex === 'M') return t('app.search.goalContextFatherMale')
+    if (sex === 'F') return t('app.search.goalContextFatherFemale')
+    return t('app.search.goalContextFather')
+  }
+  if (goal === 'mother') {
+    if (sex === 'M') return t('app.search.goalContextMotherMale')
+    if (sex === 'F') return t('app.search.goalContextMotherFemale')
+    return t('app.search.goalContextMother')
+  }
   if (goal === 'other') return t('app.search.goalContextOther')
   return t('app.search.goalContextUnknown')
 })
