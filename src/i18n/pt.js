@@ -105,6 +105,7 @@ export default {
       loadAndCalculate: 'Carregar e calcular',
       validation: {
         pass: '✓ O algoritmo retornou {expected} como resultado principal ({probability}% de probabilidade).',
+        passAny: '✓ {actual} ficou em primeiro ({probability}%), dentro do esperado ({expected}). Não se força um único vencedor.',
         fail: '✗ Esperado {expected}, mas o algoritmo retornou {actual} ({probability}%). O scoring não coincide com o caso de referência.',
         failRank: '✗ Esperado {expected} em primeiro lugar, mas o algoritmo retornou {actual} ({probability}%). {expected} ficou na posição #{rank}.',
       },
@@ -137,11 +138,11 @@ export default {
         },
         pamelaPatricio: {
           label: 'Pamela ↔ Patricio — busca o pai (128.4 cM)',
-          note: 'Caso real (Pamela 1961, Patricio 1980). {cm} cM, {segments} segmentos, bloco {largest} cM. Pamela busca o pai: aplicam-se as regras do ramo paterno. H2C e 2C1R ficam muito próximos; o motor não posiciona o piso geracional (Pamela é contemporânea da mãe de Patricio). Esperado: {expected}.',
+          note: 'Caso real (Pamela 1961, Patricio 1980): 1,8% de coincidência, {cm} cM, {segments} segmentos, bloco {largest} cM. Pamela busca o pai. Esse total cabe igual em H2C (média 120) e 2C1R (média 122); 7 segmentos e o bloco de 41,7 não têm faixa publicada para essas hipóteses. O piso geracional (Pamela contemporânea da mãe de Patricio) favorece 2C1R, mas o motor não o usa. QA: o primeiro deve ser H2C ou 2C1R.',
         },
         searchFatherPamela: {
           label: 'Busco o meu pai — Pamela ↔ Patricio (128.4 cM)',
-          note: 'Mesmos dados reais de Pamela e Patricio. Objetivo: pai. Avalia-se a linha paterna e as características desse ramo para uma pesquisadora. Esperado: {expected}.',
+          note: 'Mesmos dados: 1,8% / {cm} cM / {segments} segmentos / bloco {largest} cM. Objetivo: pai. QA: primeiro H2C ou 2C1R; não se força um único vencedor.',
         },
         searchMotherBettina: {
           label: 'Busco a minha mãe — Bettina ↔ Veronica (1601.6 cM)',

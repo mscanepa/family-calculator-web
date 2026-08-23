@@ -908,11 +908,12 @@ const testCaseValidation = computed(() => {
 
 const testCaseValidationMessage = computed(() => {
   if (!testCaseValidation.value) return ''
-  const { passed, expectedCode, actualCode, probability, expectedRank } = testCaseValidation.value
+  const { passed, expectedCode, actualCode, probability, expectedRank, expectedAny } = testCaseValidation.value
   const probPct = ((probability ?? 0) * 100).toFixed(1)
 
   if (passed) {
-    return t('app.testCases.validation.pass', { expected: expectedCode, actual: actualCode, probability: probPct })
+    const key = expectedAny ? 'app.testCases.validation.passAny' : 'app.testCases.validation.pass'
+    return t(key, { expected: expectedCode, actual: actualCode, probability: probPct })
   }
 
   if (expectedRank != null && expectedRank > 1) {

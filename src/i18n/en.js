@@ -98,6 +98,7 @@ export default {
       loadAndCalculate: 'Load & calculate',
       validation: {
         pass: '✓ Algorithm returned {expected} as top result ({probability}% probability).',
+        passAny: '✓ {actual} ranked first ({probability}%), within the expected set ({expected}). No single winner is forced.',
         fail: '✗ Expected {expected}, but algorithm returned {actual} ({probability}%). Scoring does not match the reference case.',
         failRank: '✗ Expected {expected} first, but algorithm returned {actual} ({probability}%). {expected} ranked #{rank}.',
       },
@@ -130,11 +131,11 @@ export default {
         },
         pamelaPatricio: {
           label: 'Pamela ↔ Patricio — looking for her father (128.4 cM)',
-          note: 'Real case (Pamela 1961, Patricio 1980). {cm} cM, {segments} segments, block {largest} cM. Pamela is looking for her father: paternal-branch rules apply. H2C and 2C1R are very close; the engine does not place the generational floor (Pamela is a contemporary of Patricio’s mother). Expected: {expected}.',
+          note: 'Real case (Pamela 1961, Patricio 1980): 1.8% match, {cm} cM, {segments} segments, block {largest} cM. Pamela is looking for her father. That total fits H2C (mean 120) and 2C1R (mean 122) equally; 7 segments and a 41.7 block have no published band for those hypotheses. The generational floor (Pamela is a contemporary of Patricio’s mother) favors 2C1R, but the engine does not use it. QA: top result must be H2C or 2C1R.',
         },
         searchFatherPamela: {
           label: 'Looking for my father — Pamela ↔ Patricio (128.4 cM)',
-          note: 'Same real data as Pamela and Patricio. Goal: father. The paternal line is evaluated with the traits of that branch for a female searcher. Expected: {expected}.',
+          note: 'Same data: 1.8% / {cm} cM / {segments} segments / block {largest} cM. Goal: father. QA: first place H2C or 2C1R; no single winner is forced.',
         },
         searchMotherBettina: {
           label: 'Looking for my mother — Bettina ↔ Veronica (1601.6 cM)',

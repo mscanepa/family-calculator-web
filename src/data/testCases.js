@@ -125,7 +125,8 @@ export const TEST_CASES = [
     group: 'real',
     labelKey: 'app.testCases.cases.pamelaPatricio.label',
     noteKey: 'app.testCases.cases.pamelaPatricio.note',
-    expectedCode: 'H2C',
+    expectedCode: 'H2C / 2C1R',
+    expectedCodes: ['H2C', '2C1R'],
     data: {
       name1: 'Pamela',
       name2: 'Patricio',
@@ -147,7 +148,8 @@ export const TEST_CASES = [
     group: 'search',
     labelKey: 'app.testCases.cases.searchFatherPamela.label',
     noteKey: 'app.testCases.cases.searchFatherPamela.note',
-    expectedCode: 'H2C',
+    expectedCode: 'H2C / 2C1R',
+    expectedCodes: ['H2C', '2C1R'],
     data: {
       name1: 'Pamela',
       name2: 'Patricio',
@@ -362,19 +364,26 @@ export function getTestCaseById(id) {
 
 /** Compara el resultado del API (sin modificarlo) contra el código esperado del caso. */
 export function validateTestCaseResult(testCase, relationships) {
-  if (!testCase?.expectedCode || !relationships?.length) return null
+  const expectedCodes = testCase.expectedCodes?.length
+    ? testCase.expectedCodes
+    : testCase.expectedCode
+      ? [testCase.expectedCode]
+      : []
+  if (!expectedCodes.length || !relationships?.length) return null
 
   const top = relationships[0]
   const actualCode = top.code
-  const expectedIndex = relationships.findIndex(rel => rel.code === testCase.expectedCode)
+  const expectedIndex = relationships.findIndex(rel => expectedCodes.includes(rel.code))
   const probability = top.adjustedProb ?? top.probability
+  const expectedLabel = testCase.expectedCode || expectedCodes.join(' / ')
 
   return {
-    passed: actualCode === testCase.expectedCode,
-    expectedCode: testCase.expectedCode,
+    passed: expectedCodes.includes(actualCode),
+    expectedCode: expectedLabel,
     actualCode,
     probability,
     expectedRank: expectedIndex >= 0 ? expectedIndex + 1 : null,
+    expectedAny: expectedCodes.length > 1,
   }
 }
 

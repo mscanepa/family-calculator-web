@@ -105,6 +105,7 @@ export default {
       loadAndCalculate: 'Cargar y calcular',
       validation: {
         pass: '✓ El algoritmo devolvió {expected} como resultado principal ({probability}% de probabilidad).',
+        passAny: '✓ {actual} quedó primero ({probability}%), dentro de lo esperado ({expected}). No se fuerza un único ganador.',
         fail: '✗ Se esperaba {expected}, pero el algoritmo devolvió {actual} ({probability}%). El scoring no coincide con el caso de referencia.',
         failRank: '✗ Se esperaba {expected} en primer lugar, pero el algoritmo devolvió {actual} ({probability}%). {expected} quedó en la posición #{rank}.',
       },
@@ -137,11 +138,11 @@ export default {
         },
         pamelaPatricio: {
           label: 'Pamela ↔ Patricio — busca a su padre (128.4 cM)',
-          note: 'Caso real (Pamela 1961, Patricio 1980). {cm} cM, {segments} segmentos, bloque {largest} cM. Pamela busca a su padre: se aplican las reglas de la rama paterna. H2C y 2C1R quedan muy cerca; el motor no ubica el piso generacional (Pamela es contemporánea de la madre de Patricio). Esperado: {expected}.',
+          note: 'Caso real (Pamela 1961, Patricio 1980): 1,8% de coincidencia, {cm} cM, {segments} segmentos, bloque {largest} cM. Pamela busca a su padre. Esos cM encajan igual en H2C (promedio 120) y 2C1R (promedio 122); 7 segmentos y el bloque de 41,7 no tienen banda publicada para esas hipótesis. El piso generacional (Pamela contemporánea de la madre de Patricio) favorece 2C1R, pero el motor no lo usa. QA: el primero debe ser H2C o 2C1R.',
         },
         searchFatherPamela: {
           label: 'Busco a mi padre — Pamela ↔ Patricio (128.4 cM)',
-          note: 'Mismos datos reales de Pamela y Patricio. Objetivo: padre. Se evalúa la línea paterna y las características de esa rama según el sexo del buscador (mujer). Esperado: {expected}.',
+          note: 'Mismos datos: 1,8% / {cm} cM / {segments} segmentos / bloque {largest} cM. Objetivo: padre. QA: primero H2C o 2C1R; no se fuerza un único ganador.',
         },
         searchMotherBettina: {
           label: 'Busco a mi madre — Bettina ↔ Veronica (1601.6 cM)',
