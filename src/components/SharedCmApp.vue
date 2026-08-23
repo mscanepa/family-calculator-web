@@ -42,9 +42,9 @@
               <n-radio-button value="classic">{{ $t('app.engine.classic') }}</n-radio-button>
               <n-radio-button value="empirical">{{ $t('app.engine.empirical') }}</n-radio-button>
             </n-radio-group>
-            <n-tooltip trigger="hover" placement="bottom" style="max-width: min(340px, 88vw)">
+            <n-tooltip trigger="click" placement="bottom" style="max-width: min(340px, 88vw)">
               <template #trigger>
-                <n-icon class="info-icon"><InformationCircle /></n-icon>
+                <n-icon class="info-icon" size="22"><InformationCircle /></n-icon>
               </template>
               {{ $t('app.engine.hint') }}
             </n-tooltip>
@@ -87,28 +87,31 @@
       </n-card>
       
       <div class="main-content">
-      <n-grid :cols="24" :x-gap="24" responsive="screen">
+      <n-grid :cols="24" :x-gap="8" :y-gap="16" responsive="screen" item-responsive>
         <!-- Left Section: Input Cards -->
-        <n-grid-item :span="12" :s-span="24" :m-span="12" :l-span="12">
+        <n-grid-item span="24 m:12">
           <!-- Searcher Row -->
           <n-card :title="$t('app.search.title')" hoverable class="form-section">
-              <n-form-item :label="$t('app.search.goal')" class="search-goal-field">
-                <n-radio-group v-model:value="store.searchGoal" class="search-goal-options" name="search-goal">
-                  <n-space vertical :size="8">
-                    <n-radio value="father">{{ $t('app.search.goalFather') }}</n-radio>
-                    <n-radio value="mother">{{ $t('app.search.goalMother') }}</n-radio>
-                    <n-radio value="unknown">{{ $t('app.search.goalUnknown') }}</n-radio>
-                    <n-radio value="other">{{ $t('app.search.goalOther') }}</n-radio>
-                  </n-space>
+              <n-form-item class="search-goal-field">
+                <template #label>
+                  <span class="search-goal-label">
+                    {{ $t('app.search.goal') }}
+                    <n-tooltip trigger="click" style="max-width: min(340px, 88vw)">
+                      <template #trigger>
+                        <n-icon class="info-icon" size="22"><InformationCircle /></n-icon>
+                      </template>
+                      <div class="tooltip-content">
+                        <p>{{ $t('app.search.goalHint') }}</p>
+                      </div>
+                    </n-tooltip>
+                  </span>
+                </template>
+                <n-radio-group v-model:value="store.searchGoal" class="search-goal-options" name="search-goal" size="large">
+                  <n-radio value="father" class="search-goal-option">{{ $t('app.search.goalFather') }}</n-radio>
+                  <n-radio value="mother" class="search-goal-option">{{ $t('app.search.goalMother') }}</n-radio>
+                  <n-radio value="unknown" class="search-goal-option">{{ $t('app.search.goalUnknown') }}</n-radio>
+                  <n-radio value="other" class="search-goal-option">{{ $t('app.search.goalOther') }}</n-radio>
                 </n-radio-group>
-                <n-tooltip trigger="hover">
-                  <template #trigger>
-                    <n-icon class="info-icon"><InformationCircle /></n-icon>
-                  </template>
-                  <div class="tooltip-content">
-                    <p>{{ $t('app.search.goalHint') }}</p>
-                  </div>
-                </n-tooltip>
               </n-form-item>
               <p class="search-goal-context">{{ searchGoalContext }}</p>
               <div class="form-row">
@@ -120,12 +123,14 @@
                   </n-input>
                 </n-form-item>
                 <n-form-item :label="$t('app.search.gender')" class="gender-field">
-                  <n-radio-group v-model:value="store.sex1">
+                  <n-radio-group v-model:value="store.sex1" class="gender-group">
                     <n-radio value="F" class="gender-radio">
-                      <n-icon size="20" color="#ff69b4"><Woman /></n-icon>
+                      <n-icon size="26" color="#ff69b4"><Woman /></n-icon>
+                      <span class="gender-letter">F</span>
                     </n-radio>
                     <n-radio value="M" class="gender-radio">
-                      <n-icon size="20" color="#1e90ff"><Man /></n-icon>
+                      <n-icon size="26" color="#1e90ff"><Man /></n-icon>
+                      <span class="gender-letter">M</span>
                     </n-radio>
                   </n-radio-group>
                 </n-form-item>
@@ -152,12 +157,14 @@
                   </n-input>
                 </n-form-item>
                 <n-form-item :label="$t('app.match.gender')" class="gender-field">
-                  <n-radio-group v-model:value="store.sex2">
+                  <n-radio-group v-model:value="store.sex2" class="gender-group">
                     <n-radio value="F" class="gender-radio">
-                      <n-icon size="20" color="#ff69b4"><Woman /></n-icon>
+                      <n-icon size="26" color="#ff69b4"><Woman /></n-icon>
+                      <span class="gender-letter">F</span>
                     </n-radio>
                     <n-radio value="M" class="gender-radio">
-                      <n-icon size="20" color="#1e90ff"><Man /></n-icon>
+                      <n-icon size="26" color="#1e90ff"><Man /></n-icon>
+                      <span class="gender-letter">M</span>
                     </n-radio>
                   </n-radio-group>
                 </n-form-item>
@@ -175,8 +182,8 @@
 
           <!-- DNA Row -->
           <n-card :title="$t('app.dna.title')" hoverable class="form-section dna-section">
-            <n-grid :cols="24" :x-gap="12" responsive="screen">
-              <n-grid-item :span="8" :s-span="24" :m-span="8" :l-span="8">
+            <n-grid :cols="24" :x-gap="8" :y-gap="8" responsive="screen" item-responsive>
+              <n-grid-item span="24 m:8">
                 <n-form-item :label="$t('app.dna.shared_cm')" class="compact-form-item">
                   <n-input-number 
                     v-model:value="store.cmValue" 
@@ -186,9 +193,9 @@
                     placeholder=""
                     class="compact-input"
                   />
-                  <n-tooltip trigger="hover">
+                  <n-tooltip trigger="click" style="max-width: min(340px, 88vw)">
                     <template #trigger>
-                      <n-icon class="info-icon"><InformationCircle /></n-icon>
+                      <n-icon class="info-icon" size="22"><InformationCircle /></n-icon>
                     </template>
                     <div class="tooltip-content">
                         <div class="tooltip-header">
@@ -203,7 +210,7 @@
                   </n-tooltip>
                 </n-form-item>
               </n-grid-item>
-              <n-grid-item :span="16" :s-span="24" :m-span="16" :l-span="16">
+              <n-grid-item span="24 m:16">
                 <n-form-item class="compact-form-item">
                   <n-checkbox v-model:checked="showAdvancedOptions">
                     <template #icon>
@@ -216,9 +223,9 @@
             </n-grid>
 
             <n-collapse-transition :show="showAdvancedOptions">
-              <n-grid :cols="24" :x-gap="12" responsive="screen" class="advanced-options-grid">
+              <n-grid :cols="24" :x-gap="8" :y-gap="8" responsive="screen" item-responsive class="advanced-options-grid">
                 <!-- Endogamy and X Chromosome -->
-                <n-grid-item :span="12" :s-span="24" :m-span="12" :l-span="12">
+                <n-grid-item span="24 m:12">
                   <n-form-item :label="$t('app.dna.endogamy.title')" class="compact-form-item">
                     <n-select
                       v-model:value="store.endogamy"
@@ -231,9 +238,9 @@
                       ]"
                       :placeholder="$t('app.dna.endogamy.placeholder')"
                     />
-                    <n-tooltip trigger="hover">
+                    <n-tooltip trigger="click" style="max-width: min(340px, 88vw)">
                       <template #trigger>
-                        <n-icon class="info-icon"><InformationCircle /></n-icon>
+                        <n-icon class="info-icon" size="22"><InformationCircle /></n-icon>
                       </template>
                       <div class="tooltip-content">
                           <div class="tooltip-header">
@@ -277,7 +284,7 @@
                   </n-form-item>
                 </n-grid-item>
 
-                <n-grid-item :span="12" :s-span="24" :m-span="12" :l-span="12">
+                <n-grid-item span="24 m:12">
                   <n-form-item :label="$t('app.dna.x_chromosome.title')" class="compact-form-item">
                     <n-select
                       v-model:value="store.xMatch"
@@ -288,9 +295,9 @@
                       ]"
                       :placeholder="$t('app.dna.x_chromosome.placeholder')"
                     />
-                    <n-tooltip trigger="hover">
+                    <n-tooltip trigger="click" style="max-width: min(340px, 88vw)">
                       <template #trigger>
-                        <n-icon class="info-icon"><InformationCircle /></n-icon>
+                        <n-icon class="info-icon" size="22"><InformationCircle /></n-icon>
                       </template>
                       <div class="tooltip-content">
                           <div class="tooltip-header">
@@ -312,7 +319,7 @@
                 </n-grid-item>
 
                 <!-- X cM when X Match is Yes -->
-                <n-grid-item v-if="store.xMatch === 'yes'" :span="12" :s-span="24" :m-span="12" :l-span="12">
+                <n-grid-item v-if="store.xMatch === 'yes'" span="24 m:12">
                   <n-form-item :label="$t('app.dna.x_chromosome.cm')" class="compact-form-item">
                     <n-input-number 
                       v-model:value="store.xcmValue" 
@@ -322,9 +329,9 @@
                       :placeholder="$t('app.dna.x_chromosome.placeholder_cm')"
                       class="compact-input"
                     />
-                    <n-tooltip trigger="hover">
+                    <n-tooltip trigger="click" style="max-width: min(340px, 88vw)">
                       <template #trigger>
-                        <n-icon class="info-icon"><InformationCircle /></n-icon>
+                        <n-icon class="info-icon" size="22"><InformationCircle /></n-icon>
                       </template>
                       <div class="tooltip-content">
                         <h4>cM en Cromosoma X</h4>
@@ -340,7 +347,7 @@
                 </n-grid-item>
 
                 <!-- Segments -->
-                <n-grid-item :span="12" :s-span="24" :m-span="12" :l-span="12">
+                <n-grid-item span="24 m:12">
                   <n-form-item :label="$t('app.dna.segments.count')" class="compact-form-item">
                     <n-input-number 
                       v-model:value="store.numSegments" 
@@ -350,9 +357,9 @@
                       :placeholder="$t('app.dna.segments.placeholder_count')"
                       class="compact-input"
                     />
-                    <n-tooltip trigger="hover">
+                    <n-tooltip trigger="click" style="max-width: min(340px, 88vw)">
                       <template #trigger>
-                        <n-icon class="info-icon"><InformationCircle /></n-icon>
+                        <n-icon class="info-icon" size="22"><InformationCircle /></n-icon>
                       </template>
                       <div class="tooltip-content">
                           <div class="tooltip-header">
@@ -372,7 +379,7 @@
                   </n-form-item>
                 </n-grid-item>
 
-                <n-grid-item :span="12" :s-span="24" :m-span="12" :l-span="12">
+                <n-grid-item span="24 m:12">
                   <n-form-item :label="$t('app.dna.segments.largest')" class="compact-form-item">
                     <n-input-number 
                       v-model:value="store.largestSegment" 
@@ -382,9 +389,9 @@
                       :placeholder="$t('app.dna.segments.placeholder_largest')"
                       class="compact-input"
                     />
-                    <n-tooltip trigger="hover">
+                    <n-tooltip trigger="click" style="max-width: min(340px, 88vw)">
                       <template #trigger>
-                        <n-icon class="info-icon"><InformationCircle /></n-icon>
+                        <n-icon class="info-icon" size="22"><InformationCircle /></n-icon>
                       </template>
                       <div class="tooltip-content">
                           <div class="tooltip-header">
@@ -409,7 +416,7 @@
 
           <!-- Action Buttons -->
           <div class="button-section">
-            <n-space>
+            <n-space class="action-buttons">
               <n-button 
                 type="primary" 
                 @click="store.calculateResults" 
@@ -438,7 +445,7 @@
         </n-grid-item>
 
         <!-- Right Section: Results -->
-        <n-grid-item :span="12" :s-span="24" :m-span="12" :l-span="12">
+        <n-grid-item span="24 m:12">
             <n-card :title="$t('app.results.title')" hoverable class="results-container">
               <template v-if="store.loading">
                 <n-spin size="large" />
@@ -451,9 +458,9 @@
                     <n-tag v-if="store.resultsEngine" size="small" round type="info" :bordered="false">
                       {{ $t('app.engine.usedTag', { name: store.resultsEngine === 'empirical' ? $t('app.engine.empirical') : $t('app.engine.classic') }) }}
                     </n-tag>
-                    <n-tooltip trigger="hover" placement="right">
+                    <n-tooltip trigger="click" placement="bottom" style="max-width: min(340px, 88vw)">
                       <template #trigger>
-                        <n-icon class="info-icon"><InformationCircle /></n-icon>
+                        <n-icon class="info-icon" size="22"><InformationCircle /></n-icon>
                       </template>
                       <div class="tooltip-content">
                         <div class="tooltip-header">
@@ -596,7 +603,7 @@
                   <n-space vertical>
                   <n-list>
                       <n-list-item v-for="rel in store.relationships" :key="rel.code">
-                        <n-space justify="space-between" align="center">
+                        <n-space class="relationship-row" justify="space-between" align="center">
                           <n-space vertical>
                             <n-text strong>{{ rel.name || $t(`app.relationships.${rel.code}.narrative`) }}</n-text>
                             <n-text depth="3">{{ rel.description || $t(`app.relationships.${rel.code}.description`) }}</n-text>
@@ -1733,12 +1740,16 @@ body {
   color: #3E3326 !important;
   --n-text-color: #3E3326 !important;
   --n-color: #F5F3ED !important;
+  max-width: min(340px, 88vw);
 }
 
 :deep(.n-tooltip-trigger),
 :deep(.n-popover-trigger) {
   display: inline-flex;
   align-items: center;
+  justify-content: center;
+  min-width: 44px;
+  min-height: 44px;
 }
 
 :deep(.n-tooltip-arrow),
@@ -1798,24 +1809,40 @@ body {
 }
 
 .info-icon {
-  color: #000000 !important;
+  color: #3E3326 !important;
   cursor: pointer;
-  transition: color 0.2s ease;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  min-width: 44px;
+  min-height: 44px;
+  box-sizing: border-box;
+  border-radius: 50%;
+  background: #E5DED3;
+  transition: background 0.2s ease, opacity 0.2s ease;
 }
 
 .info-icon:hover {
-  color: #000000 !important;
-  opacity: 0.8;
+  background: #d8cfc3;
+  opacity: 1;
 }
 
 /* Forzar estilos de Naive UI */
 :deep(.n-tooltip-trigger) {
-  color: #000000 !important;
+  color: #3E3326 !important;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 44px;
+  min-height: 44px;
+  border-radius: 50%;
 }
 
 :deep(.n-tooltip-trigger:hover) {
-  color: #000000 !important;
-  opacity: 0.8;
+  color: #3E3326 !important;
+  opacity: 1;
 }
 
 /* Forzar eliminación de bordes en botones */
@@ -2080,6 +2107,60 @@ body {
   padding: 0 var(--spacing-lg);
 }
 
+@media (min-width: 1024px) {
+  .main-content > .n-grid {
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr) !important;
+    gap: 24px !important;
+  }
+
+  .main-content > .n-grid > * {
+    grid-column: auto !important;
+    max-width: 100%;
+    min-width: 0;
+  }
+}
+
+@media (max-width: 768px) {
+  .app-container,
+  .container {
+    max-width: 100%;
+    overflow-x: hidden;
+  }
+
+  .main-content {
+    padding: 0 12px;
+    max-width: 100%;
+    min-width: 0;
+  }
+
+  .app-container .n-grid {
+    width: 100%;
+    max-width: 100%;
+    grid-template-columns: minmax(0, 1fr) !important;
+    gap: 16px 0 !important;
+  }
+
+  .app-container .n-grid > * {
+    width: 100%;
+    max-width: 100%;
+    min-width: 0;
+    grid-column: 1 / -1 !important;
+  }
+
+  .form-section,
+  .results-container {
+    width: 100%;
+    max-width: 100%;
+    box-sizing: border-box;
+  }
+}
+
+@media (max-width: 480px) {
+  .main-content {
+    padding: 0 8px;
+  }
+}
+
 /* Estilos del header */
 .header {
   position: relative;
@@ -2102,14 +2183,18 @@ body {
 }
 
 .language-selector .n-text {
-  display: flex;
+  display: inline-flex;
   align-items: center;
+  justify-content: center;
   gap: var(--spacing-xs);
-  padding: var(--spacing-xs) var(--spacing-sm);
+  min-height: 44px;
+  min-width: 52px;
+  padding: 8px 12px;
   border-radius: var(--border-radius-sm);
   cursor: pointer;
   transition: all 0.2s ease;
   color: var(--text-secondary);
+  font-size: 0.95rem;
 }
 
 .language-selector .n-text:hover {
@@ -2194,7 +2279,11 @@ body {
 }
 
 .calc-toggle {
-  font-size: 0.82rem;
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+  padding: 8px 0;
+  font-size: 0.95rem;
   color: #1e90ff;
   text-decoration: none;
 }
@@ -2257,17 +2346,20 @@ body {
   margin: 0;
 }
 
-/* Ajustes responsivos para el header */
-@media (max-width: 768px) {
-  .header {
-    padding: var(--spacing-lg) 0;
-    margin-bottom: var(--spacing-lg);
-  }
-
+/* Evitar que ES/EN/PT pisen el título en tablet */
+@media (max-width: 900px) {
   .language-selector {
     position: relative;
     right: auto;
     top: auto;
+    margin-bottom: var(--spacing-lg);
+  }
+}
+
+/* Ajustes responsivos para el header */
+@media (max-width: 768px) {
+  .header {
+    padding: var(--spacing-lg) 0;
     margin-bottom: var(--spacing-lg);
   }
 
@@ -2415,8 +2507,52 @@ body {
   margin-bottom: var(--spacing-xs);
 }
 
-.search-goal-options {
-  width: 100%;
+.search-goal-label {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.search-goal-field :deep(.n-form-item-label) {
+  white-space: normal;
+}
+
+.app-container .search-goal-options.n-radio-group {
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: stretch !important;
+  gap: 8px !important;
+  width: 100% !important;
+  justify-content: flex-start !important;
+}
+
+.app-container .search-goal-options .n-radio {
+  width: 100% !important;
+  min-height: 48px !important;
+  height: auto !important;
+  margin: 0 !important;
+  padding: 12px 14px !important;
+  box-sizing: border-box !important;
+  border: 1.5px solid var(--border-color) !important;
+  border-radius: 10px !important;
+  background: var(--background-white) !important;
+  display: flex !important;
+  align-items: center !important;
+}
+
+.app-container .search-goal-options .n-radio.n-radio--checked {
+  border-color: var(--primary-color) !important;
+  background: var(--background-yellow) !important;
+}
+
+.app-container .search-goal-options .n-radio__dot {
+  width: 18px !important;
+  height: 18px !important;
+}
+
+.app-container .search-goal-options .n-radio__label {
+  font-size: 1rem !important;
+  line-height: 1.35 !important;
 }
 
 .search-goal-context {
@@ -2433,15 +2569,57 @@ body {
 }
 
 .gender-field {
-  width: 100px;
+  width: auto;
+  min-width: 132px;
+  flex: none;
+}
+
+.app-container .gender-field .n-radio-group {
+  display: flex !important;
+  gap: 8px !important;
+  justify-content: flex-start !important;
+  align-items: center !important;
+}
+
+.app-container .gender-field .n-radio {
+  min-width: 56px !important;
+  min-height: 48px !important;
+  height: 48px !important;
+  margin: 0 !important;
+  padding: 8px 10px !important;
+  box-sizing: border-box !important;
+  border: 1.5px solid var(--border-color) !important;
+  border-radius: 10px !important;
+  background: var(--background-white) !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+}
+
+.app-container .gender-field .n-radio.n-radio--checked {
+  border-color: var(--primary-color) !important;
+  background: var(--background-yellow) !important;
+}
+
+.app-container .gender-field .n-radio__dot-wrapper {
+  display: none !important;
+}
+
+.gender-letter {
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+.age-field {
+  width: 80px;
   min-width: 80px;
   flex: none;
 }
 
-.age-field {
-  width: 60px;
-  min-width: 60px;
-  flex: none;
+.app-container .age-field .n-input-number,
+.app-container .age-field .n-input {
+  min-height: 48px !important;
 }
 
 :deep(.n-form-item) {
@@ -2460,16 +2638,8 @@ body {
   padding: 0 4px;
 }
 
-:deep(.n-radio-group) {
-  display: flex;
-  gap: var(--spacing-sm);
-  justify-content: center;
-  min-width: 0;
-}
-
 :deep(.n-radio) {
   margin-right: 0;
-  min-width: 0;
 }
 
 :deep(.n-form-item-label) {
@@ -2485,23 +2655,80 @@ body {
 
 /* Ajustes responsivos */
 @media (max-width: 768px) {
+  .main-content,
+  .form-section,
+  .results-container,
+  .form-row {
+    max-width: 100%;
+    min-width: 0;
+  }
+
   .form-row {
     flex-wrap: wrap;
   }
   
   .name-field {
     width: 100%;
-    min-width: 100%;
+    min-width: 0;
+    flex: 1 1 100%;
   }
   
   .gender-field {
-    width: 100px;
-    min-width: 80px;
+    width: auto;
+    min-width: 132px;
+  }
+
+  .app-container .gender-field .n-radio {
+    min-width: 56px !important;
+    min-height: 48px !important;
   }
   
   .age-field {
-    width: 60px;
-    min-width: 60px;
+    width: 88px;
+    min-width: 88px;
+  }
+
+  .factor-chip {
+    font-size: 0.78rem;
+    padding: 6px 10px;
+    white-space: normal;
+  }
+
+  .language-selector .n-text {
+    min-height: 44px;
+  }
+}
+
+@media (max-width: 480px) {
+  .button-section .action-buttons {
+    flex-direction: column !important;
+    width: 100%;
+  }
+
+  .button-section .action-buttons :deep(.n-space-item),
+  .button-section .n-button {
+    width: 100%;
+  }
+}
+
+@media (max-width: 768px) {
+  .relationship-row {
+    flex-direction: column !important;
+    align-items: flex-start !important;
+    gap: 8px;
+  }
+
+  .prob-column {
+    max-width: 100%;
+    align-items: flex-start;
+  }
+
+  .factor-chips {
+    justify-content: flex-start;
+  }
+
+  .factor-chip {
+    white-space: normal;
   }
 }
 
@@ -2519,38 +2746,57 @@ body {
 .empty-state .n-icon {
   margin-bottom: var(--spacing-md);
   font-size: 48px;
-  color: var(--text-secondary);
+  color: var(--secondary-color);
 }
 
 .empty-state p {
-  color: var(--text-secondary);
+  color: var(--primary-color-dark);
   font-size: 1rem;
   line-height: 1.5;
   margin: 0;
   max-width: 400px;
 }
 
-/* Ajustar el contenedor de resultados */
-.results-container {
-  background: transparent !important;
-  border: none !important;
-  box-shadow: none !important;
+/* Panel de resultados: contraste respecto al formulario beige */
+.app-container .results-container.n-card {
+  background: var(--secondary-color-light) !important;
+  border: 1.5px solid var(--secondary-color) !important;
+  box-shadow: 0 2px 10px rgba(122, 157, 126, 0.14) !important;
+  border-radius: var(--border-radius-lg) !important;
   padding: 0 !important;
   display: flex;
   flex-direction: column;
   min-height: 400px;
+  overflow: hidden;
 }
 
-.results-container :deep(.n-card-header) {
-  padding: 0 !important;
-  margin-bottom: var(--spacing-md);
+.app-container .results-container > .n-card-header {
+  padding: 14px 16px !important;
+  margin: 0 !important;
+  background: var(--secondary-color);
+  border-bottom: none !important;
+  --n-title-text-color: #fff;
+  --n-color: var(--secondary-color);
 }
 
-.results-container :deep(.n-card__content) {
-  padding: 0 !important;
+.app-container .results-container > .n-card-header .n-card-header__main,
+.app-container .results-container > .n-card-header .n-card-header__main *,
+.app-container .results-container > .n-card-header .n-card-header__main-wrap {
+  color: #fff !important;
+  font-weight: 700;
+}
+
+.app-container .results-container > .n-card__content {
+  padding: 16px !important;
   flex: 1;
   display: flex;
   flex-direction: column;
+}
+
+.app-container .results-container .analysis-card,
+.app-container .results-container .relationships-card,
+.app-container .results-container .suggestions-card {
+  background: var(--background-white) !important;
 }
 
 .n-list {

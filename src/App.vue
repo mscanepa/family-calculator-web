@@ -3,7 +3,7 @@
     <n-message-provider>
       <n-layout>
         <n-layout-content>
-          <n-space vertical size="large" style="padding: 20px">
+          <n-space vertical size="large" class="app-shell">
             <SharedCmApp />
           </n-space>
         </n-layout-content>
@@ -22,5 +22,15 @@ body {
   margin: 0;
   padding: 0;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+}
+
+.app-shell {
+  padding: 20px;
+}
+
+@media (max-width: 768px) {
+  .app-shell {
+    padding: 8px;
+  }
 }
 </style> 
