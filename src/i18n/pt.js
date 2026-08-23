@@ -110,29 +110,42 @@ export default {
       },
       groups: {
         real: 'Casos reais (projeto)',
+        search: 'Busca de progenitor',
         half: 'Meio parentesco e ambiguidade',
         segments: 'Mesmo cM, recombinação diferente',
       },
       cases: {
         javierSoledadFs: {
           label: 'Javier ↔ Soledad — irmãos completos (2730 cM)',
-          note: 'Caso real do projeto (idades estimadas). {cm} cM, sem dados de segmentos no teste original. Coincidência no X: sim. Esperado: {expected}.',
+          note: 'Caso real do projeto (idades estimadas). {cm} cM, sem dados de segmentos no teste original. Coincidência no X: sim. Objetivo da busca: não sei. Esperado: {expected}.',
         },
         sebastianAlejo1c: {
           label: 'Sebastian ↔ Alejo — primos 1.º (884.6 cM)',
-          note: 'Caso real do projeto (idades estimadas). {cm} cM, {segments} segmentos, bloco {largest} cM. Sem X compartilhado. A idade descarta tio-avô. Esperado: {expected}.',
+          note: 'Caso real do projeto (idades estimadas). {cm} cM, {segments} segmentos, bloco {largest} cM. Sem X compartilhado. A idade descarta tio-avô. Objetivo da busca: não sei. Esperado: {expected}.',
         },
         bettinaMariana2c: {
           label: 'Bettina ↔ Mariana — primas 2.º (286.3 cM)',
-          note: 'Caso real do projeto (idades estimadas). {cm} cM, {segments} segmentos, bloco {largest} cM. Coincidência no X: sim. Esperado: {expected}.',
+          note: 'Caso real do projeto (idades estimadas). {cm} cM, {segments} segmentos, bloco {largest} cM. Coincidência no X: sim. Objetivo da busca: não sei. Esperado: {expected}.',
         },
         soledadElizabeth3c: {
           label: 'Soledad ↔ Elizabeth — primas 3.º (65.8 cM)',
-          note: 'Caso real do projeto (idades estimadas). {cm} cM, {segments} segmentos, bloco {largest} cM. Sem X compartilhado. Esperado: {expected}.',
+          note: 'Caso real do projeto (idades estimadas). {cm} cM, {segments} segmentos, bloco {largest} cM. Sem X compartilhado. Objetivo da busca: não sei. Esperado: {expected}.',
         },
         bettinaVeronicaHs: {
           label: 'Bettina ↔ Veronica — meias-irmãs (1601.6 cM)',
-          note: 'Caso real (Bettina 1976, Veronica 1991). {cm} cM, {segments} segmentos, bloco {largest} cM no cromossomo 5. O bloco enorme favorece 2 meiose (meia-irmã) frente a tia. Esperado: {expected}.',
+          note: 'Caso real (Bettina 1976, Veronica 1991). {cm} cM, {segments} segmentos, bloco {largest} cM no cromossomo 5. O bloco enorme favorece 2 meiose (meia-irmã) frente a tia. Objetivo da busca: não sei. Esperado: {expected}.',
+        },
+        pamelaPatricio: {
+          label: 'Pamela ↔ Patricio — busca o pai (128.4 cM)',
+          note: 'Caso real (Pamela 1961, Patricio 1980). {cm} cM, {segments} segmentos, bloco {largest} cM. Pamela busca o pai: aplicam-se as regras do ramo paterno. H2C e 2C1R ficam muito próximos; o motor não posiciona o piso geracional (Pamela é contemporânea da mãe de Patricio). Esperado: {expected}.',
+        },
+        searchFatherPamela: {
+          label: 'Busco o meu pai — Pamela ↔ Patricio (128.4 cM)',
+          note: 'Mesmos dados reais de Pamela e Patricio. Objetivo: pai. Avalia-se a linha paterna e as características desse ramo para uma pesquisadora. Esperado: {expected}.',
+        },
+        searchMotherBettina: {
+          label: 'Busco a minha mãe — Bettina ↔ Veronica (1601.6 cM)',
+          note: 'Mesmos dados reais de Bettina e Veronica. Objetivo: mãe. Avalia-se a linha materna; sem X declarado o fator X permanece neutro. Esperado: {expected}.',
         },
         hsHalfSisters: {
           label: 'Meias-irmãs (1800 cM)',

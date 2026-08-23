@@ -103,29 +103,42 @@ export default {
       },
       groups: {
         real: 'Real project cases',
+        search: 'Parent search',
         half: 'Half relationships & ambiguity',
         segments: 'Same cM, different recombination',
       },
       cases: {
         javierSoledadFs: {
           label: 'Javier ↔ Soledad — full siblings (2730 cM)',
-          note: 'Real project case (estimated ages). {cm} cM, no segment data in the original test. X match: yes. Expected: {expected}.',
+          note: 'Real project case (estimated ages). {cm} cM, no segment data in the original test. X match: yes. Search goal: unknown. Expected: {expected}.',
         },
         sebastianAlejo1c: {
           label: 'Sebastian ↔ Alejo — 1st cousins (884.6 cM)',
-          note: 'Real project case (estimated ages). {cm} cM, {segments} segments, block {largest} cM. No X match. Age rules out great-uncle. Expected: {expected}.',
+          note: 'Real project case (estimated ages). {cm} cM, {segments} segments, block {largest} cM. No X match. Age rules out great-uncle. Search goal: unknown. Expected: {expected}.',
         },
         bettinaMariana2c: {
           label: 'Bettina ↔ Mariana — 2nd cousins (286.3 cM)',
-          note: 'Real project case (estimated ages). {cm} cM, {segments} segments, block {largest} cM. X match: yes. Expected: {expected}.',
+          note: 'Real project case (estimated ages). {cm} cM, {segments} segments, block {largest} cM. X match: yes. Search goal: unknown. Expected: {expected}.',
         },
         soledadElizabeth3c: {
           label: 'Soledad ↔ Elizabeth — 3rd cousins (65.8 cM)',
-          note: 'Real project case (estimated ages). {cm} cM, {segments} segments, block {largest} cM. No X match. Expected: {expected}.',
+          note: 'Real project case (estimated ages). {cm} cM, {segments} segments, block {largest} cM. No X match. Search goal: unknown. Expected: {expected}.',
         },
         bettinaVeronicaHs: {
           label: 'Bettina ↔ Veronica — half sisters (1601.6 cM)',
-          note: 'Real case (Bettina 1976, Veronica 1991). {cm} cM, {segments} segments, {largest} cM block on chromosome 5. The huge block favors 2 meioses (half sibling) over aunt/niece. Expected: {expected}.',
+          note: 'Real case (Bettina 1976, Veronica 1991). {cm} cM, {segments} segments, {largest} cM block on chromosome 5. The huge block favors 2 meioses (half sibling) over aunt/niece. Search goal: unknown. Expected: {expected}.',
+        },
+        pamelaPatricio: {
+          label: 'Pamela ↔ Patricio — looking for her father (128.4 cM)',
+          note: 'Real case (Pamela 1961, Patricio 1980). {cm} cM, {segments} segments, block {largest} cM. Pamela is looking for her father: paternal-branch rules apply. H2C and 2C1R are very close; the engine does not place the generational floor (Pamela is a contemporary of Patricio’s mother). Expected: {expected}.',
+        },
+        searchFatherPamela: {
+          label: 'Looking for my father — Pamela ↔ Patricio (128.4 cM)',
+          note: 'Same real data as Pamela and Patricio. Goal: father. The paternal line is evaluated with the traits of that branch for a female searcher. Expected: {expected}.',
+        },
+        searchMotherBettina: {
+          label: 'Looking for my mother — Bettina ↔ Veronica (1601.6 cM)',
+          note: 'Same real data as Bettina and Veronica. Goal: mother. The maternal line is evaluated; with X unknown the X factor stays neutral. Expected: {expected}.',
         },
         hsHalfSisters: {
           label: 'Half sisters (1800 cM)',
