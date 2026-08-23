@@ -31,7 +31,7 @@
           <h1 class="title">{{ $t('app.title') }}</h1>
           <p class="subtitle">{{ $t('app.subtitle') }}</p>
         </div>
-        <div class="engine-selector">
+        <div v-if="SHOW_ENGINE_SELECTOR" class="engine-selector">
           <n-space align="center" :size="8" justify="center" wrap>
             <n-text depth="2" class="engine-label">{{ $t('app.engine.label') }}</n-text>
             <n-radio-group
@@ -52,7 +52,7 @@
         </div>
       </div>
 
-      <n-card class="test-cases-bar" size="small" :bordered="true">
+      <n-card v-if="SHOW_QA" class="test-cases-bar" size="small" :bordered="true">
         <n-space vertical :size="8">
           <n-space align="center" wrap :size="12">
             <n-tag type="info" size="small">{{ $t('app.testCases.badge') }}</n-tag>
@@ -861,6 +861,7 @@ import {
 } from 'naive-ui'
 import { useRelationshipStore } from '../stores/relationshipStore'
 import { API_URL } from '../config/api'
+import { SHOW_ENGINE_SELECTOR, SHOW_QA } from '../config/features'
 import {
   buildTestCaseSelectOptions,
   getTestCaseById,
@@ -1090,6 +1091,9 @@ watch(() => locale.value, (newLocale) => {
 
 // Initialize locale on mount
 onMounted(() => {
+  if (!SHOW_ENGINE_SELECTOR) {
+    store.engine = 'classic'
+  }
   const savedLocale = localStorage.getItem('locale')
   if (savedLocale) {
     locale.value = savedLocale
