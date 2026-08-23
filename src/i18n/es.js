@@ -3,17 +3,27 @@ export default {
     title: 'Family Calc - Calculadora de Relaciones Familiares',
     subtitle: 'Analiza el ADN compartido para determinar posibles relaciones familiares',
     search: {
-      title: 'Buscador',
+      title: 'Tus datos y tu búsqueda',
       name: 'Nombre',
       example: 'Ex: Carlos Rodríguez',
       gender: 'Género',
       age: 'Edad',
+      goal: '¿Qué estás buscando?',
+      goalFather: 'Busco a mi padre',
+      goalMother: 'Busco a mi madre',
+      goalUnknown: 'No sé qué busco',
+      goalOther: 'Busco otro familiar (no padre ni madre)',
+      goalHint: 'Esto fija cómo se lee el cromosoma X y las sugerencias. Si buscás a tu padre, el match se interpreta por línea paterna; si buscás a tu madre, por la materna. Si no sabés o buscás otro pariente, no se asume un lado.',
+      goalContextFather: 'Este match se va a interpretar como posible pariente por tu línea paterna (conocés a tu madre, el misterio es papá).',
+      goalContextMother: 'Este match se va a interpretar como posible pariente por tu línea materna (conocés a tu padre, el misterio es mamá).',
+      goalContextUnknown: 'Sin un objetivo fijo: el motor compara todas las hipótesis por igual.',
+      goalContextOther: 'No estás buscando a un progenitor: el match se trata como un pariente a identificar, sin asumir línea paterna o materna.',
       placeholder: {
         name: 'Ej: Juan Pérez'
       }
     },
     match: {
-      title: 'Match',
+      title: 'Datos del match',
       name: 'Nombre',
       example: 'Ex: Ana Martínez',
       gender: 'Género',
@@ -205,7 +215,7 @@ export default {
         },
         evidence: {
           title: '3. Evidencia adicional',
-          text: 'El puntaje se ajusta multiplicando factores: número de segmentos y bloque más grande (un bloque enorme favorece relaciones de menos meiosis, p. ej. media hermana frente a tía), coincidencia en cromosoma X (una coincidencia genéticamente imposible elimina la hipótesis) y diferencia de edad (fuera del rango típico del parentesco penaliza gradualmente).',
+          text: 'El puntaje se ajusta multiplicando factores: número de segmentos y bloque más grande (un bloque enorme favorece relaciones de menos meiosis, p. ej. media hermana frente a tía), cromosoma X (Sí refuerza vías que pueden transmitirlo y descarta las imposibles; No no penaliza medias hermanas si no buscás al padre; No sé es neutro) y diferencia de edad. Si indicaste que buscás a tu padre o a tu madre, el X se lee por esa línea.',
         },
         normalization: {
           title: '4. Normalización',

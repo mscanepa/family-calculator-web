@@ -19,6 +19,8 @@ export const useRelationshipStore = defineStore('relationship', () => {
   const numSegments = ref(null)
   const largestSegment = ref(null)
   const endogamy = ref(null)
+  // Qué busca: 'father' | 'mother' | 'unknown' | 'other'
+  const searchGoal = ref('unknown')
 
   // Motor de scoring del backend: 'classic' (gaussiano) o 'empirical' (paper)
   const engine = ref('classic')
@@ -119,7 +121,9 @@ export const useRelationshipStore = defineStore('relationship', () => {
           sexo: sex1.value,
           person1_sex: sex1.value,
           person2_sex: sex2.value,
-          x_inheritance: xMatch.value === 'yes',
+          x_inheritance: xMatch.value === 'yes' ? true : xMatch.value === 'no' ? false : null,
+          search_goal: searchGoal.value,
+          search_line: searchGoal.value === 'father' ? 'paternal' : searchGoal.value === 'mother' ? 'maternal' : null,
           segments: numSegments.value,
           largest_segment: largestSegment.value,
           endogamia: endogamy.value,
@@ -192,6 +196,7 @@ export const useRelationshipStore = defineStore('relationship', () => {
     numSegments.value = data.numSegments ?? null
     largestSegment.value = data.largestSegment ?? null
     endogamy.value = data.endogamy ?? null
+    searchGoal.value = data.searchGoal ?? 'unknown'
 
     relationships.value = []
     selectedRelationship.value = null
@@ -214,6 +219,7 @@ export const useRelationshipStore = defineStore('relationship', () => {
     numSegments.value = null
     largestSegment.value = null
     endogamy.value = null
+    searchGoal.value = 'unknown'
     selectedRelationship.value = null
     relationships.value = []
     histogram.value = {}
@@ -246,6 +252,7 @@ export const useRelationshipStore = defineStore('relationship', () => {
     numSegments,
     largestSegment,
     endogamy,
+    searchGoal,
     engine,
     loading,
     relationships,

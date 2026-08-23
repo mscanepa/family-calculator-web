@@ -3,17 +3,27 @@ export default {
     title: 'Calculadora de Relações Familiares',
     subtitle: 'Analise o DNA compartilhado para determinar possíveis relações familiares',
     search: {
-      title: 'Pesquisador',
+      title: 'Seus dados e a sua busca',
       name: 'Nome',
       example: 'Ex: Pedro Oliveira',
       gender: 'Gênero',
       age: 'Idade',
+      goal: 'O que você está buscando?',
+      goalFather: 'Busco o meu pai',
+      goalMother: 'Busco a minha mãe',
+      goalUnknown: 'Não sei o que busco',
+      goalOther: 'Busco outro familiar (não pai nem mãe)',
+      goalHint: 'Isso define como o cromossomo X e as sugestões são lidos. Se busca o pai, o match se interpreta pela linha paterna; se busca a mãe, pela materna. Se não sabe ou busca outro parente, não se assume um lado.',
+      goalContextFather: 'Este match será lido como possível parente pela sua linha paterna (você conhece a mãe; o mistério é o pai).',
+      goalContextMother: 'Este match será lido como possível parente pela sua linha materna (você conhece o pai; o mistério é a mãe).',
+      goalContextUnknown: 'Sem um objetivo fixo: o motor compara todas as hipóteses por igual.',
+      goalContextOther: 'Você não está buscando um progenitor: o match é um parente a identificar, sem assumir linha paterna ou materna.',
       placeholder: {
         name: 'Ex: João Silva'
       }
     },
     match: {
-      title: 'Match',
+      title: 'Dados do match',
       name: 'Nome',
       example: 'Ex: Maria Santos',
       gender: 'Gênero',
@@ -205,7 +215,7 @@ export default {
         },
         evidence: {
           title: '3. Evidência adicional',
-          text: 'A pontuação é ajustada com fatores multiplicativos: número de segmentos e maior bloco (um bloco enorme favorece relações com menos meiose, p. ex. meia-irmã frente a tia), coincidência no cromossomo X (uma coincidência geneticamente impossível elimina a hipótese) e diferença de idade (fora da faixa típica penaliza gradualmente).',
+          text: 'A pontuação é ajustada com fatores multiplicativos: número de segmentos e maior bloco (um bloco enorme favorece menos meiose, p. ex. meia-irmã frente a tia), cromossomo X (Sim reforça vias que podem transmiti-lo e descarta as impossíveis; Não não penaliza meias-irmãs se você não está buscando o pai; Não sei é neutro) e diferença de idade. Se indicou que busca o pai ou a mãe, o X é lido por essa linha.',
         },
         normalization: {
           title: '4. Normalização',

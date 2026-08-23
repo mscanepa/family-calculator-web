@@ -92,6 +92,25 @@
         <n-grid-item :span="12" :s-span="24" :m-span="12" :l-span="12">
           <!-- Searcher Row -->
           <n-card :title="$t('app.search.title')" hoverable class="form-section">
+              <n-form-item :label="$t('app.search.goal')" class="search-goal-field">
+                <n-radio-group v-model:value="store.searchGoal" class="search-goal-options" name="search-goal">
+                  <n-space vertical :size="8">
+                    <n-radio value="father">{{ $t('app.search.goalFather') }}</n-radio>
+                    <n-radio value="mother">{{ $t('app.search.goalMother') }}</n-radio>
+                    <n-radio value="unknown">{{ $t('app.search.goalUnknown') }}</n-radio>
+                    <n-radio value="other">{{ $t('app.search.goalOther') }}</n-radio>
+                  </n-space>
+                </n-radio-group>
+                <n-tooltip trigger="hover">
+                  <template #trigger>
+                    <n-icon class="info-icon"><InformationCircle /></n-icon>
+                  </template>
+                  <div class="tooltip-content">
+                    <p>{{ $t('app.search.goalHint') }}</p>
+                  </div>
+                </n-tooltip>
+              </n-form-item>
+              <p class="search-goal-context">{{ searchGoalContext }}</p>
               <div class="form-row">
                 <n-form-item :label="$t('app.search.name')" class="name-field">
                   <n-input v-model:value="store.name1" :placeholder="$t('app.search.placeholder.name')">
@@ -906,6 +925,14 @@ const testCaseValidationMessage = computed(() => {
   }
 
   return t('app.testCases.validation.fail', { expected: expectedCode, actual: actualCode, probability: probPct })
+})
+
+const searchGoalContext = computed(() => {
+  const goal = store.searchGoal
+  if (goal === 'father') return t('app.search.goalContextFather')
+  if (goal === 'mother') return t('app.search.goalContextMother')
+  if (goal === 'other') return t('app.search.goalContextOther')
+  return t('app.search.goalContextUnknown')
 })
 
 watch(selectedTestCaseId, (id) => {
@@ -2368,6 +2395,21 @@ body {
   width: 100%;
   flex-wrap: nowrap;
   min-width: 0;
+}
+
+.search-goal-field {
+  margin-bottom: var(--spacing-xs);
+}
+
+.search-goal-options {
+  width: 100%;
+}
+
+.search-goal-context {
+  margin: 0 0 var(--spacing-md);
+  font-size: 0.85rem;
+  color: var(--text-secondary);
+  line-height: 1.4;
 }
 
 .name-field {

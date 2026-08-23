@@ -3,17 +3,27 @@ export default {
     title: 'Family Relationship Calculator',
     subtitle: 'Analyze shared DNA to determine possible family relationships',
     search: {
-      title: 'Searcher',
+      title: 'Your details and your search',
       name: 'Name',
       example: 'Ex: James Wilson',
       gender: 'Gender',
       age: 'Age',
+      goal: 'What are you looking for?',
+      goalFather: 'I am looking for my father',
+      goalMother: 'I am looking for my mother',
+      goalUnknown: "I don't know what I am looking for",
+      goalOther: 'I am looking for another relative (not a parent)',
+      goalHint: 'This sets how the X chromosome and suggestions are read. Looking for your father treats the match on the paternal line; looking for your mother, on the maternal line. If you are unsure or looking for someone else, no side is assumed.',
+      goalContextFather: 'This match will be read as a possible relative on your paternal line (you know your mother; the mystery is dad).',
+      goalContextMother: 'This match will be read as a possible relative on your maternal line (you know your father; the mystery is mom).',
+      goalContextUnknown: 'No fixed goal: the engine compares all hypotheses equally.',
+      goalContextOther: 'You are not looking for a parent: the match is treated as a relative to identify, without assuming a paternal or maternal line.',
       placeholder: {
         name: 'Ex: John Smith'
       }
     },
     match: {
-      title: 'Match',
+      title: 'Match details',
       name: 'Name',
       example: 'Ex: Sarah Thompson',
       gender: 'Gender',
@@ -198,7 +208,7 @@ export default {
         },
         evidence: {
           title: '3. Additional evidence',
-          text: 'The score is adjusted with multiplicative factors: segment count and largest block (a very large block favors relationships with fewer meioses, e.g. half sibling over aunt/niece), X chromosome match (a genetically impossible match eliminates the hypothesis) and age difference (values outside the typical range for the relationship are penalized gradually).',
+          text: 'The score is adjusted with multiplicative factors: segment count and largest block (a very large block favors fewer meioses, e.g. half sibling over aunt), X chromosome (Yes boosts paths that can transmit X and drops impossible ones; No does not penalize half sisters unless you are looking for your father; Don’t know is neutral) and age difference. If you said you are looking for your father or mother, the X is read on that line.',
         },
         normalization: {
           title: '4. Normalization',
