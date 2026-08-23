@@ -116,6 +116,10 @@ export default {
           label: 'Soledad ↔ Elizabeth — primas 3.º (65.8 cM)',
           note: 'Caso real do projeto (idades estimadas). {cm} cM, {segments} segmentos, bloco {largest} cM. Sem X compartilhado. Esperado: {expected}.',
         },
+        bettinaVeronicaHs: {
+          label: 'Bettina ↔ Veronica — meias-irmãs (1601.6 cM)',
+          note: 'Caso real (Bettina 1976, Veronica 1991). {cm} cM, {segments} segmentos, bloco {largest} cM no cromossomo 5. O bloco enorme favorece 2 meiose (meia-irmã) frente a tia. Esperado: {expected}.',
+        },
         hsHalfSisters: {
           label: 'Meias-irmãs (1800 cM)',
           note: '{cm} cM, {segments} segmentos, bloco {largest} cM, idades próximas. A idade descarta avó/tia. Esperado: {expected}.',

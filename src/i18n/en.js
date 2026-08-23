@@ -109,6 +109,10 @@ export default {
           label: 'Soledad ↔ Elizabeth — 3rd cousins (65.8 cM)',
           note: 'Real project case (estimated ages). {cm} cM, {segments} segments, block {largest} cM. No X match. Expected: {expected}.',
         },
+        bettinaVeronicaHs: {
+          label: 'Bettina ↔ Veronica — half sisters (1601.6 cM)',
+          note: 'Real case (Bettina 1976, Veronica 1991). {cm} cM, {segments} segments, {largest} cM block on chromosome 5. The huge block favors 2 meioses (half sibling) over aunt/niece. Expected: {expected}.',
+        },
         hsHalfSisters: {
           label: 'Half sisters (1800 cM)',
           note: '{cm} cM, {segments} segments, block {largest} cM, close ages. Age rules out grandparent/aunt. Expected: {expected}.',
