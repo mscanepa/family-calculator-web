@@ -201,7 +201,7 @@ export default {
         },
         evidence: {
           title: '3. Evidência adicional',
-          text: 'A pontuação é ajustada com fatores multiplicativos: número de segmentos e maior bloco (onde existem faixas confiáveis), coincidência no cromossomo X (uma coincidência geneticamente impossível elimina a hipótese) e diferença de idade (fora da faixa típica penaliza gradualmente).',
+          text: 'A pontuação é ajustada com fatores multiplicativos: número de segmentos e maior bloco (um bloco enorme favorece relações com menos meiose, p. ex. meia-irmã frente a tia), coincidência no cromossomo X (uma coincidência geneticamente impossível elimina a hipótese) e diferença de idade (fora da faixa típica penaliza gradualmente).',
         },
         normalization: {
           title: '4. Normalização',

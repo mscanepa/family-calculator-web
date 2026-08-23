@@ -201,7 +201,7 @@ export default {
         },
         evidence: {
           title: '3. Evidencia adicional',
-          text: 'El puntaje se ajusta multiplicando factores: número de segmentos y bloque más grande (donde existen rangos confiables), coincidencia en cromosoma X (una coincidencia genéticamente imposible elimina la hipótesis) y diferencia de edad (fuera del rango típico del parentesco penaliza gradualmente).',
+          text: 'El puntaje se ajusta multiplicando factores: número de segmentos y bloque más grande (un bloque enorme favorece relaciones de menos meiosis, p. ej. media hermana frente a tía), coincidencia en cromosoma X (una coincidencia genéticamente imposible elimina la hipótesis) y diferencia de edad (fuera del rango típico del parentesco penaliza gradualmente).',
         },
         normalization: {
           title: '4. Normalización',

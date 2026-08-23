@@ -194,7 +194,7 @@ export default {
         },
         evidence: {
           title: '3. Additional evidence',
-          text: 'The score is adjusted with multiplicative factors: segment count and largest block (where reliable ranges exist), X chromosome match (a genetically impossible match eliminates the hypothesis) and age difference (values outside the typical range for the relationship are penalized gradually).',
+          text: 'The score is adjusted with multiplicative factors: segment count and largest block (a very large block favors relationships with fewer meioses, e.g. half sibling over aunt/niece), X chromosome match (a genetically impossible match eliminates the hypothesis) and age difference (values outside the typical range for the relationship are penalized gradually).',
         },
         normalization: {
           title: '4. Normalization',
